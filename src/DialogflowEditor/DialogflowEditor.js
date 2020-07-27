@@ -1,0 +1,150 @@
+import React, { Component } from 'react';
+import { INode, IEdge } from 'react-digraph';
+import { v4 as uuidv4 } from 'uuid';
+import { NODE_KEY, nodeTypes } from '../configs/graph';
+import { Layout } from 'antd';
+
+const { Content, Sider } = Layout;
+const sample = require('../sample.json');
+
+/**
+ * Main component to edit intents
+ */
+export default class DialogflowEditor extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      graph: sample,
+      selected: null,
+      type: nodeTypes[0],
+    };
+
+    this.GraphView = React.createRef();
+  }
+
+  /**
+   * Helper to find the index of a given node
+   *
+   * @param {INode} searchNode
+   * @returns {number} Index of the search node
+   */
+  getNodeIndex(searchNode) {
+    const { graph } = this.state;
+    const { nodes } = graph;
+
+    return nodes.findIndex((node) => (
+      node[NODE_KEY] === searchNode[NODE_KEY]
+    ));
+  }
+
+  /**
+   * Helper to find the index of a given edge
+   *
+   * @param {IEdge} searchEdge
+   * @returns {number} Index of the search edge
+   */
+  getEdgeIndex(searchEdge) {
+    const { graph } = this.state;
+    const { edges } = graph;
+
+    return edges.findIndex((edge) => (
+      edge.source === searchEdge.source && edge.target === searchEdge.target
+    ));
+  }
+
+  /**
+   * Helper to find the node of a given node key
+   *
+   * @param {String} nodeKey
+   * @returns {INode} Node corresponding to the given node key
+   */
+  getViewNode(nodeKey) {
+    const searchNode = {};
+    const { graph } = this.state;
+    const { nodes } = graph;
+
+    searchNode[NODE_KEY] = nodeKey;
+    const i = this.getNodeIndex(searchNode);
+
+    return nodes[i];
+  }
+
+  /**
+   * Called by 'drag' handler, etc. to sync coordinates from D3 with the graph
+   *
+   * @param {INode} viewNode
+   */
+  onUpdateNode = (viewNode) => {
+    const { graph } = this.state;
+    const i = this.getNodeIndex(viewNode);
+
+    graph.nodes[i] = viewNode;
+    this.setState({ graph });
+  };
+
+  /**
+   * Called by 'mouseUp' handler
+   *
+   * @param {(INode|Wnull)} viewNode
+   */
+  onSelectNode = (viewNode) => {
+    // Deselect events will send Null viewNode
+    this.setState({ selected: viewNode });
+  };
+
+  /**
+   * Updates the graph with a new node
+   *
+   * @param {number} x Coordinates
+   * @param {number} y Coordinates
+   */
+  onCreateNode = (x, y) => {
+    const { graph, type } = this.state;
+    const viewNode = {
+      id: uuidv4(),
+      title: '',
+      type,
+      x,
+      y,
+    };
+
+    graph.nodes = [...graph.nodes, viewNode];
+    this.setState({ graph });
+  };
+
+  /**
+   * Deletes a node from the graph
+   *
+   * @param {INode} viewNode
+   * @param {String} nodeId
+   * @param {Inode[]} nodeArr
+   */
+  onDeleteNode = (viewNode, nodeId, nodeArr) => {
+    const { graph } = this.state;
+
+    // Delete any connected edges
+    const newEdges = graph.edges.filter((edge, i) => (
+      edge.source !== viewNode[NODE_KEY] && edge.target !== viewNode[NODE_KEY]
+    ));
+
+    graph.nodes = nodeArr;
+    graph.edges = newEdges;
+
+    this.setState({ graph, selected: null });
+  };
+
+
+
+  render() {
+    return (
+      <Layout>
+        <Sider>
+
+        </Sider>
+        <Content>
+          
+        </Content>
+      </Layout>
+    );
+  }
+}

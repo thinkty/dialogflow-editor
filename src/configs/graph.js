@@ -27,19 +27,35 @@ const INTENT_WIDTH = 100;
 const INTENT_HEIGHT = 100;
 const INTENT_VIEWBOX = `0 0 ${INTENT_WIDTH} ${INTENT_HEIGHT}`;
 const CONTEXT_RADIUS = 40;
-const CONTEXT_VIEWBOX = `0 0 ${CONTEXT_RADIUS + 2} ${CONTEXT_RADIUS + 2}`;
+const CONTEXT_VIEWBOX = `0 0 ${CONTEXT_RADIUS*2 + 2} ${CONTEXT_RADIUS*2 + 2}`;
 
 // Shape specifications for each types
 
 const intentNodeShape = (
-  <symbol viewBox={INTENT_VIEWBOX} id="intentNode">
+  <symbol 
+    viewBox={INTENT_VIEWBOX}
+    width={INTENT_WIDTH}
+    height={INTENT_HEIGHT}
+    id="intentNode"
+  >
     <rect width={INTENT_WIDTH} height={INTENT_HEIGHT} />
   </symbol>
 );
 
 const contextNodeShape = (
-  <symbol viewBox={CONTEXT_VIEWBOX} id="contextNode">
-    <circle cx={CONTEXT_RADIUS + 1} cy={CONTEXT_RADIUS + 1} r={CONTEXT_RADIUS} />
+  <symbol 
+    viewBox={CONTEXT_VIEWBOX} 
+    width={CONTEXT_RADIUS*2 + 2}
+    height={CONTEXT_RADIUS*2 + 2}
+    id="contextNode"
+  >
+    <circle 
+      width={CONTEXT_RADIUS*2 + 2}
+      height={CONTEXT_RADIUS*2 + 2}
+      cx={CONTEXT_RADIUS + 1} 
+      cy={CONTEXT_RADIUS + 1} 
+      r={CONTEXT_RADIUS} 
+    />
   </symbol>
 );
 
@@ -58,6 +74,7 @@ export default {
       shapeId: '#basicEdge',
     },
   },
+  NodeSubTypes: {},
   NodeTypes: {
     intentNode: {
       shape: intentNodeShape,
