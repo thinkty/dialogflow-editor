@@ -9,6 +9,9 @@
  */
 
 
+const NODE_KEY = 'id';
+
+
 // Declaration of node types and edge types
 
 export const INTENT_TYPE = 'intentNode';
