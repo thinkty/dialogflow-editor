@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import { INode, IEdge } from 'react-digraph';
+import { INode, IEdge, GraphView } from 'react-digraph';
 import { v4 as uuidv4 } from 'uuid';
-import { NODE_KEY, nodeTypes } from '../configs/graph';
+import GraphConfig, { NODE_KEY, nodeTypes, BASIC_EDGE } from '../configs/graph';
 import { Layout } from 'antd';
 
 const { Content, Sider } = Layout;
@@ -18,8 +18,6 @@ export default class DialogflowEditor extends Component {
       selected: null,
       type: nodeTypes[0],
     };
-
-    this.GraphView = React.createRef();
   }
 
   /**
@@ -133,16 +131,127 @@ export default class DialogflowEditor extends Component {
     this.setState({ graph, selected: null });
   };
 
+  /**
+   * Edge 'mouseUp' handler
+   * 
+   * @param {IEdge} viewEdge 
+   */
+  onSelectEdge = (viewEdge) => {
+    // Do nothing on select edge
+  };
 
+  /**
+   * Creates a new node between two edges
+   * 
+   * @param {INode} sourceViewNode 
+   * @param {INode} targetViewNode 
+   */
+  onCreateEdge = (sourceViewNode, targetViewNode) => {
+    const { graph } = this.state;
+    const type = BASIC_EDGE;
+
+    const viewEdge = {
+      source: sourceViewNode[NODE_KEY],
+      target: targetViewNode[NODE_KEY],
+      type,
+    };
+
+    // Only add the edge when the source node is not the same as the target
+    if (viewEdge.source !== viewEdge.target) {
+      graph.edges = [...graph.edges, viewEdge];
+      this.setState({
+        graph
+      });
+    }
+  };
+
+  /**
+   * Called when an edge is reattached to a different target
+   * 
+   * @param {INode} sourceViewNode 
+   * @param {INode} targetViewNode 
+   * @param {IEdge} viewEdge 
+   */
+  onSwapEdge = (sourceViewNode, targetViewNode, viewEdge) => {
+    const { graph } = this.state;
+    const i = this.getEdgeIndex(viewEdge);
+    const edge = JSON.parse(JSON.stringify(graph.edges[i]));
+
+    edge.source = sourceViewNode[NODE_KEY];
+    edge.target = targetViewNode[NODE_KEY];
+    graph.edges[i] = edge;
+    // reassign the array reference to re-render a swapped edge
+    graph.edges = [...graph.edges];
+
+    this.setState({
+      graph
+    });
+  };
+
+  /**
+   * Called when an edge is deleted
+   * 
+   * @param {IEdge} viewEdge 
+   * @param {IEdge[]} edges 
+   */
+  onDeleteEdge = (viewEdge, edges) => {
+    const { graph } = this.state;
+
+    graph.edges = edges;
+    this.setState({
+      graph
+    });
+  };
+
+
+  /**
+   * Called when mouse-right clicked
+   * 
+   * @param {number} x 
+   * @param {number} y 
+   * @param {Object} event D3 event
+   */
+  onContextMenu = (x, y, event) => {
+    // TODO: Prompt new node on right click
+  }
 
   render() {
+    const { graph, selected } = this.state;
+    const { nodes, edges } = graph;
+    const { NodeTypes, NodeSubTypes, EdgeTypes } = GraphConfig;
+    const height = window.innerHeight * 0.98;
+
     return (
-      <Layout>
-        <Sider>
+      <Layout 
+        hasSider
+        style={{ height }}
+      >
+        <Sider
+          defaultCollapsed={false}
+        >
 
         </Sider>
-        <Content>
-          
+        <Content
+          style={{ height }}
+        >
+          <GraphView 
+            nodeKey={NODE_KEY}
+            nodes={nodes}
+            edges={edges}
+            selected={selected}
+            nodeTypes={NodeTypes}
+            nodeSubtypes={NodeSubTypes}
+            edgeTypes={EdgeTypes}
+            onSelectNode={this.onSelectNode}
+            onCreateNode={this.onCreateNode}
+            onUpdateNode={this.onUpdateNode}
+            onDeleteNode={this.onDeleteNode}
+            onSelectEdge={this.onSelectEdge}
+            onCreateEdge={this.onCreateEdge}
+            onSwapEdge={this.onSwapEdge}
+            onDeleteEdge={this.onDeleteEdge}
+            gridDotSize={0}
+          />
         </Content>
       </Layout>
     );
