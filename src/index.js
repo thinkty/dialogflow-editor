@@ -1,10 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Editor from './Editor';
+import DialogflowEditor from './DialogflowEditor';
 
 ReactDOM.render(
   <React.Fragment>
-    <Editor />
+    <DialogflowEditor />
   </React.Fragment>,
-  document.getElementById('root')
+  document.getElementById('root'),
 );
