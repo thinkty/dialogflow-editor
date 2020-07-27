@@ -1,0 +1,37 @@
+{
+  "edges": [
+    {
+      "source": "inode1",
+      "target": "cnode1",
+      "type": "basicEdge"
+    },
+    {
+      "source": "cnode1",
+      "target": "inode2",
+      "type": "basicEdge"
+    }
+  ],
+  "nodes": [
+    {
+      "id": "inode1",
+      "title": "inode1",
+      "type": "intentNode",
+      "x": 0,
+      "y": 0
+    },
+    {
+      "id": "cnode1",
+      "title": "cnode1",
+      "type": "contextNode",
+      "x": 0,
+      "y": 250
+    },
+    {
+      "id": "inode2",
+      "title": "inode2",
+      "type": "intentNode",
+      "x": 0,
+      "y": 500
+    }
+  ]
+}
