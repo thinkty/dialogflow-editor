@@ -9,7 +9,7 @@
  */
 
 
-const NODE_KEY = 'id';
+export const NODE_KEY = 'id';
 
 
 // Declaration of node types and edge types
