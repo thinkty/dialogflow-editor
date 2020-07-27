@@ -1,6 +1,11 @@
 /**
  * Configuration file for the SVGs available in the react-digraph component.
- *
+ * To add a new node or edge shape, follow the steps below.
+ * 
+ * 1. Declare the node/edge type
+ * 2. (optional) Specify the dimensions for the new type
+ * 3. Draw the shape in SVG
+ * 4. Modify the export to include the new type
  */
 
 
