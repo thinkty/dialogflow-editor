@@ -1,0 +1,66 @@
+/**
+ * Configuration file for the SVGs available in the react-digraph component.
+ *
+ */
+
+
+// Declaration of node types and edge types
+
+export const INTENT_TYPE = 'intentNode';
+export const CONTEXT_TYPE = 'contextNode';
+export const BASIC_EDGE = 'basicEdge';
+
+export const nodeTypes = [INTENT_TYPE, CONTEXT_TYPE];
+export const edgeTypes = [BASIC_EDGE];
+
+
+// Dimensions for each types
+
+const INTENT_WIDTH = 100;
+const INTENT_HEIGHT = 100;
+const INTENT_VIEWBOX = `0 0 ${INTENT_WIDTH} ${INTENT_HEIGHT}`;
+const CONTEXT_RADIUS = 40;
+const CONTEXT_VIEWBOX = `0 0 ${CONTEXT_RADIUS + 2} ${CONTEXT_RADIUS + 2}`;
+
+
+// Shape specifications for each types
+
+const intentNodeShape = (
+  <symbol viewBox={INTENT_VIEWBOX} id="intentNode">
+    <rect width={INTENT_WIDTH} height={INTENT_HEIGHT}/>
+  </symbol>
+);
+
+const contextNodeShape = (
+  <symbol viewBox={CONTEXT_VIEWBOX} id="contextNode">
+    <circle cx={CONTEXT_RADIUS + 1} cy={CONTEXT_RADIUS + 1} r={CONTEXT_RADIUS}/>
+  </symbol>
+);
+
+const basicEdgeShape = (
+  <symbol viewBox="0 0 50 50" id="basicEdge">
+    <circle cx="25" cy="25" r="0"/>
+  </symbol>
+);
+
+
+// Export
+
+export default {
+  EdgeTypes: {
+    basicEdge: {
+      shape: basicEdgeShape,
+      shapeId: '#basicEdge'
+    }
+  },
+  NodeTypes: {
+    intentNode: {
+      shape: intentNodeShape,
+      shapeId: '#intentNode'
+    },
+    contextNode: {
+      shape: contextNodeShape,
+      shapeId: '#contextNode'
+    }
+  }
+}
