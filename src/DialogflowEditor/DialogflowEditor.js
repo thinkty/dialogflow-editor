@@ -207,13 +207,16 @@ export default class DialogflowEditor extends Component {
 
   /**
    * Called when mouse-right clicked
+   * TODO: This feature is not released yet
    * 
    * @param {number} x 
    * @param {number} y 
    * @param {Object} event D3 event
    */
   onContextMenu = (x, y, event) => {
+    event.prevenDefault();
     // TODO: Prompt new node on right click
+    console.log('Right clicked');
   }
 
   render() {
