@@ -1,11 +1,13 @@
 {
   "edges": [
     {
+      "id": "edge1",
       "source": "inode1",
       "target": "cnode1",
       "type": "basicEdge"
     },
     {
+      "id": "edge2",
       "source": "cnode1",
       "target": "inode2",
       "type": "basicEdge"
