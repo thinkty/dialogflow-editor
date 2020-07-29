@@ -240,12 +240,10 @@ export default class DialogflowEditor extends Component {
     const { graph, selected } = this.state;
     const { nodes, edges } = graph;
     const { NodeTypes, NodeSubTypes, EdgeTypes } = GraphConfig;
-    const height = window.innerHeight * 0.98;
 
     return (
       <Layout 
         hasSider
-        style={{ height }}
       >
         <Sider
           defaultCollapsed={false}
@@ -253,7 +251,10 @@ export default class DialogflowEditor extends Component {
 
         </Sider>
         <Content
-          style={{ height }}
+          style={{ 
+            height : window.innerHeight,
+
+          }}
         >
           <GraphView 
             nodeKey={NODE_KEY}

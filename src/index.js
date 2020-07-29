@@ -3,8 +3,12 @@ import ReactDOM from 'react-dom';
 import DialogflowEditor from './DialogflowEditor';
 
 ReactDOM.render(
-  <React.Fragment>
-    <DialogflowEditor />
-  </React.Fragment>,
+    <div
+      style={{
+        margin: -8
+      }}
+    >
+      <DialogflowEditor />
+    </div>,
   document.getElementById('root'),
 );
