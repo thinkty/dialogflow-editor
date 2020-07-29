@@ -2,8 +2,9 @@ import React, { Component } from 'react';
 // eslint-disable-next-line
 import { INode, IEdge, GraphView } from 'react-digraph';
 import { v4 as uuidv4 } from 'uuid';
-import GraphConfig, { NODE_KEY, nodeTypes, BASIC_EDGE } from '../configs/graph';
 import { Layout } from 'antd';
+
+import GraphConfig, { NODE_KEY, nodeTypes, BASIC_EDGE } from '../configs/graph';
 
 const { Content, Sider } = Layout;
 const sample = require('../sample.json');
@@ -17,7 +18,7 @@ export default class DialogflowEditor extends Component {
     this.state = {
       graph: sample,
       selected: null,
-      type: nodeTypes[0]
+      type: nodeTypes[0],
     };
   }
 
@@ -134,8 +135,8 @@ export default class DialogflowEditor extends Component {
 
   /**
    * Edge 'mouseUp' handler
-   * 
-   * @param {IEdge} viewEdge 
+   *
+   * @param {IEdge} viewEdge
    */
   onSelectEdge = (viewEdge) => {
     // Do nothing on select edge
@@ -143,9 +144,9 @@ export default class DialogflowEditor extends Component {
 
   /**
    * Creates a new node between two edges
-   * 
-   * @param {INode} sourceViewNode 
-   * @param {INode} targetViewNode 
+   *
+   * @param {INode} sourceViewNode
+   * @param {INode} targetViewNode
    */
   onCreateEdge = (sourceViewNode, targetViewNode) => {
     const { graph } = this.state;
@@ -162,17 +163,17 @@ export default class DialogflowEditor extends Component {
     if (viewEdge.source !== viewEdge.target) {
       graph.edges = [...graph.edges, viewEdge];
       this.setState({
-        graph
+        graph,
       });
     }
   };
 
   /**
    * Called when an edge is reattached to a different target
-   * 
-   * @param {INode} sourceViewNode 
-   * @param {INode} targetViewNode 
-   * @param {IEdge} viewEdge 
+   *
+   * @param {INode} sourceViewNode
+   * @param {INode} targetViewNode
+   * @param {IEdge} viewEdge
    */
   onSwapEdge = (sourceViewNode, targetViewNode, viewEdge) => {
     const { graph } = this.state;
@@ -186,31 +187,31 @@ export default class DialogflowEditor extends Component {
     graph.edges = [...graph.edges];
 
     this.setState({
-      graph
+      graph,
     });
   };
 
   /**
    * Called when an edge is deleted
-   * 
-   * @param {IEdge} viewEdge 
-   * @param {IEdge[]} edges 
+   *
+   * @param {IEdge} viewEdge
+   * @param {IEdge[]} edges
    */
   onDeleteEdge = (viewEdge, edges) => {
     const { graph } = this.state;
 
     graph.edges = edges;
     this.setState({
-      graph
+      graph,
     });
   };
 
   /**
    * Called when mouse-right clicked
    * TODO: This feature is not released yet
-   * 
-   * @param {number} x 
-   * @param {number} y 
+   *
+   * @param {number} x
+   * @param {number} y
    * @param {Object} event D3 event
    */
   onContextMenu = (x, y, event) => {
@@ -221,20 +222,18 @@ export default class DialogflowEditor extends Component {
 
   /**
    * Function to render custom background for the graph
-   * 
-   * @param {number} gridSize 
+   *
+   * @param {number} gridSize
    */
-  renderBackground = (gridSize) => {
-    return (
-      <rect 
-        x={-(gridSize || 0) / 4}
-        y={-(gridSize || 0) / 4}
-        width={gridSize}
-        height={gridSize}
-        fill="#e9e9e9"
-      />
-    );
-  }
+  renderBackground = (gridSize) => (
+    <rect
+      x={-(gridSize || 0) / 4}
+      y={-(gridSize || 0) / 4}
+      width={gridSize}
+      height={gridSize}
+      fill="#e9e9e9"
+    />
+  );
 
   render() {
     const { graph, selected } = this.state;
@@ -242,31 +241,31 @@ export default class DialogflowEditor extends Component {
     const { NodeTypes, NodeSubTypes, EdgeTypes } = GraphConfig;
 
     return (
-      <Layout 
+      <Layout
         hasSider
       >
         <Sider
           defaultCollapsed={false}
           collapsedWidth={0}
-          collapsible={true}
+          collapsible
           collapsed={!selected}
           trigger={null}
-          width={'30vw'}
+          width="30vw"
           style={{
             height: '100vh',
             position: 'fixed',
             right: 0,
-            background: '#fff'
+            background: '#fff',
           }}
         >
-          
+          Hello
         </Sider>
         <Content
-          style={{ 
-            height : '100vh'
+          style={{
+            height: '100vh',
           }}
         >
-          <GraphView 
+          <GraphView
             nodeKey={NODE_KEY}
             nodes={nodes}
             edges={edges}
