@@ -205,7 +205,6 @@ export default class DialogflowEditor extends Component {
     });
   };
 
-
   /**
    * Called when mouse-right clicked
    * TODO: This feature is not released yet
@@ -218,6 +217,23 @@ export default class DialogflowEditor extends Component {
     event.prevenDefault();
     // TODO: Prompt new node on right click
     console.log('Right clicked');
+  }
+
+  /**
+   * Function to render custom background for the graph
+   * 
+   * @param {number} gridSize 
+   */
+  renderBackground = (gridSize) => {
+    return (
+      <rect 
+        x={-(gridSize || 0) / 4}
+        y={-(gridSize || 0) / 4}
+        width={gridSize}
+        height={gridSize}
+        fill={`#e9e9e9`}
+      />
+    );
   }
 
   render() {
@@ -255,7 +271,7 @@ export default class DialogflowEditor extends Component {
             onCreateEdge={this.onCreateEdge}
             onSwapEdge={this.onSwapEdge}
             onDeleteEdge={this.onDeleteEdge}
-            gridDotSize={0}
+            renderBackground={this.renderBackground}
           />
         </Content>
       </Layout>
