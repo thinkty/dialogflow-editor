@@ -152,6 +152,7 @@ export default class DialogflowEditor extends Component {
     const type = BASIC_EDGE;
 
     const viewEdge = {
+      id: uuidv4(),
       source: sourceViewNode[NODE_KEY],
       target: targetViewNode[NODE_KEY],
       type,
