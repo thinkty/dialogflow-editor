@@ -17,7 +17,7 @@ export default class DialogflowEditor extends Component {
     this.state = {
       graph: sample,
       selected: null,
-      type: nodeTypes[0],
+      type: nodeTypes[0]
     };
   }
 
@@ -231,7 +231,7 @@ export default class DialogflowEditor extends Component {
         y={-(gridSize || 0) / 4}
         width={gridSize}
         height={gridSize}
-        fill={`#e9e9e9`}
+        fill="#e9e9e9"
       />
     );
   }
@@ -247,13 +247,23 @@ export default class DialogflowEditor extends Component {
       >
         <Sider
           defaultCollapsed={false}
+          collapsedWidth={0}
+          collapsible={true}
+          collapsed={!selected}
+          trigger={null}
+          width={'30vw'}
+          style={{
+            height: '100vh',
+            position: 'fixed',
+            right: 0,
+            background: '#fff'
+          }}
         >
-
+          
         </Sider>
         <Content
           style={{ 
-            height : window.innerHeight,
-
+            height : '100vh'
           }}
         >
           <GraphView 
