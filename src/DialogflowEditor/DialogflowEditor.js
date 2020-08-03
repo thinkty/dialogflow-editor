@@ -7,7 +7,8 @@ import GraphConfig, {
   NODE_KEY,
   nodeTypes,
   BASIC_EDGE,
-  INTENT_TYPE
+  INTENT_TYPE,
+  CONTEXT_TYPE
 } from '../configs/graph';
 import NodeEditor from '../NodeEditor/NodeEditor';
 
@@ -131,19 +132,43 @@ export default class DialogflowEditor extends Component {
    *
    * @param {INode} viewNode
    * @param {String} nodeId
-   * @param {Inode[]} nodeArr
+   * @param {INode[]} nodeArr
    */
   onDeleteNode = (viewNode, nodeId, nodeArr) => {
     const { graph } = this.state;
 
-    // Delete any connected edges
-    const newEdges = graph.edges.filter((edge, i) => (
-      edge.source !== viewNode[NODE_KEY] && edge.target !== viewNode[NODE_KEY]
-    ));
+    // Delete any connected edges and save the connected nodes for later use
+    const connectedNodeIds = new Map();
+    const newEdges = graph.edges.filter((edge, i) => {
+      const id = viewNode[NODE_KEY];
 
-    graph.nodes = nodeArr;
+      if (edge.source === id || edge.target === id) {
+        const key = edge.source === id ? edge.target : edge.source;
+        const value = edge.source === id ? "in" : "out";
+        connectedNodeIds.set(key, value);
+        return false;
+      }
+      return true;
+    });
+
+    // Remove the nodeId from any of the connected nodes' contexts if the
+    // deleted node is a context node
+    if (viewNode.type === CONTEXT_TYPE) {
+      graph.nodes = nodeArr.map(node => {
+        if (connectedNodeIds.has(node[NODE_KEY])) {
+          const value = connectedNodeIds.get(node[NODE_KEY]);
+          const index = node.contexts[value].indexOf(nodeId);
+          if (index > -1) {
+            node.contexts[value].splice(index, 1);
+          }
+        }
+        return node;
+      });
+    } else {
+      graph.nodes = nodeArr;
+    }
+
     graph.edges = newEdges;
-
     this.setState({ graph, selected: null });
   };
 
