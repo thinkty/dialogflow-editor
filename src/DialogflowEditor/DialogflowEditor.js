@@ -201,7 +201,7 @@ export default class DialogflowEditor extends Component {
   }
 
   /**
-   * Creates a new node between two edges
+   * Creates a new edge between two nodes
    *
    * @param {INode} sourceViewNode
    * @param {INode} targetViewNode
