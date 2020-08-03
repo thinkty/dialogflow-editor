@@ -2,42 +2,42 @@
   "edges": [
     {
       "id": "edge1",
-      "source": "inode1",
-      "target": "cnode1",
+      "source": "a0c13faf-723d-4208-85d0-76eaf7c790c5",
+      "target": "c802d68d-c57d-40cf-bb72-536b5413741d",
       "type": "basicEdge"
     },
     {
       "id": "edge2",
-      "source": "cnode1",
-      "target": "inode2",
+      "source": "c802d68d-c57d-40cf-bb72-536b5413741d",
+      "target": "fb5affa9-2415-4fab-9d8f-f3cd2dd2383a",
       "type": "basicEdge"
     },
     {
       "id": "edge3",
-      "source": "cnode1",
-      "target": "inode3",
+      "source": "c802d68d-c57d-40cf-bb72-536b5413741d",
+      "target": "7b128fba-c79f-4d00-9793-da78e355686e",
       "type": "basicEdge"
 
     }
   ],
   "nodes": [
     {
-      "id": "inode1",
+      "id": "a0c13faf-723d-4208-85d0-76eaf7c790c5",
       "title": "inode1",
       "type": "intentNode"
     },
     {
-      "id": "cnode1",
+      "id": "c802d68d-c57d-40cf-bb72-536b5413741d",
       "title": "cnode1",
       "type": "contextNode"
     },
     {
-      "id": "inode2",
+      "id": "fb5affa9-2415-4fab-9d8f-f3cd2dd2383a",
       "title": "inode2",
       "type": "intentNode"
     },
     {
-      "id": "inode3",
+      "id": "7b128fba-c79f-4d00-9793-da78e355686e",
       "title": "yeet",
       "type": "intentNode"
     }
