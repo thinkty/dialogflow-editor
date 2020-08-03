@@ -241,6 +241,19 @@ export default class DialogflowEditor extends Component {
   };
 
   /**
+   * Determines if an edge can be swapped or not based on the rules similar to
+   * canCreateEdge.
+   * 
+   * TODO: This feature is not yet released (v6.7.1)
+   * 
+   * @param {INode} sourceNode 
+   * @param {INode} targetNode 
+   * @param {IEdge} edge 
+   * @returns {Boolean} Whether it can swap edge or not
+   */
+  canSwapEdge = (sourceNode, targetNode, edge) => {}
+
+  /**
    * Called when an edge is reattached to a different target
    *
    * @param {INode} sourceViewNode
@@ -261,6 +274,9 @@ export default class DialogflowEditor extends Component {
     this.setState({
       graph,
     });
+
+    // Re-graph after swapping edge
+    this.updateGraph();
   };
 
   /**
