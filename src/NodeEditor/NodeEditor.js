@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
-import UneditableTextInput from './UneditableTextInput';
 import { Menu, Space } from 'antd';
+
+import SimpleTextInput from './SimpleTextInput';
+import UneditableTextInput from './UneditableTextInput';
 import { CONTEXT_TYPE, INTENT_TYPE } from '../configs/graph';
 
 /**
@@ -11,8 +13,9 @@ export default class NodeEditor extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      selected: this.props.selected
-    }
+      selected: this.props.selected,
+      update: this.props.update
+    };
   }
 
   /**
@@ -23,25 +26,34 @@ export default class NodeEditor extends Component {
    * @param {*} state Previous state
    */
   static getDerivedStateFromProps(props, state) {
-    if (!!props.selected) {
-      if (!state.selected || state.selected.id !== props.selected.id) {
-        return {
-          selected: props.selected
-        };
-      }
-    }
-    return null;
+    return {
+      selected: props.selected
+    };
+  }
+
+  /**
+   * Handle changes from simple string input fields
+   * 
+   * @param {*} event 
+   */
+  onChange = (event) => {
+    const { id, value } = event.target;
+    const { selected } = this.state;
+    selected[id] = value;
+    this.setState({ selected });
+
+    // Notify the parent component to rerender the graph to show changes
+    this.state.update();
   }
 
   render() {
     const { selected } = this.state;
-
-    // Do not render if selected is null
     if (!selected) {
-      return <div/>;
+      // Do not render if selected is null
+      return null;
     }
 
-    const { id, type } = this.state.selected;
+    const { id, type, title } = this.state.selected;
 
     // Distinguish between context type and intent type
     if (type === CONTEXT_TYPE) {
@@ -55,8 +67,15 @@ export default class NodeEditor extends Component {
         >
           <UneditableTextInput value={id} label="Id" />
           <UneditableTextInput value={type} label="Type" />
+          <SimpleTextInput
+            id="title"
+            value={title}
+            label="Title"
+            onChange={this.onChange}
+          />
         </Space>
       );
+
     } else if (type === INTENT_TYPE) {
       return (
         <Menu
@@ -66,7 +85,7 @@ export default class NodeEditor extends Component {
           }}
         >
           <Menu.SubMenu
-            key="uneditable"
+            key="nodeData"
             title="Node Data"
           >
             <Menu.Item key="id">
@@ -75,14 +94,18 @@ export default class NodeEditor extends Component {
             <Menu.Item key="type">
               <UneditableTextInput value={type} label="Type" />
             </Menu.Item>
-          </Menu.SubMenu>
-          <Menu.SubMenu
-  
-          >
-  
+            <Menu.Item key="name">
+              <SimpleTextInput
+                id="title"
+                value={title}
+                label="Title"
+                onChange={this.onChange}
+              />
+            </Menu.Item>
           </Menu.SubMenu>
         </Menu>
       );
+
     } else {
       return null;
     }
