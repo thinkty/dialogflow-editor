@@ -24,7 +24,11 @@
     {
       "id": "a0c13faf-723d-4208-85d0-76eaf7c790c5",
       "title": "inode1",
-      "type": "intentNode"
+      "type": "intentNode",
+      "contexts": {
+        "in": [],
+        "out": ["c802d68d-c57d-40cf-bb72-536b5413741d"]
+      }
     },
     {
       "id": "c802d68d-c57d-40cf-bb72-536b5413741d",
@@ -34,12 +38,20 @@
     {
       "id": "fb5affa9-2415-4fab-9d8f-f3cd2dd2383a",
       "title": "inode2",
-      "type": "intentNode"
+      "type": "intentNode",
+      "contexts": {
+        "in": ["c802d68d-c57d-40cf-bb72-536b5413741d"],
+        "out": []
+      }
     },
     {
       "id": "7b128fba-c79f-4d00-9793-da78e355686e",
       "title": "yeet",
-      "type": "intentNode"
+      "type": "intentNode",
+      "contexts": {
+        "in": ["c802d68d-c57d-40cf-bb72-536b5413741d"],
+        "out": []
+      }
     }
   ]
 }
