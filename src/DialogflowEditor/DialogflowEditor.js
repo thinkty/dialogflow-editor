@@ -201,7 +201,8 @@ export default class DialogflowEditor extends Component {
   }
 
   /**
-   * Creates a new edge between two nodes
+   * Creates a new edge between two nodes. Only add the edge when the source
+   * node is not the same as the target. When adding an edge, update the context
    *
    * @param {INode} sourceViewNode
    * @param {INode} targetViewNode
@@ -209,7 +210,6 @@ export default class DialogflowEditor extends Component {
   onCreateEdge = (sourceViewNode, targetViewNode) => {
     const { graph } = this.state;
     const type = BASIC_EDGE;
-
     const viewEdge = {
       id: uuidv4(),
       source: sourceViewNode[NODE_KEY],
@@ -217,8 +217,18 @@ export default class DialogflowEditor extends Component {
       type,
     };
 
-    // Only add the edge when the source node is not the same as the target
     if (viewEdge.source !== viewEdge.target) {
+      const isInputContext = (sourceViewNode.type === CONTEXT_TYPE);
+      const intentNode = (isInputContext ? targetViewNode : sourceViewNode);
+      const contextNode = (isInputContext ? sourceViewNode : targetViewNode);
+
+      graph.nodes = graph.nodes.map(node => {
+        if (node[NODE_KEY] === intentNode[NODE_KEY]) {
+          node.contexts[isInputContext ? "in" : "out"].push(contextNode[NODE_KEY]);
+        }
+        return node;
+      });
+
       graph.edges = [...graph.edges, viewEdge];
       this.setState({
         graph,
