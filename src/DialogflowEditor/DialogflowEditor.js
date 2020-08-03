@@ -241,12 +241,13 @@ export default class DialogflowEditor extends Component {
   );
 
   /**
-   * Update the graph when the selected node has been modified by the node
-   * editor
+   * Update the graph when some of the nodes has changed. The update is
+   * triggered by changing the layout engine type which is not an intuitive
+   * method of doing but it works.
+   * 
+   * @see https://github.com/uber/react-digraph/issues/192#issuecomment-577770253
    */
-  updateSelectedNode = (key, value) => {
-    // let selected = this.state.selected;
-    // selected[key] = value;
+  updateGraph = () => {
 
     // Replace the modified node from the nodes array
     this.setState({
@@ -257,7 +258,7 @@ export default class DialogflowEditor extends Component {
       this.setState({
         layoutEngineType: "VerticalTree"
       });
-    }, 100);
+    }, 5);
   }
 
   render() {
@@ -283,7 +284,7 @@ export default class DialogflowEditor extends Component {
         >
           <NodeEditor
             selected={selected}
-            onChange={this.updateSelectedNode}
+            update={this.updateGraph}
           />
         </Sider>
         <Content
