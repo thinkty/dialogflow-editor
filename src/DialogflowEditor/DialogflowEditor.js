@@ -3,8 +3,12 @@ import React, { Component } from 'react';
 import { INode, IEdge, GraphView } from 'react-digraph';
 import { v4 as uuidv4 } from 'uuid';
 import { Layout } from 'antd';
-
-import GraphConfig, { NODE_KEY, nodeTypes, BASIC_EDGE } from '../configs/graph';
+import GraphConfig, {
+  NODE_KEY,
+  nodeTypes,
+  BASIC_EDGE
+} from '../configs/graph';
+import NodeEditor from '../NodeEditor/NodeEditor';
 
 const { Content, Sider } = Layout;
 const sample = require('../sample.json');
@@ -241,9 +245,7 @@ export default class DialogflowEditor extends Component {
     const { NodeTypes, NodeSubTypes, EdgeTypes } = GraphConfig;
 
     return (
-      <Layout
-        hasSider
-      >
+      <Layout hasSider>
         <Sider
           defaultCollapsed={false}
           collapsedWidth={0}
@@ -258,7 +260,7 @@ export default class DialogflowEditor extends Component {
             background: '#fff',
           }}
         >
-          Hello
+          <NodeEditor selected={selected}/>
         </Sider>
         <Content
           style={{
