@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import DialogflowEditor from './DialogflowEditor';
+import DialogflowEditor from './DialogflowEditor/DialogflowEditor';
 
 ReactDOM.render(
   <div
