@@ -23,6 +23,7 @@ export default class DialogflowEditor extends Component {
       graph: sample,
       selected: null,
       type: nodeTypes[0],
+      layoutEngineType: "VerticalTree"
     };
   }
 
@@ -239,8 +240,28 @@ export default class DialogflowEditor extends Component {
     />
   );
 
+  /**
+   * Update the graph when the selected node has been modified by the node
+   * editor
+   */
+  updateSelectedNode = (key, value) => {
+    // let selected = this.state.selected;
+    // selected[key] = value;
+
+    // Replace the modified node from the nodes array
+    this.setState({
+      layoutEngineType: "None"
+    });
+
+    setTimeout(() => {
+      this.setState({
+        layoutEngineType: "VerticalTree"
+      });
+    }, 100);
+  }
+
   render() {
-    const { graph, selected } = this.state;
+    const { graph, selected, layoutEngineType } = this.state;
     const { nodes, edges } = graph;
     const { NodeTypes, NodeSubTypes, EdgeTypes } = GraphConfig;
 
@@ -260,7 +281,10 @@ export default class DialogflowEditor extends Component {
             background: '#fff',
           }}
         >
-          <NodeEditor selected={selected}/>
+          <NodeEditor
+            selected={selected}
+            onChange={this.updateSelectedNode}
+          />
         </Sider>
         <Content
           style={{
@@ -268,6 +292,7 @@ export default class DialogflowEditor extends Component {
           }}
         >
           <GraphView
+            layoutEngineType={layoutEngineType}
             nodeKey={NODE_KEY}
             nodes={nodes}
             edges={edges}

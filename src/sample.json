@@ -11,29 +11,35 @@
       "source": "cnode1",
       "target": "inode2",
       "type": "basicEdge"
+    },
+    {
+      "id": "edge3",
+      "source": "cnode1",
+      "target": "inode3",
+      "type": "basicEdge"
+
     }
   ],
   "nodes": [
     {
       "id": "inode1",
       "title": "inode1",
-      "type": "intentNode",
-      "x": 0,
-      "y": 0
+      "type": "intentNode"
     },
     {
       "id": "cnode1",
       "title": "cnode1",
-      "type": "contextNode",
-      "x": 0,
-      "y": 250
+      "type": "contextNode"
     },
     {
       "id": "inode2",
       "title": "inode2",
-      "type": "intentNode",
-      "x": 0,
-      "y": 500
+      "type": "intentNode"
+    },
+    {
+      "id": "inode3",
+      "title": "yeet",
+      "type": "intentNode"
     }
   ]
 }
