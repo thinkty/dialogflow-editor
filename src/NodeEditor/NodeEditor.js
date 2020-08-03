@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Menu, Space } from 'antd';
 
 import SimpleTextInput from './SimpleTextInput';
-import UneditableTextInput from './UneditableTextInput';
+import DisabledTextInput from './DisabledTextInput';
 import { CONTEXT_TYPE, INTENT_TYPE } from '../configs/graph';
 
 /**
@@ -64,8 +64,8 @@ export default class NodeEditor extends Component {
             padding: 20
           }}
         >
-          <UneditableTextInput value={id} label="Id" />
-          <UneditableTextInput value={type} label="Type" />
+          <DisabledTextInput value={id} label="Id" />
+          <DisabledTextInput value={type} label="Type" />
           <SimpleTextInput
             id="title"
             value={title}
@@ -88,10 +88,10 @@ export default class NodeEditor extends Component {
             title="Node Data"
           >
             <Menu.Item key="id">
-              <UneditableTextInput value={id} label="Id" />
+              <DisabledTextInput value={id} label="Id" />
             </Menu.Item>
             <Menu.Item key="type">
-              <UneditableTextInput value={type} label="Type" />
+              <DisabledTextInput value={type} label="Type" />
             </Menu.Item>
             <Menu.Item key="name">
               <SimpleTextInput
