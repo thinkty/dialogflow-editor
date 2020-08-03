@@ -69,7 +69,7 @@ export default class NodeEditor extends Component {
           <SimpleTextInput
             id="title"
             value={title}
-            label="Title"
+            label="Name"
             onChange={this.onChange}
           />
         </Space>
@@ -97,7 +97,7 @@ export default class NodeEditor extends Component {
               <SimpleTextInput
                 id="title"
                 value={title}
-                label="Title"
+                label="Name"
                 onChange={this.onChange}
               />
             </Menu.Item>
