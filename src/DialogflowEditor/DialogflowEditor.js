@@ -6,7 +6,8 @@ import { Layout } from 'antd';
 import GraphConfig, {
   NODE_KEY,
   nodeTypes,
-  BASIC_EDGE
+  BASIC_EDGE,
+  INTENT_TYPE
 } from '../configs/graph';
 import NodeEditor from '../NodeEditor/NodeEditor';
 
@@ -112,6 +113,14 @@ export default class DialogflowEditor extends Component {
       x,
       y,
     };
+
+    // Initialize contexts if it is an intent node
+    if (type === INTENT_TYPE) {
+      viewNode.contexts = {
+        in: [],
+        out: []
+      };
+    }
 
     graph.nodes = [...graph.nodes, viewNode];
     this.setState({ graph });
