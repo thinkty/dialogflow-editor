@@ -182,6 +182,25 @@ export default class DialogflowEditor extends Component {
   };
 
   /**
+   * Determines if an edge can be created or not. Currently, an edge can only be
+   * created between an intent node and a context node. An edge that tries to
+   * connect the same type of nodes will not be created
+   * 
+   * @param {INode} startNode Source node of the edge
+   * @param {INode} endNode Target node of the edge
+   */
+  canCreateEdge = (startNode, endNode) => {
+
+    // Allow edge creation when source or target is undefined. If false is
+    // returned here, the svg will not even render.
+    if (!startNode || !endNode) {
+      return true;
+    }
+
+    return (startNode.type !== endNode.type);
+  }
+
+  /**
    * Creates a new node between two edges
    *
    * @param {INode} sourceViewNode
@@ -340,6 +359,7 @@ export default class DialogflowEditor extends Component {
             onUpdateNode={this.onUpdateNode}
             onDeleteNode={this.onDeleteNode}
             onSelectEdge={this.onSelectEdge}
+            canCreateEdge={this.canCreateEdge}
             onCreateEdge={this.onCreateEdge}
             onSwapEdge={this.onSwapEdge}
             onDeleteEdge={this.onDeleteEdge}
