@@ -1,14 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import DialogflowEditor from './DialogflowEditor/DialogflowEditor';
+import '../node_modules/antd/dist/antd.css';
 
 ReactDOM.render(
-  <div
-    style={{
-      margin: -8,
-    }}
-  >
-    <DialogflowEditor />
-  </div>,
+  <DialogflowEditor />,
   document.getElementById('root'),
 );
