@@ -223,6 +223,9 @@ export default class DialogflowEditor extends Component {
       this.setState({
         graph,
       });
+
+      // Rerender graph on create edge
+      this.updateGraph();
     }
   };
 
