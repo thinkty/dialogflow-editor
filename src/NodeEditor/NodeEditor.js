@@ -19,8 +19,7 @@ export default class NodeEditor extends Component {
   }
 
   /**
-   * Update the currently selected node on prop change and when the given prop
-   * has the property selected that is not null
+   * Update the currently selected node on prop change
    * 
    * @param {*} props Next props
    * @param {*} state Previous state
