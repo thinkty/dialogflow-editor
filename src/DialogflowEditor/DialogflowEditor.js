@@ -188,6 +188,7 @@ export default class DialogflowEditor extends Component {
    * 
    * @param {INode} startNode Source node of the edge
    * @param {INode} endNode Target node of the edge
+   * @returns {Boolean} Whether it can create an edge or not
    */
   canCreateEdge = (startNode, endNode) => {
 
