@@ -257,7 +257,11 @@ export default class DialogflowEditor extends Component {
   canSwapEdge = (sourceNode, targetNode, edge) => {}
 
   /**
-   * Called when an edge is reattached to a different target
+   * Called when an edge is reattached to a different target. On swapping edge,
+   * if the source node is an intent node, it should remove the previous context
+   * from the output and add the new context. If the source node is a context
+   * node, the previous target intent node should remove the input context and
+   * the new target intent node should add the context node.
    *
    * @param {INode} sourceViewNode
    * @param {INode} targetViewNode
@@ -267,6 +271,7 @@ export default class DialogflowEditor extends Component {
     const { graph } = this.state;
     const i = this.getEdgeIndex(viewEdge);
     const edge = JSON.parse(JSON.stringify(graph.edges[i]));
+    const prevTarget = viewEdge.target;
 
     edge.source = sourceViewNode[NODE_KEY];
     edge.target = targetViewNode[NODE_KEY];
@@ -274,11 +279,46 @@ export default class DialogflowEditor extends Component {
     // reassign the array reference to re-render a swapped edge
     graph.edges = [...graph.edges];
 
+    if (sourceViewNode.type === INTENT_TYPE) {
+      graph.nodes = graph.nodes.map(node => {
+        if (node[NODE_KEY] === sourceViewNode[NODE_KEY]) {
+
+          // Remove the old context and add the new context
+          const index = node.contexts.out.indexOf(prevTarget);
+          if (index > -1) {
+            node.contexts.out.splice(index, 1);
+          }
+          node.contexts.out.push(targetViewNode[NODE_KEY]);
+        }
+        return node;
+      });
+
+    } else if (sourceViewNode.type === CONTEXT_TYPE) {
+      graph.nodes = graph.nodes.map(node => {
+        if (node[NODE_KEY] === prevTarget) {
+
+          // Remove the current context from the previous target intent node
+          const index = node.contexts.in.indexOf(node[NODE_KEY]);
+          if (index > -1) {
+            node.contexts.in.splice(index, 1);
+          }
+        } else if (node[NODE_KEY] === targetViewNode[NODE_KEY]) {
+
+          // Add the current context to the new target intent node
+          node.contexts.in.push(node[NODE_KEY]);
+        }
+        return node;
+      });
+
+    } else {
+      throw new Error(`Unexpected node type for ${sourceViewNode[NODE_KEY]}`);
+    }
+
     this.setState({
       graph,
     });
 
-    // Re-graph after swapping edge
+    // Re-render graph after swapping edge
     this.updateGraph();
   };
 
