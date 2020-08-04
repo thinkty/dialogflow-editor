@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import { Menu, Space } from 'antd';
 
-import SimpleTextInput from './SimpleTextInput';
-import DisabledTextInput from './DisabledTextInput';
 import { CONTEXT_TYPE, INTENT_TYPE } from '../configs/graph';
+import DisabledArrayInput from './inputs/DisabledArrayInput';
+import DisabledTextInput from './inputs/DisabledTextInput';
+import SimpleTextInput from './inputs/SimpleTextInput';
 
 /**
  * Component to edit the currently selected node
@@ -52,7 +53,7 @@ export default class NodeEditor extends Component {
       return null;
     }
 
-    const { id, type, title } = this.state.selected;
+    const { id, type, title, contexts } = this.state.selected;
 
     // Distinguish between context type and intent type
     if (type === CONTEXT_TYPE) {
@@ -100,6 +101,28 @@ export default class NodeEditor extends Component {
                 label="Name"
                 onChange={this.onChange}
               />
+            </Menu.Item>
+          </Menu.SubMenu>
+          <Menu.Divider />
+          <Menu.SubMenu
+            key="contexts"
+            title="Contexts"
+          >
+            <Menu.Item 
+              key="inputContext"
+              style={{
+                height: (contexts.in.length + 1) * 40
+              }}
+            >
+              <DisabledArrayInput items={contexts.in} label="Input Contexts" />
+            </Menu.Item>
+            <Menu.Item 
+              key="outputContext"
+              style={{
+                height: (contexts.out.length + 1) * 40
+              }}
+            >
+              <DisabledArrayInput items={contexts.out} label="Output Contexts" />
             </Menu.Item>
           </Menu.SubMenu>
         </Menu>
