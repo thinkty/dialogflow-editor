@@ -8,7 +8,7 @@ import GraphConfig, {
   nodeTypes,
   BASIC_EDGE,
   INTENT_TYPE,
-  CONTEXT_TYPE
+  CONTEXT_TYPE,
 } from '../configs/graph';
 import NodeEditor from '../NodeEditor/NodeEditor';
 
@@ -25,7 +25,7 @@ export default class DialogflowEditor extends Component {
       graph: sample,
       selected: null,
       type: nodeTypes[0],
-      layoutEngineType: "VerticalTree"
+      layoutEngineType: 'VerticalTree',
     };
   }
 
@@ -119,7 +119,7 @@ export default class DialogflowEditor extends Component {
     if (type === INTENT_TYPE) {
       viewNode.contexts = {
         in: [],
-        out: []
+        out: [],
       };
     }
 
@@ -144,7 +144,7 @@ export default class DialogflowEditor extends Component {
 
       if (edge.source === id || edge.target === id) {
         const key = edge.source === id ? edge.target : edge.source;
-        const value = edge.source === id ? "in" : "out";
+        const value = edge.source === id ? 'in' : 'out';
         connectedNodeIds.set(key, value);
         return false;
       }
@@ -154,7 +154,7 @@ export default class DialogflowEditor extends Component {
     // Remove the nodeId from any of the connected nodes' contexts if the
     // deleted node is a context node
     if (viewNode.type === CONTEXT_TYPE) {
-      graph.nodes = nodeArr.map(node => {
+      graph.nodes = nodeArr.map((node) => {
         if (connectedNodeIds.has(node[NODE_KEY])) {
           const value = connectedNodeIds.get(node[NODE_KEY]);
           const index = node.contexts[value].indexOf(nodeId);
@@ -188,13 +188,12 @@ export default class DialogflowEditor extends Component {
    * Determines if an edge can be created or not. Currently, an edge can only be
    * created between an intent node and a context node. An edge that tries to
    * connect the same type of nodes will not be created
-   * 
+   *
    * @param {INode} startNode Source node of the edge
    * @param {INode} endNode Target node of the edge
    * @returns {Boolean} Whether it can create an edge or not
    */
   canCreateEdge = (startNode, endNode) => {
-
     // Allow edge creation when source or target is undefined. If false is
     // returned here, the svg will not even render.
     if (!startNode || !endNode) {
@@ -226,9 +225,9 @@ export default class DialogflowEditor extends Component {
       const intentNode = (isInputContext ? targetViewNode : sourceViewNode);
       const contextNode = (isInputContext ? sourceViewNode : targetViewNode);
 
-      graph.nodes = graph.nodes.map(node => {
+      graph.nodes = graph.nodes.map((node) => {
         if (node[NODE_KEY] === intentNode[NODE_KEY]) {
-          node.contexts[isInputContext ? "in" : "out"].push(contextNode[NODE_KEY]);
+          node.contexts[isInputContext ? 'in' : 'out'].push(contextNode[NODE_KEY]);
         }
         return node;
       });
@@ -246,12 +245,12 @@ export default class DialogflowEditor extends Component {
   /**
    * Determines if an edge can be swapped or not based on the rules similar to
    * canCreateEdge.
-   * 
+   *
    * TODO: This feature is not yet released (v6.7.1)
-   * 
-   * @param {INode} sourceNode 
-   * @param {INode} targetNode 
-   * @param {IEdge} edge 
+   *
+   * @param {INode} sourceNode
+   * @param {INode} targetNode
+   * @param {IEdge} edge
    * @returns {Boolean} Whether it can swap edge or not
    */
   canSwapEdge = (sourceNode, targetNode, edge) => {}
@@ -280,9 +279,8 @@ export default class DialogflowEditor extends Component {
     graph.edges = [...graph.edges];
 
     if (sourceViewNode.type === INTENT_TYPE) {
-      graph.nodes = graph.nodes.map(node => {
+      graph.nodes = graph.nodes.map((node) => {
         if (node[NODE_KEY] === sourceViewNode[NODE_KEY]) {
-
           // Remove the old context and add the new context
           const index = node.contexts.out.indexOf(prevTarget);
           if (index > -1) {
@@ -292,24 +290,20 @@ export default class DialogflowEditor extends Component {
         }
         return node;
       });
-
     } else if (sourceViewNode.type === CONTEXT_TYPE) {
-      graph.nodes = graph.nodes.map(node => {
+      graph.nodes = graph.nodes.map((node) => {
         if (node[NODE_KEY] === prevTarget) {
-
           // Remove the current context from the previous target intent node
           const index = node.contexts.in.indexOf(node[NODE_KEY]);
           if (index > -1) {
             node.contexts.in.splice(index, 1);
           }
         } else if (node[NODE_KEY] === targetViewNode[NODE_KEY]) {
-
           // Add the current context to the new target intent node
           node.contexts.in.push(node[NODE_KEY]);
         }
         return node;
       });
-
     } else {
       throw new Error(`Unexpected node type for ${sourceViewNode[NODE_KEY]}`);
     }
@@ -334,7 +328,7 @@ export default class DialogflowEditor extends Component {
   onDeleteEdge = (viewEdge, edges) => {
     const { graph } = this.state;
 
-    graph.nodes = graph.nodes.map(node => {
+    graph.nodes = graph.nodes.map((node) => {
       if (node.type === INTENT_TYPE) {
         if (node[NODE_KEY] === viewEdge.source) {
           const index = node.contexts.out.indexOf(viewEdge.target);
@@ -372,7 +366,6 @@ export default class DialogflowEditor extends Component {
   onContextMenu = (x, y, event) => {
     event.prevenDefault();
     // TODO: Prompt new node on right click
-    console.log('Right clicked');
   }
 
   /**
@@ -394,20 +387,15 @@ export default class DialogflowEditor extends Component {
    * Update the graph when some of the nodes has changed. The update is
    * triggered by changing the layout engine type which is not an intuitive
    * method of doing but it works.
-   * 
+   *
    * @see https://github.com/uber/react-digraph/issues/192#issuecomment-577770253
    */
   updateGraph = () => {
-
     // Replace the modified node from the nodes array
-    this.setState({
-      layoutEngineType: "None"
-    });
+    this.setState({ layoutEngineType: 'None' });
 
     setTimeout(() => {
-      this.setState({
-        layoutEngineType: "VerticalTree"
-      });
+      this.setState({ layoutEngineType: 'VerticalTree' });
     }, 5);
   }
 

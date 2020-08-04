@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { Menu, Space } from 'antd';
 
 import { CONTEXT_TYPE, INTENT_TYPE } from '../configs/graph';
@@ -10,40 +11,36 @@ import SimpleTextInput from './inputs/SimpleTextInput';
  * Component to edit the currently selected node
  */
 export default class NodeEditor extends Component {
-
   constructor(props) {
     super(props);
-    this.state = {
-      selected: this.props.selected,
-      update: this.props.update
-    };
+    this.state = { ...props };
   }
 
   /**
    * Update the currently selected node on prop change
-   * 
+   *
    * @param {*} props Next props
    * @param {*} state Previous state
    */
   static getDerivedStateFromProps(props, state) {
     return {
-      selected: props.selected
+      selected: props.selected,
     };
   }
 
   /**
    * Handle changes from simple string input fields
-   * 
-   * @param {*} event 
+   *
+   * @param {*} event
    */
   onChange = (event) => {
     const { id, value } = event.target;
-    const { selected } = this.state;
+    const { selected, update } = this.state;
     selected[id] = value;
     this.setState({ selected });
 
     // Notify the parent component to rerender the graph to show changes
-    this.state.update();
+    update();
   }
 
   render() {
@@ -53,16 +50,21 @@ export default class NodeEditor extends Component {
       return null;
     }
 
-    const { id, type, title, contexts } = this.state.selected;
+    const {
+      id,
+      type,
+      title,
+      contexts,
+    } = selected;
 
     // Distinguish between context type and intent type
     if (type === CONTEXT_TYPE) {
       return (
-        <Space 
+        <Space
           direction="vertical"
           style={{
             width: '100%',
-            padding: 20
+            padding: 20,
           }}
         >
           <DisabledTextInput value={id} label="Id" />
@@ -75,14 +77,13 @@ export default class NodeEditor extends Component {
           />
         </Space>
       );
+    }
 
-    } else if (type === INTENT_TYPE) {
+    if (type === INTENT_TYPE) {
       return (
         <Menu
           mode="inline"
-          style={{
-            width: '100%'
-          }}
+          style={{ width: '100%' }}
         >
           <Menu.SubMenu
             key="nodeData"
@@ -108,28 +109,22 @@ export default class NodeEditor extends Component {
             key="contexts"
             title="Contexts"
           >
-            <Menu.Item 
+            <Menu.Item
               key="inputContext"
-              style={{
-                height: (contexts.in.length + 1) * 40
-              }}
+              style={{ height: (contexts.in.length + 1) * 40 }}
             >
               <DisabledArrayInput items={contexts.in} label="Input Contexts" />
             </Menu.Item>
-            <Menu.Item 
+            <Menu.Item
               key="outputContext"
-              style={{
-                height: (contexts.out.length + 1) * 40
-              }}
+              style={{ height: (contexts.out.length + 1) * 40 }}
             >
               <DisabledArrayInput items={contexts.out} label="Output Contexts" />
             </Menu.Item>
           </Menu.SubMenu>
         </Menu>
       );
-
-    } else {
-      return null;
     }
+    return null;
   }
 }
