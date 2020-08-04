@@ -323,13 +323,34 @@ export default class DialogflowEditor extends Component {
   };
 
   /**
-   * Called when an edge is deleted
+   * Called when an edge is deleted. If the source node is an intent node,
+   * remove the target context node id from the context list. If the source node
+   * was a context node, remove the context node id from the target intent
+   * node's context list.
    *
    * @param {IEdge} viewEdge
    * @param {IEdge[]} edges
    */
   onDeleteEdge = (viewEdge, edges) => {
     const { graph } = this.state;
+
+    graph.nodes = graph.nodes.map(node => {
+      if (node.type === INTENT_TYPE) {
+        if (node[NODE_KEY] === viewEdge.source) {
+          const index = node.contexts.out.indexOf(viewEdge.target);
+          if (index > -1) {
+            node.contexts.out.splice(index, 1);
+          }
+        } else if (node[NODE_KEY] === viewEdge.target) {
+          const index = node.contexts.in.indexOf(viewEdge.source);
+          if (index > -1) {
+            node.contexts.in.splice(index, 1);
+          }
+        }
+      }
+
+      return node;
+    });
 
     graph.edges = edges;
     this.setState({
