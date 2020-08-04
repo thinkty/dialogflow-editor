@@ -181,7 +181,7 @@ export default class DialogflowEditor extends Component {
    * @param {IEdge} viewEdge
    */
   onSelectEdge = (viewEdge) => {
-    // Do nothing on select edge
+    this.setState({ selected: viewEdge });
   };
 
   /**
@@ -356,6 +356,9 @@ export default class DialogflowEditor extends Component {
     this.setState({
       graph,
     });
+
+    // Re render graph on delete edge
+    this.updateGraph();
   };
 
   /**
@@ -419,7 +422,7 @@ export default class DialogflowEditor extends Component {
           defaultCollapsed={false}
           collapsedWidth={0}
           collapsible
-          collapsed={!selected}
+          collapsed={!selected || selected.source}
           trigger={null}
           width="30vw"
           style={{
