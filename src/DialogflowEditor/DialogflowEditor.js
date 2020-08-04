@@ -170,6 +170,9 @@ export default class DialogflowEditor extends Component {
 
     graph.edges = newEdges;
     this.setState({ graph, selected: null });
+
+    // Rerender graph on delete node
+    this.updateGraph();
   };
 
   /**
