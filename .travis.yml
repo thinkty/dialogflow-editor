@@ -3,6 +3,7 @@ node_js:
   - lts/*
 cache: npm
 script:
+  - npm run lint
   - npm test
   - npm run test:cov
   - npm run build
