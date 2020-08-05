@@ -415,6 +415,7 @@ export default class DialogflowEditor extends Component {
           width="30vw"
           style={{
             height: '100vh',
+            overflow: 'auto',
             position: 'fixed',
             right: 0,
             background: '#fff',
