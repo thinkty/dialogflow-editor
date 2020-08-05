@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 import { Menu, Space } from 'antd';
 
 import { CONTEXT_TYPE, INTENT_TYPE } from '../configs/graph';
