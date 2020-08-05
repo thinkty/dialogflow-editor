@@ -16,10 +16,11 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test --coverage",
+    "test": "react-scripts test",
+    "test:cov": "react-scripts test --coverage",
     "eject": "react-scripts eject",
-    "linter": "./node_modules/.bin/eslint src/",
-    "linter-fix": "./node_modules/.bin/eslint --fix src/"
+    "lint": "./node_modules/.bin/eslint src/",
+    "lint:fix": "./node_modules/.bin/eslint --fix src/"
   },
   "eslintConfig": {
     "extends": "react-app"
