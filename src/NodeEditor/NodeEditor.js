@@ -51,10 +51,10 @@ export default class NodeEditor extends Component {
     }
 
     const defaultOpenMenus = [
-      "nodeData",
-      "contexts",
-      "events",
-      "trainingPhrases"
+      'nodeData',
+      'contexts',
+      'events',
+      'trainingPhrases',
     ];
 
     const {
@@ -150,7 +150,7 @@ export default class NodeEditor extends Component {
             <Menu.Item
               key="trainingPhrases"
               style={{
-                height: trainingPhrases.length === 0 ? 100 : trainingPhrases.length * 45 + 40
+                height: trainingPhrases.length === 0 ? 100 : trainingPhrases.length * 45 + 40,
               }}
             >
               <SimpleArrayInput

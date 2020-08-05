@@ -7,7 +7,7 @@ export default class SimpleArrayInput extends Component {
     super(props);
     this.state = {
       ...props,
-      temp: ''
+      temp: '',
     };
   }
 
@@ -24,8 +24,8 @@ export default class SimpleArrayInput extends Component {
   }
 
   /**
-   * 
-   * 
+   *
+   *
    * @param {*} item Item to delete from the list
    */
   onDelete = (item) => {
@@ -34,7 +34,7 @@ export default class SimpleArrayInput extends Component {
 
     if (index > -1) {
       items.splice(index, 1);
-      onChange({target: {id, value: items}});
+      onChange({ target: { id, value: items } });
     }
   }
 
@@ -42,31 +42,33 @@ export default class SimpleArrayInput extends Component {
    * Event handler when the user submits the temporary input field. Chech that
    * the input is not empty and add it to the items and report the change to the
    * parent component
-   * 
-   * @param {*} event 
+   *
+   * @param {*} event
    */
   onSubmit = (event) => {
     event.preventDefault();
 
-    const { id, onChange, items, temp } = this.state;
+    const {
+      id, onChange, items, temp,
+    } = this.state;
 
     if (temp === '') {
       return;
     }
 
     items.push(temp);
-    onChange({target: {id, value: items}});
+    onChange({ target: { id, value: items } });
     this.setState({ temp: '' });
   }
 
   /**
    * Event handler for input field value change
-   * 
-   * @param {*} event 
+   *
+   * @param {*} event
    */
   onChange = (event) => {
     this.setState({
-      temp: event.target.value
+      temp: event.target.value,
     });
   }
 
