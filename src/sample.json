@@ -31,7 +31,8 @@
       },
       "events": ["start"],
       "trainingPhrases": [],
-      "action": ""
+      "action": "",
+      "responses": []
     },
     {
       "id": "c802d68d-c57d-40cf-bb72-536b5413741d",
@@ -48,11 +49,12 @@
       },
       "events": [],
       "trainingPhrases": [],
-      "action": ""
+      "action": "",
+      "responses": []
     },
     {
       "id": "7b128fba-c79f-4d00-9793-da78e355686e",
-      "title": "yeet",
+      "title": "inode3",
       "type": "intentNode",
       "contexts": {
         "in": ["c802d68d-c57d-40cf-bb72-536b5413741d"],
@@ -60,7 +62,8 @@
       },
       "events": ["end", "bye"],
       "trainingPhrases": [],
-      "action": ""
+      "action": "",
+      "responses": []
     }
   ]
 }

@@ -56,6 +56,7 @@ export default class NodeEditor extends Component {
       'events',
       'trainingPhrases',
       'action',
+      'responses',
     ];
 
     const {
@@ -65,6 +66,7 @@ export default class NodeEditor extends Component {
       action,
       events,
       contexts,
+      responses,
       trainingPhrases,
     } = selected;
 
@@ -181,6 +183,22 @@ export default class NodeEditor extends Component {
             </Menu.Item>
           </Menu.SubMenu>
           <Menu.Divider />
+          <Menu.SubMenu key="responses" title="Responses">
+            <Menu.Item
+              key="responses"
+              style={{
+                height: responses.length === 0 ? 100 : responses.length * 45 + 40,
+                marginBottom: 40,
+              }}
+            >
+              <SimpleArrayInput
+                items={responses}
+                label="Responses"
+                id="responses"
+                onChange={this.onChange}
+              />
+            </Menu.Item>
+          </Menu.SubMenu>
         </Menu>
       );
     }
