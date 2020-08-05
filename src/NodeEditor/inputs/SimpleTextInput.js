@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import { Input } from 'antd';
 
+/**
+ * A component for editting string with a simple text input field
+ */
 export default class SimpleTextInput extends Component {
   constructor(props) {
     super(props);

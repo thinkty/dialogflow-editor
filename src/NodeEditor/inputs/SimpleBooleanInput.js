@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import { Switch, Space, Typography } from 'antd';
 
+/**
+ * A component for editting boolean through a switch
+ */
 export default class SimpleBooleanInput extends Component {
   constructor(props) {
     super(props);

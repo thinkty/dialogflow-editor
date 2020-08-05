@@ -2,6 +2,11 @@ import React from 'react';
 import { List } from 'antd';
 import PropTypes from 'prop-types';
 
+/**
+ * Functional component to display uneditable arrays
+ *
+ * @param {*} props Object containing an array of items and label
+ */
 export default function DisabledArrayInput(props) {
   const { items, label } = props;
 

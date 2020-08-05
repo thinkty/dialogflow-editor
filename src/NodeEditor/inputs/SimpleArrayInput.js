@@ -2,6 +2,10 @@ import React, { Component } from 'react';
 import { List, Input, Space } from 'antd';
 import { CloseOutlined } from '@ant-design/icons';
 
+/**
+ * A component for editting array with an interactive list and a text input
+ * field which can be used to add new items to the list
+ */
 export default class SimpleArrayInput extends Component {
   constructor(props) {
     super(props);
