@@ -5,7 +5,7 @@ export default class SimpleBooleanInput extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      ...props
+      ...props,
     };
   }
 
@@ -32,7 +32,6 @@ export default class SimpleBooleanInput extends Component {
   }
 
   render() {
-
     const { value, label } = this.state;
 
     return (
