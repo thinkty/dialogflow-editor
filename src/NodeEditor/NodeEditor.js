@@ -55,12 +55,14 @@ export default class NodeEditor extends Component {
       'contexts',
       'events',
       'trainingPhrases',
+      'action',
     ];
 
     const {
       id,
       type,
       title,
+      action,
       events,
       contexts,
       trainingPhrases,
@@ -136,7 +138,10 @@ export default class NodeEditor extends Component {
           <Menu.SubMenu key="events" title="Events">
             <Menu.Item
               key="events"
-              style={{ height: events.length === 0 ? 100 : events.length * 45 + 40 }}
+              style={{
+                height: events.length === 0 ? 100 : events.length * 45 + 40,
+                marginBottom: 40,
+              }}
             >
               <SimpleArrayInput
                 items={events}
@@ -146,11 +151,13 @@ export default class NodeEditor extends Component {
               />
             </Menu.Item>
           </Menu.SubMenu>
+          <Menu.Divider />
           <Menu.SubMenu key="trainingPhrases" title="Training Phrases">
             <Menu.Item
               key="trainingPhrases"
               style={{
                 height: trainingPhrases.length === 0 ? 100 : trainingPhrases.length * 45 + 40,
+                marginBottom: 40,
               }}
             >
               <SimpleArrayInput
@@ -161,6 +168,18 @@ export default class NodeEditor extends Component {
               />
             </Menu.Item>
           </Menu.SubMenu>
+          <Menu.Divider />
+          <Menu.SubMenu key="action" title="Action">
+            <Menu.Item key="action" style={{ marginBottom: 40 }}>
+              <SimpleTextInput
+                id="action"
+                value={action}
+                label=""
+                onChange={this.onChange}
+              />
+            </Menu.Item>
+          </Menu.SubMenu>
+          <Menu.Divider />
         </Menu>
       );
     }
