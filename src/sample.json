@@ -28,7 +28,8 @@
       "contexts": {
         "in": [],
         "out": ["c802d68d-c57d-40cf-bb72-536b5413741d"]
-      }
+      },
+      "events": ["start"]
     },
     {
       "id": "c802d68d-c57d-40cf-bb72-536b5413741d",
@@ -42,7 +43,8 @@
       "contexts": {
         "in": ["c802d68d-c57d-40cf-bb72-536b5413741d"],
         "out": []
-      }
+      },
+      "events": []
     },
     {
       "id": "7b128fba-c79f-4d00-9793-da78e355686e",
@@ -51,7 +53,8 @@
       "contexts": {
         "in": ["c802d68d-c57d-40cf-bb72-536b5413741d"],
         "out": []
-      }
+      },
+      "events": ["end", "bye"]
     }
   ]
 }
