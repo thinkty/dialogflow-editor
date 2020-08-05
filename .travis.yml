@@ -1,10 +1,10 @@
 language: node_js
 node_js:
-  - "stable"
+  - lts/*
 cache: npm
 script:
   - npm test
-  - npm run cov
+  - npm run test:cov
   - npm run build
 notifications:
   email:
