@@ -5,6 +5,7 @@ import { CONTEXT_TYPE, INTENT_TYPE } from '../configs/graph';
 import DisabledArrayInput from './inputs/DisabledArrayInput';
 import DisabledTextInput from './inputs/DisabledTextInput';
 import SimpleTextInput from './inputs/SimpleTextInput';
+import SimpleArrayInput from './inputs/SimpleArrayInput';
 
 /**
  * Component to edit the currently selected node
@@ -49,10 +50,13 @@ export default class NodeEditor extends Component {
       return null;
     }
 
+    const defaultOpenMenus = ["nodeData", "contexts", "events"];
+
     const {
       id,
       type,
       title,
+      events,
       contexts,
     } = selected;
 
@@ -83,11 +87,10 @@ export default class NodeEditor extends Component {
         <Menu
           mode="inline"
           style={{ width: '100%' }}
+          defaultOpenKeys={defaultOpenMenus}
+          selectable={false}
         >
-          <Menu.SubMenu
-            key="nodeData"
-            title="Node Data"
-          >
+          <Menu.SubMenu key="nodeData" title="Node Data">
             <Menu.Item key="id">
               <DisabledTextInput value={id} label="Id" />
             </Menu.Item>
@@ -104,21 +107,37 @@ export default class NodeEditor extends Component {
             </Menu.Item>
           </Menu.SubMenu>
           <Menu.Divider />
-          <Menu.SubMenu
-            key="contexts"
-            title="Contexts"
-          >
+          <Menu.SubMenu key="contexts" title="Contexts">
             <Menu.Item
               key="inputContext"
-              style={{ height: (contexts.in.length + 1) * 40 }}
+              style={{
+                height: contexts.in.length === 0 ? 90 : contexts.in.length * 40 + 35,
+              }}
             >
               <DisabledArrayInput items={contexts.in} label="Input Contexts" />
             </Menu.Item>
             <Menu.Item
               key="outputContext"
-              style={{ height: (contexts.out.length + 1) * 40 }}
+              style={{
+                height: contexts.out.length === 0 ? 90 : contexts.out.length * 40 + 35,
+                marginBottom: 40,
+              }}
             >
               <DisabledArrayInput items={contexts.out} label="Output Contexts" />
+            </Menu.Item>
+          </Menu.SubMenu>
+          <Menu.Divider />
+          <Menu.SubMenu key="events" title="Events">
+            <Menu.Item
+              key="events"
+              style={{ height: events.length === 0 ? 100 : events.length * 45 + 40 }}
+            >
+              <SimpleArrayInput
+                items={events}
+                label="Events"
+                id="events"
+                onChange={this.onChange}
+              />
             </Menu.Item>
           </Menu.SubMenu>
         </Menu>
