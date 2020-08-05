@@ -6,6 +6,7 @@ import DisabledArrayInput from './inputs/DisabledArrayInput';
 import DisabledTextInput from './inputs/DisabledTextInput';
 import SimpleTextInput from './inputs/SimpleTextInput';
 import SimpleArrayInput from './inputs/SimpleArrayInput';
+import SimpleBooleanInput from './inputs/SimpleBooleanInput';
 
 /**
  * Component to edit the currently selected node
@@ -52,11 +53,12 @@ export default class NodeEditor extends Component {
 
     const defaultOpenMenus = [
       'nodeData',
-      'contexts',
-      'events',
-      'trainingPhrases',
       'action',
+      'events',
+      'contexts',
       'responses',
+      'fulfillment',
+      'trainingPhrases',
     ];
 
     const {
@@ -67,6 +69,7 @@ export default class NodeEditor extends Component {
       events,
       contexts,
       responses,
+      fulfillment,
       trainingPhrases,
     } = selected;
 
@@ -199,9 +202,22 @@ export default class NodeEditor extends Component {
               />
             </Menu.Item>
           </Menu.SubMenu>
+          <Menu.Divider />
+          <Menu.SubMenu key="fulfillment" title="Fulfillment">
+            <Menu.Item key="fulfillment" style={{ marginBottom: 40 }}>
+              <SimpleBooleanInput
+                id="fulfillment"
+                value={fulfillment}
+                label="Enable Webhook"
+                onChange={this.onChange}
+              />
+            </Menu.Item>
+          </Menu.SubMenu>
         </Menu>
       );
     }
+
+    // Does not match any known node type
     return null;
   }
 }

@@ -32,7 +32,8 @@
       "events": ["start"],
       "trainingPhrases": [],
       "action": "",
-      "responses": []
+      "responses": [],
+      "fulfillment": false
     },
     {
       "id": "c802d68d-c57d-40cf-bb72-536b5413741d",
@@ -50,7 +51,8 @@
       "events": [],
       "trainingPhrases": [],
       "action": "",
-      "responses": []
+      "responses": [],
+      "fulfillment": false
     },
     {
       "id": "7b128fba-c79f-4d00-9793-da78e355686e",
@@ -63,7 +65,8 @@
       "events": ["end", "bye"],
       "trainingPhrases": [],
       "action": "",
-      "responses": []
+      "responses": [],
+      "fulfillment": false
     }
   ]
 }
