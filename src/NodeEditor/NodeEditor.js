@@ -50,7 +50,12 @@ export default class NodeEditor extends Component {
       return null;
     }
 
-    const defaultOpenMenus = ["nodeData", "contexts", "events"];
+    const defaultOpenMenus = [
+      "nodeData",
+      "contexts",
+      "events",
+      "trainingPhrases"
+    ];
 
     const {
       id,
@@ -58,6 +63,7 @@ export default class NodeEditor extends Component {
       title,
       events,
       contexts,
+      trainingPhrases,
     } = selected;
 
     // Distinguish between context type and intent type
@@ -136,6 +142,21 @@ export default class NodeEditor extends Component {
                 items={events}
                 label="Events"
                 id="events"
+                onChange={this.onChange}
+              />
+            </Menu.Item>
+          </Menu.SubMenu>
+          <Menu.SubMenu key="trainingPhrases" title="Training Phrases">
+            <Menu.Item
+              key="trainingPhrases"
+              style={{
+                height: trainingPhrases.length === 0 ? 100 : trainingPhrases.length * 45 + 40
+              }}
+            >
+              <SimpleArrayInput
+                items={trainingPhrases}
+                label="Training Phrases"
+                id="trainingPhrases"
                 onChange={this.onChange}
               />
             </Menu.Item>

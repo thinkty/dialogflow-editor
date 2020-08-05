@@ -29,7 +29,8 @@
         "in": [],
         "out": ["c802d68d-c57d-40cf-bb72-536b5413741d"]
       },
-      "events": ["start"]
+      "events": ["start"],
+      "trainingPhrases": []
     },
     {
       "id": "c802d68d-c57d-40cf-bb72-536b5413741d",
@@ -44,7 +45,8 @@
         "in": ["c802d68d-c57d-40cf-bb72-536b5413741d"],
         "out": []
       },
-      "events": []
+      "events": [],
+      "trainingPhrases": []
     },
     {
       "id": "7b128fba-c79f-4d00-9793-da78e355686e",
@@ -54,7 +56,8 @@
         "in": ["c802d68d-c57d-40cf-bb72-536b5413741d"],
         "out": []
       },
-      "events": ["end", "bye"]
+      "events": ["end", "bye"],
+      "trainingPhrases": []
     }
   ]
 }
