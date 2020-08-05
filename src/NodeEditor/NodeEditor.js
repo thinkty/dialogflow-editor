@@ -97,6 +97,7 @@ export default class NodeEditor extends Component {
           style={{ width: '100%' }}
           defaultOpenKeys={defaultOpenMenus}
           selectable={false}
+          inlineIndent={15}
         >
           <Menu.SubMenu key="nodeData" title="Node Data">
             <Menu.Item key="id">
