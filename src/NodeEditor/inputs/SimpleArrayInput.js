@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { List, Input, Space } from 'antd';
+import { List, Input, Space, Form } from 'antd';
 import { CloseOutlined } from '@ant-design/icons';
 
 /**
@@ -47,12 +47,8 @@ export default class SimpleArrayInput extends Component {
    * Event handler when the user submits the temporary input field. Chech that
    * the input is not empty and add it to the items and report the change to the
    * parent component
-   *
-   * @param {*} event
    */
-  onSubmit = (event) => {
-    event.preventDefault();
-
+  onSubmit = () => {
     const {
       id, onChange, items, temp,
     } = this.state;
@@ -95,13 +91,16 @@ export default class SimpleArrayInput extends Component {
             </List.Item>
           )}
         />
-        <Input
-          id="temp"
-          value={temp}
-          onChange={this.onChange}
-          onPressEnter={this.onSubmit}
-          placeholder="Press enter to add new entry"
-        />
+        <Form onFinish={this.onSubmit}>
+          <Form.Item>
+            <Input
+              id="temp"
+              value={temp}
+              onChange={this.onChange}
+              placeholder="Press enter to add new entry"
+            />
+          </Form.Item>
+        </Form>
       </Space>
     );
   }
