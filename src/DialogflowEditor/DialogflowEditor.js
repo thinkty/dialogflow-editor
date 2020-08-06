@@ -411,12 +411,11 @@ export default class DialogflowEditor extends Component {
           style={{
             position: 'fixed',
             width: '100vw',
-            height: !selected || selected.source ? '5vh' : 0,
-            backgroundColor: '#fff',
-            // zIndex: 1,
+            // backgroundColor: '#fff',
+            zIndex: 1,
           }}
         >
-          <EditorMenu />
+          <EditorMenu graph={graph} />
         </Header>
         <Sider
           defaultCollapsed={false}
@@ -431,6 +430,7 @@ export default class DialogflowEditor extends Component {
             position: 'fixed',
             right: 0,
             background: '#fff',
+            paddingTop: '70px',
           }}
         >
           <NodeEditor
