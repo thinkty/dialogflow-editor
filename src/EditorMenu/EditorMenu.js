@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import {
-  Space, Typography, Button, Dropdown, Menu, message
+  Space, Typography, Button, Dropdown, Menu, message,
 } from 'antd';
 import { DownOutlined } from '@ant-design/icons';
 import PropTypes from 'prop-types';
