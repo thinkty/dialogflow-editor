@@ -1,7 +1,7 @@
 import React from 'react';
 import { shallow, mount } from 'enzyme';
 import '@testing-library/jest-dom';
-import { render, fireEvent, getAllByDisplayValue } from '@testing-library/react';
+import { render, fireEvent } from '@testing-library/react';
 
 import NodeEditor from '../NodeEditor';
 import DisabledArrayInput from '../NodeEditor/inputs/DisabledArrayInput';
