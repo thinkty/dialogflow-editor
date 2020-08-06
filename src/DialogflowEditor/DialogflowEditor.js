@@ -411,8 +411,11 @@ export default class DialogflowEditor extends Component {
           style={{
             position: 'fixed',
             width: '100vw',
-            // backgroundColor: '#fff',
+            backgroundColor: '#fff',
             zIndex: 1,
+            borderStyle: 'none none solid none',
+            borderWidth: 1,
+            borderBottomColor: '#d3d3d3',
           }}
         >
           <EditorMenu graph={graph} />
