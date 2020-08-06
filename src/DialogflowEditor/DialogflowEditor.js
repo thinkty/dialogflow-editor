@@ -10,9 +10,10 @@ import GraphConfig, {
   INTENT_TYPE,
   CONTEXT_TYPE,
 } from '../configs/graph';
-import NodeEditor from '../NodeEditor/NodeEditor';
+import NodeEditor from '../NodeEditor';
+import EditorMenu from '../EditorMenu';
 
-const { Content, Sider } = Layout;
+const { Content, Sider, Header } = Layout;
 const sample = require('../sample.json');
 
 /**
@@ -406,6 +407,17 @@ export default class DialogflowEditor extends Component {
 
     return (
       <Layout hasSider>
+        <Header
+          style={{
+            position: 'fixed',
+            width: '100vw',
+            height: !selected || selected.source ? '5vh' : 0,
+            backgroundColor: '#fff',
+            // zIndex: 1,
+          }}
+        >
+          <EditorMenu />
+        </Header>
         <Sider
           defaultCollapsed={false}
           collapsedWidth={0}
