@@ -1,7 +1,7 @@
 import React from 'react';
 import { shallow, mount } from 'enzyme';
 import '@testing-library/jest-dom';
-import { render, fireEvent } from '@testing-library/react';
+import { render, fireEvent, getAllByDisplayValue } from '@testing-library/react';
 
 import NodeEditor from '../NodeEditor';
 import DisabledArrayInput from '../NodeEditor/inputs/DisabledArrayInput';
@@ -174,7 +174,7 @@ describe('Disabled Text Input Component', () => {
     const {
       getByText,
       getByDisplayValue
-    } = render( < DisabledTextInput value={value} label={label} />);
+    } = render( <DisabledTextInput value={value} label={label} />);
 
     expect(getByText(label)).toBeVisible();
     expect(getByDisplayValue(value)).toBeVisible();
@@ -281,9 +281,40 @@ describe('Simple Boolean Input Component', () => {
 
 describe('Simple Text Input Component', () => {
 
+  const value = "Temporary Value";
+  const label = "Temporary Label";
+  const id = "temp";
   const onChange = jest.fn();
+  let output;
+
+  beforeEach(() => {
+    output = render(
+      <SimpleTextInput
+        value={value}
+        label={label}
+        id={id}
+        onChange={onChange}
+      />
+    );
+  });
 
   it('renders without crashing', () => {
     mount(<SimpleTextInput />);
+  });
+
+  it('renders w/ given props', () => {
+    const { getByDisplayValue, getByText } = output;
+
+    expect(getByDisplayValue(value)).toBeVisible();
+    expect(getByText(label)).toBeVisible();
+  });
+
+  it('udpates on change', () => {
+    const { getByDisplayValue, getByRole } = output;
+    const input = getByRole('textbox');
+    const newValue = 'new value';
+
+    fireEvent.change(input, { target: { value: newValue } });
+    expect(onChange).toHaveBeenCalled();
   });
 });
