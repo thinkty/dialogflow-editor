@@ -19,6 +19,7 @@ module.exports = {
     'react',
   ],
   rules: {
+    "react/forbid-prop-types": 'off',
     "react/jsx-filename-extension": [1, { extensions: ['.js', '.jsx'] }],
     "react/jsx-fragments": 'off',
     "react/prefer-stateless-function": 'off',
