@@ -28,7 +28,8 @@ export default class SimpleArrayInput extends Component {
   }
 
   /**
-   *
+   * Called when the user clicks on the delete icon in the list. Remove the item
+   * from the list and also update the parent component
    *
    * @param {*} item Item to delete from the list
    */
