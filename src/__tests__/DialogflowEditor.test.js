@@ -1,8 +1,16 @@
 import React from 'react';
-import ReactDom from 'react-dom';
+import { shallow, mount } from 'enzyme';
+
 import DialogflowEditor from '../DialogflowEditor';
 
-it('renders without crashing', () => {
-  const div = document.createElement('div');
-  ReactDom.render(<DialogflowEditor />, div);
+describe('Dialogflow Editor Component', () => {
+
+  it('renders without crashing', () => {
+    shallow(<DialogflowEditor />);
+  });
+
+  it('renders all the sub-components without crashing', () => {
+    mount(<DialogflowEditor />);
+  });
+
 });
