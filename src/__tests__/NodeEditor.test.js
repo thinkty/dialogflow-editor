@@ -19,7 +19,6 @@ describe('Node Editor Smoke Test', () => {
   it('renders all the sub input components without crashing', () => {
     mount(<NodeEditor />);
   });
-
 });
 
 describe('Node Editor Component w/ Intent Node', () => {
@@ -140,5 +139,121 @@ describe('Node Editor Component w/ Context Node', () => {
     const { getByDisplayValue } = output;
     const disabledInput = getByDisplayValue(selected.id);
     expect(disabledInput).toHaveAttribute('disabled');
+  });
+});
+
+describe('Disabled Array Component', () => {
+
+  const items = ["temp-item1", "temp-item2", "temp-item3"];
+  const label = "Temporary Label";
+
+  it('renders without crashing', () => {
+    mount(<DisabledArrayInput items={items} label={label} />);
+  });
+
+  it('renders w/ given props', () => {
+    const { getByText } = render(<DisabledArrayInput items={items} label={label} />);
+
+    expect(getByText(label)).toBeVisible();
+    items.forEach(item => {
+      expect(getByText(item)).toBeVisible();
+    });
+  });
+})
+
+describe('Disabled Text Input Component', () => {
+
+  const value = "temporary input value";
+  const label = "Temporary Input Label";
+
+  it('renders without crashing', () => {
+    mount(<DisabledTextInput value={value} label={label} />);
+  });
+
+  it('renders w/ given props', () => {
+    const {
+      getByText,
+      getByDisplayValue
+    } = render( < DisabledTextInput value={value} label={label} />);
+
+    expect(getByText(label)).toBeVisible();
+    expect(getByDisplayValue(value)).toBeVisible();
+  });
+});
+
+describe('Simple Array Input Component', () => {
+
+  const items = ["temp-item1", "temp-item2", "temp-item3"];
+  const label = "Temporary Label";
+  const id = "temp";
+  const onChange = jest.fn();
+  let output;
+
+  beforeEach(() => {
+    output = render(
+      < SimpleArrayInput
+        items={items}
+        label={label}
+        id={id}
+        onChange={onChange}
+      />
+    );
+  });
+
+  it('renders without crashing', () => {
+    mount(<SimpleArrayInput />);
+  });
+
+  it('renders w/ given props', () => {
+    const { getByText } = output;
+    items.forEach(item => { expect(getByText(item)).toBeVisible() });
+  });
+
+  it('renders the input field', () => {
+    const { getByPlaceholderText } = output;
+    expect(getByPlaceholderText('Press enter to add new entry')).toBeVisible();
+  });
+
+  it('adds new item to the list on submit', () => {
+    const { getByRole, getByDisplayValue, getByText } = output;
+    const input = getByRole('textbox');
+    const button = getByRole('button');
+    const newValue = 'new item';
+
+    fireEvent.change(input, { target: { value: newValue } });
+    expect(getByDisplayValue(newValue)).toBeVisible();
+    expect(input.value).toMatch(newValue);
+
+    fireEvent.click(button);
+    expect(onChange).toHaveBeenCalled();
+    expect(input.value).toMatch(/^$/); // empty
+    expect(getByText(newValue)).toBeVisible();
+  });
+
+  it('removes item from the list when icon clicked', () => {
+    const { getAllByRole, getByDisplayValue, getByText } = output;
+    const iconButtons = getAllByRole('img', { name: 'close' });
+    const length = iconButtons.length;
+
+    fireEvent.click(iconButtons[0]);
+    expect(onChange).toHaveBeenCalled();
+  });
+});
+
+describe('Simple Boolean Input Component', () => {
+
+  const onChange = jest.fn();
+
+  it('renders without crashing', () => {
+    mount(<SimpleBooleanInput />);
+  });
+});
+
+describe('Simple Text Input Component', () => {
+
+  const onChange = jest.fn();
+
+  it('renders without crashing', () => {
+    mount(<SimpleTextInput />);
   });
 });
