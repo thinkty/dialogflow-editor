@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
-import { List, Input, Space, Form } from 'antd';
+import {
+  List, Input, Space, Form,
+} from 'antd';
 import { CloseOutlined } from '@ant-design/icons';
 
 /**
@@ -101,7 +103,7 @@ export default class SimpleArrayInput extends Component {
             />
           </Form.Item>
         </Form>
-        <button onClick={this.onSubmit}/>
+        <button aria-label="test" type="submit" onClick={this.onSubmit} />
       </Space>
     );
   }
