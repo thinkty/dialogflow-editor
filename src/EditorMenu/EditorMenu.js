@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import {
-  Space, Typography, Button, Dropdown, Menu,
+  Space, Typography, Button, Dropdown, Menu, message
 } from 'antd';
 import { DownOutlined } from '@ant-design/icons';
 import PropTypes from 'prop-types';
@@ -57,10 +57,12 @@ export default class EditorMenu extends Component {
   saveGraph = () => {
     const { graph } = this.props;
     localStorage.setItem('graph', JSON.stringify(graph));
+    message.success('Saved graph', 1);
   }
 
   /**
-   * Given the key of the menu that the user has selected,
+   * Given the key of the menu that the user has selected, execute the
+   * appropriate function to handle export/import
    */
   handleExportImportOnClick = ({ key }) => {
     switch (key) {
@@ -73,7 +75,7 @@ export default class EditorMenu extends Component {
         break;
 
       case overlayKeys.export.url.key:
-        console.log('export to json');
+        console.log('export to url');
         break;
 
       default:
