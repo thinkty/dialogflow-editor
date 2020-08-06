@@ -23,6 +23,9 @@
     "lint": "./node_modules/.bin/eslint src/",
     "lint:fix": "./node_modules/.bin/eslint --fix src/"
   },
+  "jest": {
+    "coveragePathIgnorePatterns": ["<rootDir>/src/index.js"]
+  },
   "eslintConfig": {
     "extends": "react-app"
   },
