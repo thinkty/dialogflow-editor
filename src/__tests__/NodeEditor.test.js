@@ -191,7 +191,7 @@ describe('Simple Array Input Component', () => {
 
   beforeEach(() => {
     output = render(
-      < SimpleArrayInput
+      <SimpleArrayInput
         items={items}
         label={label}
         id={id}
@@ -231,9 +231,8 @@ describe('Simple Array Input Component', () => {
   });
 
   it('removes item from the list when icon clicked', () => {
-    const { getAllByRole, getByDisplayValue, getByText } = output;
+    const { getAllByRole } = output;
     const iconButtons = getAllByRole('img', { name: 'close' });
-    const length = iconButtons.length;
 
     fireEvent.click(iconButtons[0]);
     expect(onChange).toHaveBeenCalled();
@@ -242,10 +241,41 @@ describe('Simple Array Input Component', () => {
 
 describe('Simple Boolean Input Component', () => {
 
+  const value = true;
+  const label = "Temporary Label";
+  const id = "temp";
   const onChange = jest.fn();
+  let output;
+
+  beforeEach(() => {
+    output = render(
+      <SimpleBooleanInput
+        value={value}
+        label={label}
+        id={id}
+        onChange={onChange}
+      />
+    );
+  });
 
   it('renders without crashing', () => {
     mount(<SimpleBooleanInput />);
+  });
+
+  it('renders w/ given props', () => {
+    const { getByRole, getByText } = output;
+    const checkbox = getByRole('switch');
+
+    expect(getByText(label)).toBeVisible();
+    expect(checkbox).toHaveAttribute('aria-checked', 'true');
+  });
+
+  it('updates on click', () => {
+    const { getByRole, getByText } = output;
+    const checkbox = getByRole('switch');
+    
+    fireEvent.click(checkbox);
+    expect(onChange).toHaveBeenCalled();
   });
 });
 
