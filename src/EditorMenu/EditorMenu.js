@@ -4,6 +4,7 @@ import {
 } from 'antd';
 import { DownOutlined } from '@ant-design/icons';
 import PropTypes from 'prop-types';
+import { downloadJSON } from './util';
 
 const overlayKeys = {
   import: {
@@ -65,13 +66,15 @@ export default class EditorMenu extends Component {
    * appropriate function to handle export/import
    */
   handleExportImportOnClick = ({ key }) => {
+    const { graph } = this.props;
+
     switch (key) {
       case overlayKeys.import.json.key:
         console.log('import from json');
         break;
 
       case overlayKeys.export.json.key:
-        console.log('export to json');
+        downloadJSON(graph);
         break;
 
       case overlayKeys.export.url.key:
