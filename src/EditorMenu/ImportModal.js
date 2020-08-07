@@ -49,8 +49,12 @@ export default class ImportModal extends Component {
       this.setState({ reading: false });
     };
 
-    reader.readAsText(file);
-    this.setState({ reading: true });
+    try {
+      reader.readAsText(file);
+      this.setState({ reading: true });
+    } catch (error) {
+      message.error('Failed to read file', 4);
+    }
   }
 
   /**
