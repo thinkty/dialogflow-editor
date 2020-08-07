@@ -25,7 +25,7 @@ export function downloadJSON(graph) {
  * @param {string} value The string to test if it is a valid url
  * @returns {boolean} True if it is a valid url
  */
-export function checkValidURL(value) {
+export function isValidURL(value) {
   try {
     new URL(value);
     return true;
