@@ -5,6 +5,7 @@ import {
 import { DownOutlined } from '@ant-design/icons';
 import PropTypes from 'prop-types';
 import { downloadJSON } from './util';
+import ExportModal from './ExportModal';
 
 const overlayKeys = {
   import: {
@@ -31,7 +32,13 @@ export default class EditorMenu extends Component {
     this.state = {
       flowchart: 'Name of flowchart',
       agent: 'Name of agent',
+      exportModalVisible: false,
     };
+  }
+
+  // Helper to close the export modal
+  closeExportModal = () => {
+    this.setState({ exportModalVisible: false });
   }
 
   /**
@@ -78,7 +85,7 @@ export default class EditorMenu extends Component {
         break;
 
       case overlayKeys.export.url.key:
-        console.log('export to url');
+        this.setState({ exportModalVisible: true });
         break;
 
       default:
@@ -87,8 +94,8 @@ export default class EditorMenu extends Component {
   }
 
   render() {
-    // const { graph } = this.props;
-    const { flowchart, agent } = this.state;
+    const { graph } = this.props;
+    const { flowchart, agent, exportModalVisible } = this.state;
     const exportImportMenu = (
       <Menu onClick={this.handleExportImportOnClick}>
         <Menu.Item key={overlayKeys.import.json.key}>
@@ -106,6 +113,13 @@ export default class EditorMenu extends Component {
 
     return (
       <Space direction="horizontal" align="start" size="middle">
+        <ExportModal
+          visible={exportModalVisible}
+          agent={agent}
+          flowchart={flowchart}
+          onCancel={this.closeExportModal}
+          graph={graph}
+        />
         <Space direction="horizontal" align="center" size="small">
           <Typography.Paragraph editable={{ onChange: this.onAgentChange }}>
             {agent}
