@@ -401,6 +401,23 @@ export default class DialogflowEditor extends Component {
     }, 5);
   }
 
+  /**
+   * Update the graph with the given JSON object
+   *
+   * @param {*} graph
+   * @returns {boolean} True if successful on importing graph
+   */
+  importGraph = (graph) => {
+    // The graph must have nodes and edges
+    if (!graph.nodes || !graph.edges || !graph.nodes.length || !graph.edges.length) {
+      return false;
+    }
+
+    this.setState({ graph });
+    this.updateGraph();
+    return true;
+  }
+
   render() {
     const { graph, selected, layoutEngineType } = this.state;
     const { nodes, edges } = graph;
@@ -419,7 +436,7 @@ export default class DialogflowEditor extends Component {
             borderBottomColor: '#d3d3d3',
           }}
         >
-          <EditorMenu graph={graph} />
+          <EditorMenu graph={graph} importGraph={this.importGraph} />
         </Header>
         <Sider
           defaultCollapsed={false}

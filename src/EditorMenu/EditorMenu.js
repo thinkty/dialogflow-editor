@@ -6,6 +6,7 @@ import { DownOutlined } from '@ant-design/icons';
 import PropTypes from 'prop-types';
 import { downloadJSON } from './util';
 import ExportModal from './ExportModal';
+import ImportModal from './ImportModal';
 
 const overlayKeys = {
   import: {
@@ -33,12 +34,18 @@ export default class EditorMenu extends Component {
       flowchart: 'Name of flowchart',
       agent: 'Name of agent',
       exportModalVisible: false,
+      importModalVisible: false,
     };
   }
 
   // Helper to close the export modal
   closeExportModal = () => {
     this.setState({ exportModalVisible: false });
+  }
+
+  // Helper to close the import modal
+  closeImportModal = () => {
+    this.setState({ importModalVisible: false });
   }
 
   /**
@@ -77,7 +84,7 @@ export default class EditorMenu extends Component {
 
     switch (key) {
       case overlayKeys.import.json.key:
-        console.log('import from json');
+        this.setState({ importModalVisible: true });
         break;
 
       case overlayKeys.export.json.key:
@@ -94,8 +101,13 @@ export default class EditorMenu extends Component {
   }
 
   render() {
-    const { graph } = this.props;
-    const { flowchart, agent, exportModalVisible } = this.state;
+    const { graph, importGraph } = this.props;
+    const {
+      flowchart,
+      agent,
+      exportModalVisible,
+      importModalVisible,
+    } = this.state;
     const exportImportMenu = (
       <Menu onClick={this.handleExportImportOnClick}>
         <Menu.Item key={overlayKeys.import.json.key}>
@@ -138,6 +150,10 @@ export default class EditorMenu extends Component {
           onCancel={this.closeExportModal}
           graph={graph}
         />
+        <ImportModal
+          visible={importModalVisible}
+          importGraph={importGraph}
+        />
       </Space>
     );
   }
@@ -148,4 +164,5 @@ EditorMenu.propTypes = {
     nodes: PropTypes.array,
     edges: PropTypes.array,
   }).isRequired,
+  importGraph: PropTypes.func.isRequired,
 };
