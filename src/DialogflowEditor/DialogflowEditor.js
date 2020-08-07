@@ -430,7 +430,7 @@ export default class DialogflowEditor extends Component {
     const { graph } = this.state;
     const graphStr = JSON.stringify(graph);
     const dataStr = `data:text/json;charset=utf-8,${graphStr}`;
-  
+
     const downloadAnchorNode = document.createElement('a');
     downloadAnchorNode.setAttribute('href', dataStr);
     downloadAnchorNode.setAttribute('download', 'graph.json');
