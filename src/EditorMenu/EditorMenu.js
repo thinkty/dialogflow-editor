@@ -153,6 +153,7 @@ export default class EditorMenu extends Component {
         <ImportModal
           visible={importModalVisible}
           importGraph={importGraph}
+          onCancel={this.closeImportModal}
         />
       </Space>
     );
