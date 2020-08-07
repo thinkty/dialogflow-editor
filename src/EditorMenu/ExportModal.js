@@ -1,5 +1,13 @@
 import React, { Component } from 'react';
-import { Modal, Input, Space, Typography, Divider, message, Select } from 'antd';
+import {
+  Modal,
+  Input,
+  Space,
+  Typography,
+  Divider,
+  message,
+  Select,
+} from 'antd';
 import PropTypes from 'prop-types';
 
 /**
@@ -31,7 +39,12 @@ export default class ExportModal extends Component {
    * POST method and waits for 10 seconds at maximum
    */
   sendGraph = () => {
-    const { graph, agent, flowchart, onCancel } = this.props;
+    const {
+      graph,
+      agent,
+      flowchart,
+      onCancel,
+    } = this.props;
     const { protocol, url } = this.state;
 
     if (url === '') {
@@ -52,23 +65,23 @@ export default class ExportModal extends Component {
         flowchart,
       }),
     };
-    
+
     fetch(`${protocol}${url}`, options)
-    .then(response => {
-      this.setState({ sending: false });
-      if (response.status === 200) {
-        message.success('Graph sent', 2);
-        onCancel(); // Close modal
-      } else {
-        message.error(`${response.status} ${response.statusText}`, 2);
-      }
-    })
-    .catch(reason => {
-      this.setState({ sending: false });
-      if (reason.message) {
-        message.error(reason.message, 4);
-      }
-    });
+      .then((response) => {
+        this.setState({ sending: false });
+        if (response.status === 200) {
+          message.success('Graph sent', 2);
+          onCancel(); // Close modal
+        } else {
+          message.error(`${response.status} ${response.statusText}`, 2);
+        }
+      })
+      .catch((reason) => {
+        this.setState({ sending: false });
+        if (reason.message) {
+          message.error(reason.message, 4);
+        }
+      });
     setTimeout(() => controller.abort(), 10000); // 10 seconds max
     this.setState({ sending: true });
   }
@@ -76,7 +89,7 @@ export default class ExportModal extends Component {
   /**
    * Event handler for input field value change
    *
-   * @param {*} event 
+   * @param {*} event
    */
   onChange = (event) => {
     const { id, value } = event.target;
@@ -85,15 +98,21 @@ export default class ExportModal extends Component {
 
   /**
    * Handle the change of protocol for the url
-   * 
-   * @param {string} protocol http or https 
+   *
+   * @param {string} protocol http or https
    */
   handleProtocolChange = (protocol) => {
     this.setState({ protocol });
   }
 
   render() {
-    const { visible, agent, flowchart, onCancel, graph } = this.props;
+    const {
+      visible,
+      agent,
+      flowchart,
+      onCancel,
+      graph,
+    } = this.props;
     const { protocol, url, sending } = this.state;
 
     return (
@@ -114,7 +133,7 @@ export default class ExportModal extends Component {
           </Typography>
           <Input
             id="url"
-            addonBefore={
+            addonBefore={(
               <Select
                 defaultValue={protocol}
                 onChange={this.handleProtocolChange}
@@ -122,24 +141,46 @@ export default class ExportModal extends Component {
                 <Select.Option value="https://">https://</Select.Option>
                 <Select.Option value="http://">http://</Select.Option>
               </Select>
-            }
+            )}
             value={url}
             onChange={this.onChange}
             allowClear
           />
         </Space>
         <Divider />
-        <Typography>Payload to {protocol}{url}</Typography>
+        <Typography>
+          Payload to&nbsp;
+          {protocol}
+          {url}
+        </Typography>
         <code>
-          <br/>
-          {"{"}<br/>
-          &nbsp;&nbsp;agent: "{agent}",<br/>
-          &nbsp;&nbsp;flowchart: "{flowchart}",<br/>
-          &nbsp;&nbsp;graph: {"{"}<br/>
-          &nbsp;&nbsp;&nbsp;&nbsp;nodes: [...], ({graph.nodes.length} nodes)<br/>
-          &nbsp;&nbsp;&nbsp;&nbsp;edges: [...]&nbsp; ({graph.edges.length} edges)<br/>
-          &nbsp;&nbsp;{"}"}<br/>
-          {"}"}<br/>
+          <br />
+          {'{'}
+          <br />
+          &nbsp;&nbsp;agent: &quot;
+          {agent}
+          &quot;,
+          <br />
+          &nbsp;&nbsp;flowchart: &quot;
+          {flowchart}
+          &quot;,
+          <br />
+          &nbsp;&nbsp;graph:&nbsp;
+          {'{'}
+          <br />
+          &nbsp;&nbsp;&nbsp;&nbsp;nodes: [...], (
+          {graph.nodes.length}
+          &nbsp;nodes)
+          <br />
+          &nbsp;&nbsp;&nbsp;&nbsp;edges: [...]&nbsp;&nbsp;(
+          {graph.edges.length}
+          &nbsp;edges)
+          <br />
+          &nbsp;&nbsp;
+          {'}'}
+          <br />
+          {'}'}
+          <br />
         </code>
       </Modal>
     );
