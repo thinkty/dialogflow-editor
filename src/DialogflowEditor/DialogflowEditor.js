@@ -22,8 +22,9 @@ const sample = require('../sample.json');
 export default class DialogflowEditor extends Component {
   constructor(props) {
     super(props);
+    const localGraph = localStorage.getItem('graph');
     this.state = {
-      graph: sample,
+      graph: !localGraph ? sample : JSON.parse(localGraph),
       selected: null,
       type: nodeTypes[0],
       layoutEngineType: 'VerticalTree',
