@@ -18,18 +18,3 @@ export function downloadJSON(graph) {
   downloadAnchorNode.click();
   downloadAnchorNode.remove();
 }
-
-/**
- * Check whether the input is a valid url
- * 
- * @param {string} value The string to test if it is a valid url
- * @returns {boolean} True if it is a valid url
- */
-export function isValidURL(value) {
-  try {
-    new URL(value);
-    return true;
-  } catch (error) {
-    return false;
-  }
-}

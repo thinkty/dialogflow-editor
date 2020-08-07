@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { Modal, Input, Space, Typography, Divider, message, Select } from 'antd';
 import PropTypes from 'prop-types';
-import { isValidURL } from './util';
 
 /**
  * A component to display the modal to export current graph to a specified url
@@ -40,11 +39,6 @@ export default class ExportModal extends Component {
       return;
     }
 
-    if (!isValidURL(`${protocol}${url}`)) {
-      message.error(`${protocol}${url} is not a valid url`, 2);
-      return;
-    }
-
     const controller = new AbortController();
     const options = {
       method: 'POST',
@@ -72,7 +66,7 @@ export default class ExportModal extends Component {
     .catch(reason => {
       this.setState({ sending: false });
       if (reason.message) {
-        message.error(reason.message, 2);
+        message.error(reason.message, 4);
       }
     });
     setTimeout(() => controller.abort(), 10000); // 10 seconds max
