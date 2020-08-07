@@ -1,5 +1,12 @@
 import React, { Component } from 'react';
-import { Modal, Space, Typography, Input, message } from 'antd';
+import {
+  Modal,
+  Space,
+  Typography,
+  Input,
+  message,
+} from 'antd';
+import PropTypes from 'prop-types';
 
 /**
  * A component to display the modal to import the graph from
@@ -24,12 +31,12 @@ export default class ImportModal extends Component {
     reader.onabort = () => {
       message.error('Aborted whlie reading file', 4);
       this.setState({ reading: false });
-    }
+    };
 
     reader.onerror = () => {
       message.error(`Failed to read file. ${reader.error}`, 4);
       this.setState({ reading: false });
-    }
+    };
 
     reader.onload = (event) => {
       try {
@@ -40,7 +47,7 @@ export default class ImportModal extends Component {
         message.error('Failed to parse into JSON', 4);
       }
       this.setState({ reading: false });
-    }
+    };
 
     reader.readAsText(file);
     this.setState({ reading: true });
@@ -75,7 +82,7 @@ export default class ImportModal extends Component {
       >
         <Space direction="vertical">
           <Typography style={{ marginBottom: 10 }}>
-            Reads from a 
+            Reads from a
             <Typography.Text code>.json</Typography.Text>
             file and replaces the graph with the contents of the json file.
           </Typography>
@@ -90,3 +97,9 @@ export default class ImportModal extends Component {
     );
   }
 }
+
+ImportModal.propTypes = {
+  importGraph: PropTypes.func.isRequired,
+  onCancel: PropTypes.func.isRequired,
+  visible: PropTypes.bool.isRequired,
+};
