@@ -4,7 +4,6 @@ import {
 } from 'antd';
 import { DownOutlined } from '@ant-design/icons';
 import PropTypes from 'prop-types';
-import { downloadJSON } from './util';
 import ExportModal from './ExportModal';
 import ImportModal from './ImportModal';
 
@@ -80,7 +79,7 @@ export default class EditorMenu extends Component {
    * appropriate function to handle export/import
    */
   handleExportImportOnClick = ({ key }) => {
-    const { graph } = this.props;
+    const { graph, downloadGraph } = this.props;
 
     switch (key) {
       case overlayKeys.import.json.key:
@@ -88,7 +87,7 @@ export default class EditorMenu extends Component {
         break;
 
       case overlayKeys.export.json.key:
-        downloadJSON(graph);
+        downloadGraph(graph);
         break;
 
       case overlayKeys.export.url.key:
@@ -137,7 +136,7 @@ export default class EditorMenu extends Component {
         <Button onClick={this.saveGraph}>
           Save
         </Button>
-        <Dropdown overlay={exportImportMenu}>
+        <Dropdown overlay={exportImportMenu} mouseEnterDelay={0}>
           <Button>
             Import / Export
             <DownOutlined />
@@ -166,4 +165,5 @@ EditorMenu.propTypes = {
     edges: PropTypes.array,
   }).isRequired,
   importGraph: PropTypes.func.isRequired,
+  downloadGraph: PropTypes.func.isRequired,
 };

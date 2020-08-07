@@ -418,6 +418,27 @@ export default class DialogflowEditor extends Component {
     return true;
   }
 
+  /**
+   * Download the current graph in a json file. This works by creating an html
+   * element of type a with attribute href set as the graph data. By executing the
+   * click on the element through js, it will initiate the download. See the below
+   * link for detailed explanation
+   *
+   * @see https://stackoverflow.com/questions/19721439/download-json-object-as-a-file-from-browser
+   */
+  downloadGraph = () => {
+    const { graph } = this.state;
+    const graphStr = JSON.stringify(graph);
+    const dataStr = `data:text/json;charset=utf-8,${graphStr}`;
+  
+    const downloadAnchorNode = document.createElement('a');
+    downloadAnchorNode.setAttribute('href', dataStr);
+    downloadAnchorNode.setAttribute('download', 'graph.json');
+    document.body.appendChild(downloadAnchorNode);
+    downloadAnchorNode.click();
+    downloadAnchorNode.remove();
+  }
+
   render() {
     const { graph, selected, layoutEngineType } = this.state;
     const { nodes, edges } = graph;
@@ -436,7 +457,11 @@ export default class DialogflowEditor extends Component {
             borderBottomColor: '#d3d3d3',
           }}
         >
-          <EditorMenu graph={graph} importGraph={this.importGraph} />
+          <EditorMenu
+            graph={graph}
+            importGraph={this.importGraph}
+            downloadGraph={this.downloadGraph}
+          />
         </Header>
         <Sider
           defaultCollapsed={false}
