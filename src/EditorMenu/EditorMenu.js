@@ -113,13 +113,6 @@ export default class EditorMenu extends Component {
 
     return (
       <Space direction="horizontal" align="start" size="middle">
-        <ExportModal
-          visible={exportModalVisible}
-          agent={agent}
-          flowchart={flowchart}
-          onCancel={this.closeExportModal}
-          graph={graph}
-        />
         <Space direction="horizontal" align="center" size="small">
           <Typography.Paragraph editable={{ onChange: this.onAgentChange }}>
             {agent}
@@ -138,6 +131,13 @@ export default class EditorMenu extends Component {
             <DownOutlined />
           </Button>
         </Dropdown>
+        <ExportModal
+          visible={exportModalVisible}
+          agent={agent}
+          flowchart={flowchart}
+          onCancel={this.closeExportModal}
+          graph={graph}
+        />
       </Space>
     );
   }
