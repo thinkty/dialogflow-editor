@@ -95,8 +95,9 @@ export default class DialogflowEditor extends Component {
    * Called by 'mouseUp' handler
    *
    * @param {(INode|Wnull)} viewNode
+   * @param {*} event D3 mouse event
    */
-  onSelectNode = (viewNode) => {
+  onSelectNode = (viewNode, event) => {
     // Deselect events will send Null viewNode
     this.setState({ selected: viewNode });
   };
@@ -128,6 +129,25 @@ export default class DialogflowEditor extends Component {
     graph.nodes = [...graph.nodes, viewNode];
     this.setState({ graph });
   };
+
+  /**
+   * Paste the selected node on mouse position using the ctrl key
+   *
+   * @param {INode} node Currently selected node
+   * @param {[number, number]} mousePosition x and y position
+   */
+  onPasteSelected = (node, mousePosition) => {
+    const { graph } = this.state;
+    const newNode = {
+      ...node,
+      id: uuidv4(),
+      x: mousePosition[0],
+      y: mousePosition[1],
+    };
+
+    graph.nodes = [...graph.nodes, newNode];
+    this.setState({ graph });
+  }
 
   /**
    * Deletes a node from the graph
@@ -500,6 +520,7 @@ export default class DialogflowEditor extends Component {
             edgeTypes={EdgeTypes}
             onSelectNode={this.onSelectNode}
             onCreateNode={this.onCreateNode}
+            onPasteSelected={this.onPasteSelected}
             onUpdateNode={this.onUpdateNode}
             onDeleteNode={this.onDeleteNode}
             onSelectEdge={this.onSelectEdge}
