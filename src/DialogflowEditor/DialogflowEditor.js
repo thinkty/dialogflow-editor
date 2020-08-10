@@ -10,8 +10,10 @@ import GraphConfig, {
   INTENT_TYPE,
   CONTEXT_TYPE,
 } from '../configs/graph';
+import { nodeAttributes } from '../configs/type';
 import NodeEditor from '../NodeEditor';
 import EditorMenu from '../EditorMenu';
+import ContextMenuModal from './ContextMenuModal';
 
 const { Content, Sider, Header } = Layout;
 const sample = require('../sample.json');
@@ -24,10 +26,13 @@ export default class DialogflowEditor extends Component {
     super(props);
     const localGraph = localStorage.getItem('graph');
     this.state = {
+      x: -1,
+      y: -1,
       graph: !localGraph ? sample : JSON.parse(localGraph),
       selected: null,
       type: nodeTypes[0],
       layoutEngineType: 'VerticalTree',
+      openContextMenu: false,
     };
   }
 
@@ -110,21 +115,14 @@ export default class DialogflowEditor extends Component {
    */
   onCreateNode = (x, y) => {
     const { graph, type } = this.state;
+    const attributes = nodeAttributes[type].attributes;
     const viewNode = {
+      ...attributes,
       id: uuidv4(),
       title: '',
-      type,
       x,
       y,
     };
-
-    // Initialize contexts if it is an intent node
-    if (type === INTENT_TYPE) {
-      viewNode.contexts = {
-        in: [],
-        out: [],
-      };
-    }
 
     graph.nodes = [...graph.nodes, viewNode];
     this.setState({ graph });
@@ -385,15 +383,41 @@ export default class DialogflowEditor extends Component {
 
   /**
    * Called when mouse-right clicked
-   * TODO: This feature is not released yet
    *
-   * @param {number} x
-   * @param {number} y
+   * @param {number} x Mouse position x
+   * @param {number} y Mouse position y
    * @param {Object} event D3 event
    */
   onContextMenu = (x, y, event) => {
-    event.prevenDefault();
-    // TODO: Prompt new node on right click
+    event.preventDefault();
+    this.setState({ openContextMenu: true, x, y });
+  }
+
+  /**
+   * Close context menu
+   */
+  closeContextMenu = () => {
+    this.setState({ openContextMenu: false });
+  }
+
+  /**
+   * Spawn the selected node on mouse position
+   *
+   * @param {string} type Node type
+   */
+  spawnNode = (type) => {
+    const { graph, x, y } = this.state;
+    const attributes = nodeAttributes[type].attributes;
+    const viewNode = {
+      ...attributes,
+      id: uuidv4(),
+      title: '',
+      x,
+      y,
+    };
+
+    graph.nodes = [...graph.nodes, viewNode];
+    this.setState({ graph });
   }
 
   /**
@@ -466,7 +490,7 @@ export default class DialogflowEditor extends Component {
   }
 
   render() {
-    const { graph, selected, layoutEngineType } = this.state;
+    const { graph, selected, layoutEngineType, openContextMenu } = this.state;
     const { nodes, edges } = graph;
     const { NodeTypes, NodeSubTypes, EdgeTypes } = GraphConfig;
 
@@ -536,6 +560,12 @@ export default class DialogflowEditor extends Component {
             onSwapEdge={this.onSwapEdge}
             onDeleteEdge={this.onDeleteEdge}
             renderBackground={this.renderBackground}
+            onContextMenu={this.onContextMenu}
+          />
+          <ContextMenuModal
+            openContextMenu={openContextMenu}
+            closeContextMenu={this.closeContextMenu}
+            spawnNode={this.spawnNode}
           />
         </Content>
       </Layout>
