@@ -268,14 +268,20 @@ export default class DialogflowEditor extends Component {
    * Determines if an edge can be swapped or not based on the rules similar to
    * canCreateEdge.
    *
-   * TODO: This feature is not yet released (v6.7.1)
-   *
    * @param {INode} sourceNode
    * @param {INode} targetNode
    * @param {IEdge} edge
    * @returns {Boolean} Whether it can swap edge or not
    */
-  canSwapEdge = (sourceNode, targetNode, edge) => {}
+  canSwapEdge = (sourceNode, targetNode, edge) => {
+    // Allow edge creation when source or target is undefined. If false is
+    // returned here, the svg will not even render.
+    if (!sourceNode || !targetNode) {
+      return true;
+    }
+
+    return (sourceNode.type !== targetNode.type);
+  }
 
   /**
    * Called when an edge is reattached to a different target. On swapping edge,
@@ -526,6 +532,7 @@ export default class DialogflowEditor extends Component {
             onSelectEdge={this.onSelectEdge}
             canCreateEdge={this.canCreateEdge}
             onCreateEdge={this.onCreateEdge}
+            canSwapEdge={this.canSwapEdge}
             onSwapEdge={this.onSwapEdge}
             onDeleteEdge={this.onDeleteEdge}
             renderBackground={this.renderBackground}
