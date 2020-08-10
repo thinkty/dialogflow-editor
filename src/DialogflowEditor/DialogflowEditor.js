@@ -471,7 +471,7 @@ export default class DialogflowEditor extends Component {
             position: 'fixed',
             width: '100vw',
             backgroundColor: '#fff',
-            zIndex: 1,
+            zIndex: 2,
             borderStyle: 'none none solid none',
             borderWidth: 1,
             borderBottomColor: '#d3d3d3',
@@ -484,10 +484,9 @@ export default class DialogflowEditor extends Component {
           />
         </Header>
         <Sider
-          defaultCollapsed={false}
           collapsedWidth={0}
           collapsible
-          collapsed={!selected || selected.source}
+          collapsed={!selected || !!selected.source}
           trigger={null}
           width="30vw"
           style={{
@@ -496,7 +495,8 @@ export default class DialogflowEditor extends Component {
             position: 'fixed',
             right: 0,
             background: '#fff',
-            paddingTop: '70px',
+            paddingTop: 60,
+            zIndex: 1,
           }}
         >
           <NodeEditor
