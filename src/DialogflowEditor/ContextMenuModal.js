@@ -56,7 +56,7 @@ export default class ContextMenuModal extends Component {
           {
             nodeTypes.map((type) => (
               <Radio.Button key={type} value={type}>
-                { nodeAttributes[type] }
+                { nodeAttributes[type].displayName }
               </Radio.Button>
             ))
           }
