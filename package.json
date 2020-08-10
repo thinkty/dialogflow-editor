@@ -9,7 +9,7 @@
     "@testing-library/user-event": "^7.2.1",
     "antd": "^4.5.2",
     "react": "^16.13.1",
-    "react-digraph": "^6.7.1",
+    "react-digraph": "^7.0.0",
     "react-dom": "^16.13.1",
     "react-scripts": "^3.4.1",
     "uuid": "^8.2.0"
@@ -24,7 +24,9 @@
     "lint:fix": "./node_modules/.bin/eslint --fix src/"
   },
   "jest": {
-    "coveragePathIgnorePatterns": ["<rootDir>/src/index.js"]
+    "coveragePathIgnorePatterns": [
+      "<rootDir>/src/index.js"
+    ]
   },
   "eslintConfig": {
     "extends": "react-app"
