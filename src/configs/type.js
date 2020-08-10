@@ -11,7 +11,7 @@ export const generalAttributes = ["id", "title"];
 
 export const nodeAttributes = {
   [INTENT_TYPE]: {
-    displayName: 'Intent Node',
+    displayName: 'Intent Type',
     attributes: {
       type: INTENT_TYPE,
       contexts: {
@@ -26,7 +26,7 @@ export const nodeAttributes = {
     },
   },
   [CONTEXT_TYPE]: {
-    displayName: 'Context Node',
+    displayName: 'Context Type',
     attributes: {
       type: CONTEXT_TYPE,
     },
