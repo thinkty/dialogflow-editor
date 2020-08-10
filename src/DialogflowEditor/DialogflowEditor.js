@@ -115,7 +115,7 @@ export default class DialogflowEditor extends Component {
    */
   onCreateNode = (x, y) => {
     const { graph, type } = this.state;
-    const attributes = nodeAttributes[type].attributes;
+    const { attributes } = nodeAttributes[type];
     const viewNode = {
       ...attributes,
       id: uuidv4(),
@@ -407,7 +407,7 @@ export default class DialogflowEditor extends Component {
    */
   spawnNode = (type) => {
     const { graph, x, y } = this.state;
-    const attributes = nodeAttributes[type].attributes;
+    const { attributes } = nodeAttributes[type];
     const viewNode = {
       ...attributes,
       id: uuidv4(),
@@ -490,7 +490,12 @@ export default class DialogflowEditor extends Component {
   }
 
   render() {
-    const { graph, selected, layoutEngineType, openContextMenu } = this.state;
+    const {
+      graph,
+      selected,
+      layoutEngineType,
+      openContextMenu,
+    } = this.state;
     const { nodes, edges } = graph;
     const { NodeTypes, NodeSubTypes, EdgeTypes } = GraphConfig;
 

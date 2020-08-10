@@ -8,7 +8,6 @@ import { nodeTypes } from '../configs/graph';
  * A component to select a type of node to create
  */
 export default class ContextMenuModal extends Component {
-
   constructor(props) {
     super(props);
     this.state = {
@@ -35,7 +34,7 @@ export default class ContextMenuModal extends Component {
   /**
    * On radio select change
    *
-   * @param {*} event 
+   * @param {*} event
    */
   onChange = (event) => {
     this.setState({ selected: event.target.value });
@@ -55,15 +54,11 @@ export default class ContextMenuModal extends Component {
         <p>Select the type of node to spawn at the mouse point</p>
         <Radio.Group onChange={this.onChange}>
           {
-            nodeTypes.map((type) => {
-              const { displayName } = nodeAttributes[type];
-              
-              return (
-                <Radio.Button key={type} value={type}>
-                  { displayName }
-                </Radio.Button>
-              );
-            })
+            nodeTypes.map((type) => (
+              <Radio.Button key={type} value={type}>
+                { nodeAttributes[type] }
+              </Radio.Button>
+            ))
           }
         </Radio.Group>
       </Modal>

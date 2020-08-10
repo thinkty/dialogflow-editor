@@ -7,7 +7,7 @@ import {
   CONTEXT_TYPE,
 } from './graph';
 
-export const generalAttributes = ["id", "title"];
+export const generalAttributes = ['id', 'title'];
 
 export const nodeAttributes = {
   [INTENT_TYPE]: {
