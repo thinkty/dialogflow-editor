@@ -4,6 +4,7 @@ import '@testing-library/jest-dom';
 import { render, fireEvent, cleanup } from '@testing-library/react';
 import DialogflowEditor from '../DialogflowEditor';
 import ContextMenuModal from '../DialogflowEditor/ContextMenuModal';
+import AttributeSVG from '../DialogflowEditor/AttributeSVG';
 
 describe('Dialogflow Editor Component', () => {
 
@@ -22,7 +23,7 @@ describe('Context Menu Modal Component', () => {
   const openContextMenu = true;
   const closeContextMenu = jest.fn();
   const spawnNode = jest.fn();
-  let output = render(
+  const output = render(
     <ContextMenuModal
       openContextMenu={openContextMenu}
       closeContextMenu={closeContextMenu}
@@ -73,5 +74,36 @@ describe('Context Menu Modal Component', () => {
     fireEvent.click(button);
 
     expect(spawnNode).toHaveBeenCalled();
+  });
+});
+
+describe('Attribute SVG Component', () => {
+
+  const events = [];
+  const isFallback = false;
+  const fulfillment = false;
+
+  it('renders without crashing', () => {
+    shallow(
+      <svg>
+        <AttributeSVG
+          events={events}
+          isFallback={isFallback}
+          fulfillment={fulfillment}
+        />
+      </svg>
+    );
+  });
+
+  it('renders all the sub-components without crashing', () => {
+    mount(
+      <svg>
+        <AttributeSVG
+          events={events}
+          isFallback={isFallback}
+          fulfillment={fulfillment}
+        />
+      </svg>
+    );
   });
 });
