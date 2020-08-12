@@ -28,8 +28,8 @@ export default function AttributeSVG(props) {
     attributes.push(WEBHOOK_COLOR);
   }
 
-  const radius = 7;
-  const distance = 20;
+  const radius = 5;
+  const distance = 15;
   const offset = ((attributes.length - 1) * distance) / 2;
   const shapes = [];
 
