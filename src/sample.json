@@ -1,6 +1,12 @@
 {
   "edges": [
     {
+      "id": "edge0",
+      "source": "9fd9d3c0-562b-4ca2-b705-1b1c1bb9905f",
+      "target": "a0c13faf-723d-4208-85d0-76eaf7c790c5",
+      "type": "basicEdge"
+    },
+    {
       "id": "edge1",
       "source": "a0c13faf-723d-4208-85d0-76eaf7c790c5",
       "target": "c802d68d-c57d-40cf-bb72-536b5413741d",
@@ -17,10 +23,14 @@
       "source": "c802d68d-c57d-40cf-bb72-536b5413741d",
       "target": "7b128fba-c79f-4d00-9793-da78e355686e",
       "type": "basicEdge"
-
     }
   ],
   "nodes": [
+    {
+      "id": "9fd9d3c0-562b-4ca2-b705-1b1c1bb9905f",
+      "title": "root",
+      "type": "contextNode"
+    },
     {
       "id": "a0c13faf-723d-4208-85d0-76eaf7c790c5",
       "title": "inode1",
