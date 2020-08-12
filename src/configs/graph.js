@@ -11,6 +11,7 @@
 import React from 'react';
 
 export const NODE_KEY = 'id';
+const DEFAULT_COLOR = '#f8f8f8';
 
 // Declaration of node types and edge types
 
@@ -38,7 +39,13 @@ const intentNodeShape = (
     height={INTENT_HEIGHT}
     id="intentNode"
   >
-    <rect width={INTENT_WIDTH} height={INTENT_HEIGHT} />
+    <rect
+      width={INTENT_WIDTH}
+      height={INTENT_HEIGHT}
+      rx="10"
+      ry="10"
+      fill={DEFAULT_COLOR}
+    />
   </symbol>
 );
 
@@ -55,6 +62,7 @@ const contextNodeShape = (
       cx={CONTEXT_RADIUS + 1}
       cy={CONTEXT_RADIUS + 1}
       r={CONTEXT_RADIUS}
+      fill={DEFAULT_COLOR}
     />
   </symbol>
 );
@@ -79,10 +87,14 @@ export default {
     intentNode: {
       shape: intentNodeShape,
       shapeId: '#intentNode',
+      width: INTENT_WIDTH,
+      height: INTENT_HEIGHT,
     },
     contextNode: {
       shape: contextNodeShape,
       shapeId: '#contextNode',
+      width: CONTEXT_RADIUS * 2,
+      height: CONTEXT_RADIUS * 2,
     },
   },
 };

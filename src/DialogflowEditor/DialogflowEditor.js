@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 // eslint-disable-next-line
-import { INode, IEdge, GraphView } from 'react-digraph';
+import { INode, IEdge, GraphView, GraphUtils } from 'react-digraph';
 import { v4 as uuidv4 } from 'uuid';
 import { Layout } from 'antd';
 import GraphConfig, {
@@ -489,6 +489,33 @@ export default class DialogflowEditor extends Component {
     downloadAnchorNode.remove();
   }
 
+  /**
+   * Custom function to render the nodes on the graph
+   *
+   * @param {*} ref
+   * @param {*} nodeData Id, type, x, y, title, etc.
+   * @param {string} id Node id (uuid v4)
+   * @param {boolean} isSelected
+   * @param {boolean} isHovered
+   */
+  renderNode = (ref, nodeData, id, isSelected, isHovered) => {
+    const { type } = nodeData;
+    const { shapeId, width, height } = GraphConfig.NodeTypes[type];
+
+    return (
+      <g>
+        <use
+          className="node"
+          x={-width / 2}
+          y={-height / 2}
+          width={width}
+          height={height}
+          xlinkHref={shapeId}
+        />
+      </g>
+    );
+  }
+
   render() {
     const {
       graph,
@@ -565,6 +592,7 @@ export default class DialogflowEditor extends Component {
             onSwapEdge={this.onSwapEdge}
             onDeleteEdge={this.onDeleteEdge}
             renderBackground={this.renderBackground}
+            renderNode={this.renderNode}
             onContextMenu={this.onContextMenu}
           />
           <ContextMenuModal
