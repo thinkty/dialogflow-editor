@@ -33,7 +33,8 @@ export default function AttributeSVG(props) {
   }
 
   const radius = 7;
-  const offset = (specifiedAttributes.length - 1) * radius;
+  const distance = 20;
+  const offset = (specifiedAttributes.length - 1) * distance / 2;
   const shapes = [];
 
   for (let i = 0; i < specifiedAttributes.length; i += 1) {
@@ -42,7 +43,7 @@ export default function AttributeSVG(props) {
     shapes.push(
       <circle
         key={color}
-        cx={20 * i - offset}
+        cx={distance * i - offset}
         cy={-30}
         r={radius}
         fill={color}
