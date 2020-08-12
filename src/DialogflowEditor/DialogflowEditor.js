@@ -513,11 +513,14 @@ export default class DialogflowEditor extends Component {
           height={height}
           xlinkHref={shapeId}
         />
-        <AttributeSVG
-          events={nodeData.events}
-          isFallback={nodeData.isFallback}
-          fulfillment={nodeData.fulfillment}
-        />
+        {
+          type === INTENT_TYPE &&
+          <AttributeSVG
+            events={nodeData.events}
+            isFallback={nodeData.isFallback}
+            fulfillment={nodeData.fulfillment}
+          />
+        }
       </g>
     );
   }
