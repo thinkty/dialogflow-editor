@@ -33,27 +33,27 @@
     },
     {
       "id": "a0c13faf-723d-4208-85d0-76eaf7c790c5",
-      "title": "inode1",
+      "title": "Hello-0",
       "type": "intentNode",
       "contexts": {
         "in": [],
         "out": ["c802d68d-c57d-40cf-bb72-536b5413741d"]
       },
-      "events": ["start"],
-      "trainingPhrases": [],
+      "events": ["hello"],
+      "trainingPhrases": ["hello", "hi", "hiiiii", "nice to meet you"],
       "action": "",
-      "responses": [],
+      "responses": ["Hi, how can I help you?"],
       "fulfillment": true,
       "isFallback": false
     },
     {
       "id": "c802d68d-c57d-40cf-bb72-536b5413741d",
-      "title": "cnode1",
+      "title": "Hello-1",
       "type": "contextNode"
     },
     {
       "id": "fb5affa9-2415-4fab-9d8f-f3cd2dd2383a",
-      "title": "inode2",
+      "title": "Hello-2",
       "type": "intentNode",
       "contexts": {
         "in": ["c802d68d-c57d-40cf-bb72-536b5413741d"],
@@ -62,22 +62,22 @@
       "events": [],
       "trainingPhrases": [],
       "action": "",
-      "responses": [],
+      "responses": ["Sorry, I didn't quite get that"],
       "fulfillment": true,
       "isFallback": true
     },
     {
       "id": "7b128fba-c79f-4d00-9793-da78e355686e",
-      "title": "inode3",
+      "title": "Hello-3",
       "type": "intentNode",
       "contexts": {
         "in": ["c802d68d-c57d-40cf-bb72-536b5413741d"],
         "out": []
       },
-      "events": ["end", "bye"],
-      "trainingPhrases": [],
+      "events": ["coffee"],
+      "trainingPhrases": ["can you order me a coffee", "i want coffee", "coffee at my desk please", "coffee please", "give me coffeeee"],
       "action": "",
-      "responses": [],
+      "responses": ["Sure, I will place an order right away"],
       "fulfillment": false,
       "isFallback": false
     }
