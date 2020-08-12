@@ -507,6 +507,10 @@ export default class DialogflowEditor extends Component {
       <g>
         <use
           className="node"
+          style={{
+            cursor: 'pointer',
+            filter: 'url(#dropshadow)',
+          }}
           x={-width / 2}
           y={-height / 2}
           width={width}
