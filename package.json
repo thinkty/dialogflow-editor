@@ -25,7 +25,8 @@
   },
   "jest": {
     "coveragePathIgnorePatterns": [
-      "<rootDir>/src/index.js"
+      "<rootDir>/src/index.js",
+      "<rootDir>/src/configs"
     ]
   },
   "eslintConfig": {
