@@ -11,6 +11,8 @@ A web application for making flowcharts specifically for [Dialogflow](https://cl
 ## Description
 Dialogflow editor is aimed to ease the process of creating a flowchart for your chatbot/agent on Dialogflow. Although the user needs a little bit of prior knowledge about [intents](https://cloud.google.com/dialogflow/docs/intents-overview) and [contexts](https://cloud.google.com/dialogflow/docs/contexts-overview) in order to utilize this tool, I tried my best to make it as intuitive as possible.
 
+This tool only consists of the editting part and does not contain any process for the actual parsing and uploading of the intents to Dialogflow. This is intended as the backend requires various private information about the dialogflow agent which I am not willing to handle at the moment. Also, since the graph's nodes are already divided into intents and contexts, I do not think that it will be too difficult to quickly build a REST server to handle the parsing and updating parts. I'm also planning to create a sample node.js server on how to do this and perhaps add an Authorization header option when exporting.
+
 ## Usage
 - **Create**: right click on the desired location in the graph and select the type of node to create
 - **Edit**: select a node to edit and a side bar containing various input fields will appear on the right
@@ -25,9 +27,10 @@ Based on the sample graph, although the flowchart is extremely simple, it shows 
 Thinking of the graph as a [State Diagram](https://en.wikipedia.org/wiki/State_diagram) seems to make it easier to understand. Each context node is the state and the intent nodes that are connected to the context node are the edges. Based on the user input, an intent whose training phrases have a high similarity will be the edge that leads to the next state (context node).
 
 ## Plans
-- Graph validation: internal validation methods to check for dangling nodes, pattern matching, and more.
+- Graph validation: internal validation methods to check for dangling nodes, pattern matching, and more
 - Entity support
 - Dynamic SVG shapes: Intent nodes w/ buttons and text areas to show an overview of the node
+- Authorization OR OAuth: I am still learning about this so this might take some time
 
 Feedbacks are welcome!
 
