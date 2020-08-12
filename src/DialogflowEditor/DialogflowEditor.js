@@ -509,7 +509,10 @@ export default class DialogflowEditor extends Component {
           className="node"
           style={{
             cursor: 'pointer',
-            filter: 'url(#dropshadow)',
+            filter: isSelected ? '' : 'url(#dropshadow)',
+            stroke: isSelected ? '#1E90FF' : '',
+            strokeDasharray: isSelected ? '4' : '',
+            strokeWidth: isSelected ? '3' : '',
           }}
           x={-width / 2}
           y={-height / 2}
