@@ -514,12 +514,14 @@ export default class DialogflowEditor extends Component {
           xlinkHref={shapeId}
         />
         {
-          type === INTENT_TYPE &&
+          type === INTENT_TYPE
+          && (
           <AttributeSVG
             events={nodeData.events}
             isFallback={nodeData.isFallback}
             fulfillment={nodeData.fulfillment}
           />
+          )
         }
       </g>
     );

@@ -30,7 +30,7 @@ export default function AttributeSVG(props) {
 
   const radius = 7;
   const distance = 20;
-  const offset = (attributes.length - 1) * distance / 2;
+  const offset = ((attributes.length - 1) * distance) / 2;
   const shapes = [];
 
   for (let i = 0; i < attributes.length; i += 1) {
