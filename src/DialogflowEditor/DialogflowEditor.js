@@ -541,8 +541,8 @@ export default class DialogflowEditor extends Component {
   renderNodeText = (nodeData, id, isSelected) => {
     const { type, title } = nodeData;
     const { width, height } = GraphConfig.NodeTypes[type];
-    const paddingTop = 10;
-    const fontSize = 15;
+    const paddingTop = type === INTENT_TYPE ? 10 : 5;
+    const fontSize = type === INTENT_TYPE ? 15 : 13;
 
     return (
       <svg
