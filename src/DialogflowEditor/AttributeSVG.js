@@ -6,10 +6,6 @@ import {
   WEBHOOK_COLOR,
 } from '../configs/graph';
 
-const EV = EVENT_COLOR;
-const FB = FALLBACK_COLOR;
-const WH = WEBHOOK_COLOR;
-
 /**
  * A functional component to render the attributes regarding event, fallback,
  * and webhook. The color of these attributes are defined in configs/graph.js
@@ -18,27 +14,27 @@ const WH = WEBHOOK_COLOR;
  */
 export default function AttributeSVG(props) {
   const { events, isFallback, fulfillment } = props;
-  const specifiedAttributes = [];
+  const attributes = [];
 
   if (!!events && events.length > 0) {
-    specifiedAttributes.push(EV);
+    attributes.push(EVENT_COLOR);
   }
 
   if (isFallback) {
-    specifiedAttributes.push(FB);
+    attributes.push(FALLBACK_COLOR);
   }
 
   if (fulfillment) {
-    specifiedAttributes.push(WH);
+    attributes.push(WEBHOOK_COLOR);
   }
 
   const radius = 7;
   const distance = 20;
-  const offset = (specifiedAttributes.length - 1) * distance / 2;
+  const offset = (attributes.length - 1) * distance / 2;
   const shapes = [];
 
-  for (let i = 0; i < specifiedAttributes.length; i += 1) {
-    const color = specifiedAttributes[i];
+  for (let i = 0; i < attributes.length; i += 1) {
+    const color = attributes[i];
 
     shapes.push(
       <circle
