@@ -49,9 +49,7 @@ export default function AttributeSVG(props) {
 
   return (
     <g>
-      {
-        shapes
-      }
+      {shapes}
     </g>
   );
 }
