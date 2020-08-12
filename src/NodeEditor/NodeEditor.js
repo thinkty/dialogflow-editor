@@ -55,6 +55,7 @@ export default class NodeEditor extends Component {
       'nodeData',
       'action',
       'events',
+      'fallback',
       'contexts',
       'responses',
       'fulfillment',
@@ -69,6 +70,7 @@ export default class NodeEditor extends Component {
       events,
       contexts,
       responses,
+      isFallback,
       fulfillment,
       trainingPhrases,
     } = selected;
@@ -116,6 +118,17 @@ export default class NodeEditor extends Component {
                 id="title"
                 value={title}
                 label="Name"
+                onChange={this.onChange}
+              />
+            </Menu.Item>
+          </Menu.SubMenu>
+          <Menu.Divider />
+          <Menu.SubMenu key="fallback" title="Fallback">
+            <Menu.Item key="isFallback" style={{ marginBottom: 40 }}>
+              <SimpleBooleanInput
+                id="isFallback"
+                value={isFallback}
+                label="Is Fallback"
                 onChange={this.onChange}
               />
             </Menu.Item>

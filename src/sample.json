@@ -33,7 +33,8 @@
       "trainingPhrases": [],
       "action": "",
       "responses": [],
-      "fulfillment": false
+      "fulfillment": false,
+      "isFallback": false
     },
     {
       "id": "c802d68d-c57d-40cf-bb72-536b5413741d",
@@ -52,7 +53,8 @@
       "trainingPhrases": [],
       "action": "",
       "responses": [],
-      "fulfillment": false
+      "fulfillment": false,
+      "isFallback": false
     },
     {
       "id": "7b128fba-c79f-4d00-9793-da78e355686e",
@@ -66,7 +68,8 @@
       "trainingPhrases": [],
       "action": "",
       "responses": [],
-      "fulfillment": false
+      "fulfillment": false,
+      "isFallback": false
     }
   ]
 }

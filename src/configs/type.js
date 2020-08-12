@@ -23,6 +23,7 @@ export const nodeAttributes = {
       action: '',
       responses: [],
       fulfillment: false,
+      isFallback: false,
     },
   },
   [CONTEXT_TYPE]: {
