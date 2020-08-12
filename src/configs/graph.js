@@ -11,7 +11,13 @@
 import React from 'react';
 
 export const NODE_KEY = 'id';
-const DEFAULT_COLOR = '#f8f8f8';
+
+// Color specification for attribute SVG
+
+export const DEFAULT_COLOR = '#f8f8f8';
+export const EVENT_COLOR = '#FF0000';
+export const FALLBACK_COLOR = '#00FF00';
+export const WEBHOOK_COLOR = '#0000FF';
 
 // Declaration of node types and edge types
 

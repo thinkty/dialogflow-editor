@@ -14,6 +14,7 @@ import { nodeAttributes } from '../configs/type';
 import NodeEditor from '../NodeEditor';
 import EditorMenu from '../EditorMenu';
 import ContextMenuModal from './ContextMenuModal';
+import AttributeSVG from './AttributeSVG';
 
 const { Content, Sider, Header } = Layout;
 const sample = require('../sample.json');
@@ -511,6 +512,11 @@ export default class DialogflowEditor extends Component {
           width={width}
           height={height}
           xlinkHref={shapeId}
+        />
+        <AttributeSVG
+          events={nodeData.events}
+          isFallback={nodeData.isFallback}
+          fulfillment={nodeData.fulfillment}
         />
       </g>
     );

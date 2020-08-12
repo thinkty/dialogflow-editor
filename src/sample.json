@@ -43,7 +43,7 @@
       "trainingPhrases": [],
       "action": "",
       "responses": [],
-      "fulfillment": false,
+      "fulfillment": true,
       "isFallback": false
     },
     {
@@ -63,8 +63,8 @@
       "trainingPhrases": [],
       "action": "",
       "responses": [],
-      "fulfillment": false,
-      "isFallback": false
+      "fulfillment": true,
+      "isFallback": true
     },
     {
       "id": "7b128fba-c79f-4d00-9793-da78e355686e",
