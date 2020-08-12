@@ -496,8 +496,8 @@ export default class DialogflowEditor extends Component {
    * @param {*} ref
    * @param {*} nodeData Id, type, x, y, title, etc.
    * @param {string} id Node id (uuid v4)
-   * @param {boolean} isSelected
-   * @param {boolean} isHovered
+   * @param {boolean} isSelected True when node is selected
+   * @param {boolean} isHovered True when node hovered
    */
   renderNode = (ref, nodeData, id, isSelected, isHovered) => {
     const { type } = nodeData;
