@@ -531,6 +531,39 @@ export default class DialogflowEditor extends Component {
     );
   }
 
+  /**
+   * Custom function to render the text on node
+   *
+   * @param {*} nodeData Id, type, x, y, title, etc.
+   * @param {string} id Node id (uuid v4)
+   * @param {boolean} isSelected True when node is selected
+   */
+  renderNodeText = (nodeData, id, isSelected) => {
+    const { type, title } = nodeData;
+    const { width, height } = GraphConfig.NodeTypes[type];
+    const paddingTop = 10;
+    const fontSize = 15;
+
+    return (
+      <svg
+        x={-width / 2}
+        y={-height / 2 + paddingTop}
+        width={width}
+        height={height}
+      >
+        <text textAnchor="middle">
+          <tspan
+            x={width / 2}
+            y={height / 2}
+            fontSize={fontSize}
+          >
+            {title}
+          </tspan>
+        </text>
+      </svg>
+    );
+  }
+
   render() {
     const {
       graph,
@@ -608,6 +641,7 @@ export default class DialogflowEditor extends Component {
             onDeleteEdge={this.onDeleteEdge}
             renderBackground={this.renderBackground}
             renderNode={this.renderNode}
+            renderNodeText={this.renderNodeText}
             onContextMenu={this.onContextMenu}
           />
           <ContextMenuModal
