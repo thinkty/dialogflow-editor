@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 // eslint-disable-next-line
-import { INode, IEdge, GraphView, GraphUtils } from 'react-digraph';
+import { INode, IEdge, GraphView } from 'react-digraph';
 import { v4 as uuidv4 } from 'uuid';
 import { Layout } from 'antd';
 import GraphConfig, {
