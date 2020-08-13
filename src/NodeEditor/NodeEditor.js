@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Menu, Space } from 'antd';
+import PropTypes from 'prop-types';
 
 import { CONTEXT_TYPE, INTENT_TYPE } from '../configs/graph';
 import DisabledArrayInput from './inputs/DisabledArrayInput';
@@ -12,23 +13,6 @@ import SimpleBooleanInput from './inputs/SimpleBooleanInput';
  * Component to edit the currently selected node
  */
 export default class NodeEditor extends Component {
-  constructor(props) {
-    super(props);
-    this.state = { ...props };
-  }
-
-  /**
-   * Update the currently selected node on prop change
-   *
-   * @param {*} props Next props
-   * @param {*} state Previous state
-   */
-  static getDerivedStateFromProps(props, state) {
-    return {
-      selected: props.selected,
-    };
-  }
-
   /**
    * Handle changes from simple string input fields
    *
@@ -36,16 +20,16 @@ export default class NodeEditor extends Component {
    */
   onChange = (event) => {
     const { id, value } = event.target;
-    const { selected, update } = this.state;
-    selected[id] = value;
-    this.setState({ selected });
+    const { update, updateSelected } = this.props;
+
+    updateSelected(id, value);
 
     // Notify the parent component to rerender the graph to show changes
     update();
   }
 
   render() {
-    const { selected } = this.state;
+    const { selected } = this.props;
     if (!selected) {
       // Do not render if selected is null
       return null;
@@ -234,3 +218,13 @@ export default class NodeEditor extends Component {
     return null;
   }
 }
+
+NodeEditor.propTypes = {
+  update: PropTypes.func.isRequired,
+  updateSelected: PropTypes.func.isRequired,
+  selected: PropTypes.any,
+};
+
+NodeEditor.defaultProps = {
+  selected: null,
+};

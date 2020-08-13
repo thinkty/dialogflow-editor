@@ -453,6 +453,16 @@ export default class DialogflowEditor extends Component {
   }
 
   /**
+   * Update the selected node's properties with the given value
+   */
+  updateSelected = (id, value) => {
+    const { selected } = this.state;
+
+    selected[id] = value;
+    this.setState({ selected });
+  }
+
+  /**
    * Update the graph with the given JSON object
    *
    * @param {*} graph
@@ -615,6 +625,7 @@ export default class DialogflowEditor extends Component {
           <NodeEditor
             selected={selected}
             update={this.updateGraph}
+            updateSelected={this.updateSelected}
           />
         </Sider>
         <Content
