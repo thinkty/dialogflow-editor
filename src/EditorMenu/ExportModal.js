@@ -17,21 +17,10 @@ export default class ExportModal extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      ...props,
       protocol: 'https://',
       url: 'www.example.com',
       sending: false,
     };
-  }
-
-  /**
-   * Update on prop change
-   *
-   * @param {*} props Next props
-   * @param {*} state Previous state
-   */
-  static getDerivedStateFromProps(props, state) {
-    return { ...props };
   }
 
   /**
