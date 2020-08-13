@@ -12,12 +12,56 @@ import SimpleTextInput from '../NodeEditor/inputs/SimpleTextInput';
 
 describe('Node Editor Smoke Test', () => {
 
+  const selected = {
+    id: "a0c13faf-723d-4208-85d0-76eaf7c790c5",
+    title: "inode1",
+    type: "intentNode",
+    contexts: {
+      in: ["c802d68d-c57d-40cf-bb72-536b5413741d"],
+      out: []
+    },
+    events: ["start"],
+    trainingPhrases: ["default training phrase"],
+    action: "checkUser",
+    responses: ["default response"],
+    fulfillment: false
+  };
+  const updateSpy = jest.fn();
+  const updateSelectedSpy = jest.fn();
+
+  // https://jestjs.io/docs/en/manual-mocks#mocking-methods-which-are-not-implemented-in-jsdom
+  Object.defineProperty(window, 'matchMedia', {
+    writable: true,
+    value: jest.fn().mockImplementation(query => ({
+      matches: false,
+      media: query,
+      onchange: null,
+      addListener: jest.fn(), // deprecated
+      removeListener: jest.fn(), // deprecated
+      addEventListener: jest.fn(),
+      removeEventListener: jest.fn(),
+      dispatchEvent: jest.fn(),
+    })),
+  });
+
   it('renders without crashing', () => {
-    shallow(<NodeEditor />);
+    shallow(
+      <NodeEditor
+        selected={selected}
+        update={updateSpy}
+        updateSelected={updateSelectedSpy}
+      />
+    );
   });
 
   it('renders all the sub input components without crashing', () => {
-    mount(<NodeEditor />);
+    mount(
+      <NodeEditor
+        selected={selected}
+        update={updateSpy}
+        updateSelected={updateSelectedSpy}
+      />
+    );
   });
 });
 
@@ -38,6 +82,7 @@ describe('Node Editor Component w/ Intent Node', () => {
     fulfillment: false
   };
   const updateSpy = jest.fn();
+  const updateSelectedSpy = jest.fn();
   let output;
 
   beforeEach(() => {
@@ -57,7 +102,13 @@ describe('Node Editor Component w/ Intent Node', () => {
       })),
     });
 
-    output = render(<NodeEditor selected={selected} update={updateSpy} />);
+    output = render(
+      <NodeEditor
+        selected={selected}
+        update={updateSpy}
+        updateSelected={updateSelectedSpy}
+      />
+    );
   });
 
   it('renders the node editor with intent node', () => {
@@ -94,6 +145,7 @@ describe('Node Editor Component w/ Context Node', () => {
     type: "contextNode"
   };
   const updateSpy = jest.fn();
+  const updateSelectedSpy = jest.fn();
   let output;
 
   beforeEach(() => {
@@ -113,7 +165,12 @@ describe('Node Editor Component w/ Context Node', () => {
       })),
     });
 
-    output = render(<NodeEditor selected={selected} update={updateSpy} />);
+    output = render(
+      <NodeEditor
+        selected={selected}
+        update={updateSpy}
+        updateSelected={updateSelectedSpy}
+      />);
   });
 
   it('renders the node editor with context node', () => {
@@ -132,7 +189,8 @@ describe('Node Editor Component w/ Context Node', () => {
 
     fireEvent.change(input, { target: { value: 'new name' } });
 
-    expect(updateSpy).toHaveBeenCalled();
+    expect(updateSpy).toHaveBeenCalledTimes(1);
+    expect(updateSelectedSpy).toHaveBeenCalledTimes(1);
   });
 
   it('renders immutable inputs as disabled', () => {
@@ -201,7 +259,14 @@ describe('Simple Array Input Component', () => {
   });
 
   it('renders without crashing', () => {
-    mount(<SimpleArrayInput />);
+    mount(
+      <SimpleArrayInput
+        items={items}
+        label={label}
+        id={id}
+        onChange={onChange}
+      />
+    );
   });
 
   it('renders w/ given props', () => {
