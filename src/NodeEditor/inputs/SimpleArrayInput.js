@@ -3,6 +3,7 @@ import {
   List, Input, Space, Form,
 } from 'antd';
 import { CloseOutlined } from '@ant-design/icons';
+import PropTypes from 'prop-types';
 
 /**
  * A component for editting array with an interactive list and a text input
@@ -11,22 +12,7 @@ import { CloseOutlined } from '@ant-design/icons';
 export default class SimpleArrayInput extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      ...props,
-      temp: '',
-    };
-  }
-
-  /**
-   * Update on prop change
-   *
-   * @param {*} props Next props
-   * @param {*} state Previous state
-   */
-  static getDerivedStateFromProps(props, state) {
-    return {
-      ...props,
-    };
+    this.state = { temp: ''};
   }
 
   /**
@@ -36,7 +22,7 @@ export default class SimpleArrayInput extends Component {
    * @param {*} item Item to delete from the list
    */
   onDelete = (item) => {
-    const { id, items, onChange } = this.state;
+    const { id, onChange, items } = this.props;
     const index = items.indexOf(item);
 
     if (index > -1) {
@@ -51,9 +37,8 @@ export default class SimpleArrayInput extends Component {
    * parent component
    */
   onSubmit = () => {
-    const {
-      id, onChange, items, temp,
-    } = this.state;
+    const { id, onChange, items } = this.props;
+    const { temp } = this.state;
 
     if (temp === '') {
       return;
@@ -70,13 +55,12 @@ export default class SimpleArrayInput extends Component {
    * @param {*} event
    */
   onChange = (event) => {
-    this.setState({
-      temp: event.target.value,
-    });
+    this.setState({ temp: event.target.value });
   }
 
   render() {
-    const { items, label, temp } = this.state;
+    const { items, label } = this.props;
+    const { temp } = this.state;
 
     return (
       <Space direction="vertical" style={{ width: '100%' }}>
@@ -108,3 +92,10 @@ export default class SimpleArrayInput extends Component {
     );
   }
 }
+
+SimpleArrayInput.propTypes = {
+  id: PropTypes.string.isRequired,
+  onChange: PropTypes.func.isRequired,
+  items: PropTypes.arrayOf(PropTypes.string).isRequired,
+  label: PropTypes.string.isRequired,
+};
