@@ -15,9 +15,10 @@ This tool only consists of the editting part and does not contain any process fo
 
 ## Usage
 - **Create**: right click on the desired location in the graph and select the type of node to create
+- **Copy**: select a node to copy and press the `ctrl` key while clicking on the position to paste the selected node to
 - **Edit**: select a node to edit and a side bar containing various input fields will appear on the right
-- **Save**: save the graph locally by clicking on the save button at the top
 - **Remove**: remove a node by selecting it and pressing the `del` key
+- **Save**: save the graph locally by clicking on the save button at the top
 - **Import**: click on the `Import from .json` button to import a graph into the editor. The graph must have a valid format
 - **Download**: click on the `Export to .json` button to download the graph in a JSON file
 - **Export to url**: click on the `Import / Export` button at the top, and click on `Export to url`. Enter the destination url to send the graph in JSON, the name of the agent, and the name of the flowchart. Click `send` to finish
