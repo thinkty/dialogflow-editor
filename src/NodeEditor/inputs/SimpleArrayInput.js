@@ -12,7 +12,7 @@ import PropTypes from 'prop-types';
 export default class SimpleArrayInput extends Component {
   constructor(props) {
     super(props);
-    this.state = { temp: ''};
+    this.state = { temp: '' };
   }
 
   /**
