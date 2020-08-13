@@ -87,7 +87,6 @@ export default class SimpleArrayInput extends Component {
             />
           </Form.Item>
         </Form>
-        <button aria-label="test" type="submit" onClick={this.onSubmit} />
       </Space>
     );
   }

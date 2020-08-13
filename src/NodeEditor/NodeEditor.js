@@ -8,6 +8,7 @@ import DisabledTextInput from './inputs/DisabledTextInput';
 import SimpleTextInput from './inputs/SimpleTextInput';
 import SimpleArrayInput from './inputs/SimpleArrayInput';
 import SimpleBooleanInput from './inputs/SimpleBooleanInput';
+import ComplexArrayInput from './inputs/ComplexArrayInput';
 
 /**
  * Component to edit the currently selected node
@@ -30,8 +31,8 @@ export default class NodeEditor extends Component {
 
   render() {
     const { selected } = this.props;
-    if (!selected) {
-      // Do not render if selected is null
+    if (!selected || selected.source) {
+      // Do not render if selected is null or is edge
       return null;
     }
 
@@ -79,6 +80,15 @@ export default class NodeEditor extends Component {
           />
         </Space>
       );
+    }
+
+    let length = 0;
+    for (const pool of responses) {
+      if (pool.length === 0) {
+        length += 130;
+      } else {
+        length += (pool.length * 45) + 60;
+      }
     }
 
     if (type === INTENT_TYPE) {
@@ -187,15 +197,15 @@ export default class NodeEditor extends Component {
             <Menu.Item
               key="responses"
               style={{
-                height: responses.length === 0 ? 100 : responses.length * 45 + 40,
+                height: length + 80,
                 marginBottom: 40,
               }}
             >
-              <SimpleArrayInput
-                items={responses}
-                label="Responses"
+              <ComplexArrayInput
                 id="responses"
                 onChange={this.onChange}
+                label="Responses"
+                pools={responses}
               />
             </Menu.Item>
           </Menu.SubMenu>
