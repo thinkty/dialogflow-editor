@@ -23,7 +23,7 @@ describe('Node Editor Smoke Test', () => {
     events: ["start"],
     trainingPhrases: ["default training phrase"],
     action: "checkUser",
-    responses: ["default response"],
+    responses: [["default response"]],
     fulfillment: false
   };
   const updateSpy = jest.fn();
@@ -78,7 +78,7 @@ describe('Node Editor Component w/ Intent Node', () => {
     events: ["start"],
     trainingPhrases: ["default training phrase"],
     action: "checkUser",
-    responses: ["default response"],
+    responses: [["default response"]],
     fulfillment: false
   };
   const updateSpy = jest.fn();
@@ -133,7 +133,7 @@ describe('Node Editor Component w/ Intent Node', () => {
     expect(getByText(selected.events[0])).toBeVisible();
     expect(getByText(selected.trainingPhrases[0])).toBeVisible();
     expect(getByDisplayValue(selected.action)).toBeVisible();
-    expect(getByText(selected.responses[0])).toBeVisible();
+    expect(getByText(selected.responses[0][0])).toBeVisible();
   });
 });
 
@@ -277,22 +277,6 @@ describe('Simple Array Input Component', () => {
   it('renders the input field', () => {
     const { getByPlaceholderText } = output;
     expect(getByPlaceholderText('Press enter to add new entry')).toBeVisible();
-  });
-
-  it('adds new item to the list on submit', () => {
-    const { getByRole, getByDisplayValue, getByText } = output;
-    const input = getByRole('textbox');
-    const button = getByRole('button');
-    const newValue = 'new item';
-
-    fireEvent.change(input, { target: { value: newValue } });
-    expect(getByDisplayValue(newValue)).toBeVisible();
-    expect(input.value).toMatch(newValue);
-
-    fireEvent.click(button);
-    expect(onChange).toHaveBeenCalled();
-    expect(input.value).toMatch(/^$/); // empty
-    expect(getByText(newValue)).toBeVisible();
   });
 
   it('removes item from the list when icon clicked', () => {
