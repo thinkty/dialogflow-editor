@@ -83,13 +83,13 @@ export default class NodeEditor extends Component {
     }
 
     let length = 0;
-    for (const pool of responses) {
+    responses.forEach((pool) => {
       if (pool.length === 0) {
         length += 130;
       } else {
         length += (pool.length * 45) + 60;
       }
-    }
+    });
 
     if (type === INTENT_TYPE) {
       return (

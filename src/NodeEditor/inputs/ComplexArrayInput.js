@@ -52,7 +52,7 @@ export default class ComplexArrayInput extends Component {
           onChange={this.onChange}
           items={pools[i]}
           label={label}
-        />
+        />,
       );
     }
 
