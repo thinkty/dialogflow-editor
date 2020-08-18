@@ -29,9 +29,20 @@ const overlayKeys = {
 export default class EditorMenu extends Component {
   constructor(props) {
     super(props);
+
+    let flowchart = localStorage.getItem('flowchart');
+    if (!flowchart) {
+      flowchart = 'Name of flowchart';
+    }
+
+    let agent = localStorage.getItem('agent');
+    if (!agent) {
+      agent = 'Name of agent';
+    }
+
     this.state = {
-      flowchart: 'Name of flowchart',
-      agent: 'Name of agent',
+      flowchart,
+      agent,
       exportModalVisible: false,
       importModalVisible: false,
     };
@@ -54,6 +65,7 @@ export default class EditorMenu extends Component {
    */
   onFlowchartChange = (value) => {
     this.setState({ flowchart: value });
+    localStorage.setItem('flowchart', value);
   }
 
   /**
@@ -63,6 +75,7 @@ export default class EditorMenu extends Component {
    */
   onAgentChange = (value) => {
     this.setState({ agent: value });
+    localStorage.setItem('agent', value);
   }
 
   /**
