@@ -470,7 +470,7 @@ export default class DialogflowEditor extends Component {
       graph: {
         nodes: [],
         edges: [],
-      }
+      },
     });
   }
 
