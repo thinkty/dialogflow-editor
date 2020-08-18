@@ -177,6 +177,7 @@ EditorMenu.propTypes = {
     nodes: PropTypes.array,
     edges: PropTypes.array,
   }).isRequired,
+  clearGraph: PropTypes.func.isRequired,
   importGraph: PropTypes.func.isRequired,
   downloadGraph: PropTypes.func.isRequired,
 };
