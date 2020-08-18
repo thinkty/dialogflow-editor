@@ -113,7 +113,7 @@ export default class EditorMenu extends Component {
   }
 
   render() {
-    const { graph, importGraph } = this.props;
+    const { graph, importGraph, clearGraph } = this.props;
     const {
       flowchart,
       agent,
@@ -148,6 +148,9 @@ export default class EditorMenu extends Component {
         </Space>
         <Button onClick={this.saveGraph}>
           Save
+        </Button>
+        <Button onClick={clearGraph}>
+          Clear
         </Button>
         <Dropdown overlay={exportImportMenu} mouseEnterDelay={0}>
           <Button>
