@@ -14,6 +14,12 @@ describe('Editor Menu Smoke Test', () => {
   };
   const importGraph = jest.fn();
   const downloadGraph = jest.fn();
+  Object.defineProperty(window, 'localStorage', {
+    value: {
+      setItem: jest.fn(),
+      getItem: jest.fn().mockReturnValue(null)
+    }
+  });
 
   it('renders without crashing', () => {
     shallow(
