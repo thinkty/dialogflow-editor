@@ -463,6 +463,18 @@ export default class DialogflowEditor extends Component {
   }
 
   /**
+   * Clear current graph
+   */
+  clearGraph = () => {
+    this.setState({
+      graph: {
+        nodes: [],
+        edges: [],
+      }
+    });
+  }
+
+  /**
    * Update the graph with the given JSON object
    *
    * @param {*} graph
@@ -602,6 +614,7 @@ export default class DialogflowEditor extends Component {
         >
           <EditorMenu
             graph={graph}
+            clearGraph={this.clearGraph}
             importGraph={this.importGraph}
             downloadGraph={this.downloadGraph}
           />
