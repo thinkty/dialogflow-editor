@@ -12,6 +12,7 @@ describe('Editor Menu Smoke Test', () => {
     nodes: [],
     edges: [],
   };
+  const clearGraph = jest.fn();
   const importGraph = jest.fn();
   const downloadGraph = jest.fn();
   Object.defineProperty(window, 'localStorage', {
@@ -25,6 +26,7 @@ describe('Editor Menu Smoke Test', () => {
     shallow(
       <EditorMenu
         graph={graph}
+        clearGraph={clearGraph}
         importGraph={importGraph}
         downloadGraph={downloadGraph}
       />
@@ -35,6 +37,7 @@ describe('Editor Menu Smoke Test', () => {
     mount(
       <EditorMenu
         graph={graph}
+        clearGraph={clearGraph}
         importGraph={importGraph}
         downloadGraph={downloadGraph}
       />
@@ -61,6 +64,7 @@ describe('Editor Menu Component', () => {
     output = render(
       <EditorMenu
         graph={graph}
+        clearGraph={jest.fn()}
         importGraph={jest.fn()}
         downloadGraph={downloadGraph}
       />
