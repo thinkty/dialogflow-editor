@@ -36,7 +36,7 @@
       "title": "Hello-0",
       "type": "intentNode",
       "contexts": {
-        "in": [],
+        "in": ["9fd9d3c0-562b-4ca2-b705-1b1c1bb9905f"],
         "out": ["c802d68d-c57d-40cf-bb72-536b5413741d"]
       },
       "events": ["hello"],
