@@ -36,7 +36,7 @@ export default class ExportModal extends Component {
     const { protocol, url } = this.state;
 
     if (url === '') {
-      message.error('Empty url');
+      message.error('Empty url', 2);
       return;
     }
 
@@ -47,10 +47,7 @@ export default class ExportModal extends Component {
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({
-        graph,
-        agent,
-      }),
+      body: JSON.stringify({ graph, agent }),
     };
 
     fetch(`${protocol}${url}`, options)
@@ -60,7 +57,14 @@ export default class ExportModal extends Component {
           message.success('Graph sent', 2);
           onCancel(); // Close modal
         } else {
-          message.error(`${response.status} ${response.statusText}`, 2);
+          response.text().then((data) => {
+            if (data.indexOf('<pre>') !== -1) {
+              const text = data.substring(data.indexOf('<pre>') + 5, data.indexOf('</pre>'));
+              message.error(text, 2);
+            } else {
+              message.error(`${response.status} ${response.statusText}`, 2);
+            }
+          });
         }
       })
       .catch((reason) => {
