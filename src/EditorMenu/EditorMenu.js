@@ -30,18 +30,12 @@ export default class EditorMenu extends Component {
   constructor(props) {
     super(props);
 
-    let flowchart = localStorage.getItem('flowchart');
-    if (!flowchart) {
-      flowchart = 'Name of flowchart';
-    }
-
     let agent = localStorage.getItem('agent');
     if (!agent) {
       agent = 'Name of agent';
     }
 
     this.state = {
-      flowchart,
       agent,
       exportModalVisible: false,
       importModalVisible: false,
@@ -59,17 +53,7 @@ export default class EditorMenu extends Component {
   }
 
   /**
-   * Handle chatbot/flowchart input change
-   *
-   * @param {string} value
-   */
-  onFlowchartChange = (value) => {
-    this.setState({ flowchart: value });
-    localStorage.setItem('flowchart', value);
-  }
-
-  /**
-   * Handle chatbot/flowchart input change
+   * Handle chatbot/agent input change
    *
    * @param {string} value
    */
@@ -115,7 +99,6 @@ export default class EditorMenu extends Component {
   render() {
     const { graph, importGraph, clearGraph } = this.props;
     const {
-      flowchart,
       agent,
       exportModalVisible,
       importModalVisible,
@@ -141,10 +124,6 @@ export default class EditorMenu extends Component {
           <Typography.Paragraph editable={{ onChange: this.onAgentChange }}>
             {agent}
           </Typography.Paragraph>
-          <Typography.Paragraph>/</Typography.Paragraph>
-          <Typography.Paragraph editable={{ onChange: this.onFlowchartChange }}>
-            {flowchart}
-          </Typography.Paragraph>
         </Space>
         <Button onClick={this.saveGraph}>
           Save
@@ -161,7 +140,6 @@ export default class EditorMenu extends Component {
         <ExportModal
           visible={exportModalVisible}
           agent={agent}
-          flowchart={flowchart}
           onCancel={this.closeExportModal}
           graph={graph}
         />

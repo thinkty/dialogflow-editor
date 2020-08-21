@@ -31,7 +31,6 @@ export default class ExportModal extends Component {
     const {
       graph,
       agent,
-      flowchart,
       onCancel,
     } = this.props;
     const { protocol, url } = this.state;
@@ -51,7 +50,6 @@ export default class ExportModal extends Component {
       body: JSON.stringify({
         graph,
         agent,
-        flowchart,
       }),
     };
 
@@ -98,7 +96,6 @@ export default class ExportModal extends Component {
     const {
       visible,
       agent,
-      flowchart,
       onCancel,
       graph,
     } = this.props;
@@ -150,10 +147,6 @@ export default class ExportModal extends Component {
           {agent}
           &quot;,
           <br />
-          &nbsp;&nbsp;flowchart: &quot;
-          {flowchart}
-          &quot;,
-          <br />
           &nbsp;&nbsp;graph:&nbsp;
           {'{'}
           <br />
@@ -179,7 +172,6 @@ export default class ExportModal extends Component {
 ExportModal.propTypes = {
   visible: PropTypes.bool.isRequired,
   agent: PropTypes.string.isRequired,
-  flowchart: PropTypes.string.isRequired,
   onCancel: PropTypes.func.isRequired,
   graph: PropTypes.shape({
     nodes: PropTypes.array,
