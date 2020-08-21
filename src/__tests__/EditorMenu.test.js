@@ -79,13 +79,11 @@ describe('Editor Menu Component', () => {
     expect(window.localStorage.setItem).toHaveBeenCalledWith('graph', JSON.stringify(graph));
   });
 
-  it('renders the editable text fields', () => {
+  it('renders the editable text field', () => {
     const { getByText } = output;
     const agent = getByText('Name of agent');
-    const flowchart = getByText('Name of flowchart');
 
     expect(agent).toBeVisible();
-    expect(flowchart).toBeVisible();
   });
 
   it('exports json to file', () => {
@@ -107,7 +105,6 @@ describe('Export Modal Component', () => {
 
   const visible = true;
   const agent = 'tempAgent';
-  const flowchart = 'tempFlowchart';
   const onCancel = jest.fn();
   const graph = {
     nodes: ['item', 'item'],
@@ -120,7 +117,6 @@ describe('Export Modal Component', () => {
       <ExportModal
         visible={visible}
         agent={agent}
-        flowchart={flowchart}
         onCancel={onCancel}
         graph={graph}
       />
@@ -132,7 +128,6 @@ describe('Export Modal Component', () => {
       <ExportModal
         visible={visible}
         agent={agent}
-        flowchart={flowchart}
         onCancel={onCancel}
         graph={graph}
       />
