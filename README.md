@@ -28,10 +28,10 @@ Based on the sample graph, although the flowchart is extremely simple, it shows 
 Thinking of the graph as a [State Diagram](https://en.wikipedia.org/wiki/State_diagram) seems to make it easier to understand. Each context node is the state and the intent nodes that are connected to the context node are the edges. Based on the user input, an intent whose training phrases have a high similarity will be the edge that leads to the next state (context node).
 
 ## Plans
-- Graph validation: internal validation methods to check for dangling nodes, pattern matching, and more
-- Entity support
-- Dynamic SVG shapes: Intent nodes w/ buttons and text areas to show an overview of the node
-- Authorization OR OAuth: I am still learning about this so this might take some time
+- Entity support : I am currently thinking of ways to enable Entity highlighting as accessible as possible in the Editor
+- Dynamic SVG shapes : Intent nodes w/ buttons and text areas to show an overview of the node
+- Custom payloads : Some platforms have quick replies and other various rich formats. I plan to support those by adding an editor section which the user can input any custom payloads that will be saved to the Intent
+- Authorization OR OAuth : I am still learning about this so this might take some time
 
 Feedbacks are welcome!
 
