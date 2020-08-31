@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Menu, Space } from 'antd';
+import { Menu, Space, Input } from 'antd';
 import PropTypes from 'prop-types';
 
 import { CONTEXT_TYPE, INTENT_TYPE } from '../configs/graph';
@@ -40,6 +40,7 @@ export default class NodeEditor extends Component {
       'nodeData',
       'action',
       'events',
+      'payload',
       'fallback',
       'contexts',
       'responses',
@@ -53,6 +54,7 @@ export default class NodeEditor extends Component {
       title,
       action,
       events,
+      payload,
       contexts,
       responses,
       isFallback,
@@ -191,6 +193,23 @@ export default class NodeEditor extends Component {
                 onChange={this.onChange}
               />
             </Menu.Item>
+          </Menu.SubMenu>
+          <Menu.Divider />
+          <Menu.SubMenu key="payload" title="Payload">
+            <Menu.Item
+              key="payload"
+              style={{
+                height: 160,
+                marginBottom: 40,
+              }}
+            >
+                <Input.TextArea
+                  id="payload"
+                  value={payload}
+                  rows={6}
+                  onChange={this.onChange}
+                />
+              </Menu.Item>
           </Menu.SubMenu>
           <Menu.Divider />
           <Menu.SubMenu key="responses" title="Responses">
