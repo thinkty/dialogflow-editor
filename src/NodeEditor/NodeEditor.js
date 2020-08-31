@@ -203,13 +203,13 @@ export default class NodeEditor extends Component {
                 marginBottom: 40,
               }}
             >
-                <Input.TextArea
-                  id="payload"
-                  value={payload}
-                  rows={6}
-                  onChange={this.onChange}
-                />
-              </Menu.Item>
+              <Input.TextArea
+                id="payload"
+                value={payload}
+                rows={6}
+                onChange={this.onChange}
+              />
+            </Menu.Item>
           </Menu.SubMenu>
           <Menu.Divider />
           <Menu.SubMenu key="responses" title="Responses">
