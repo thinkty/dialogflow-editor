@@ -21,6 +21,7 @@ export const nodeAttributes = {
       events: [],
       trainingPhrases: [],
       action: '',
+      payload: '{}',
       responses: [[]],
       fulfillment: false,
       isFallback: false,
