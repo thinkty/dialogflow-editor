@@ -13,6 +13,8 @@ Dialogflow editor is aimed to ease the process of creating a flowchart for your 
 
 This tool only consists of the editting part and does not contain any process for the actual parsing and uploading of the intents to Dialogflow. This is intended as the backend requires various private information about the dialogflow agent which I am not willing to handle at the moment. Also, since the graph's nodes are already divided into intents and contexts, I do not think that it will be too difficult to quickly build a REST server to handle the parsing and updating parts. I'm also planning to create a sample node.js server on how to do this and perhaps add an Authorization header option when exporting.
 
+This tool will not work well with Safari or IE. Use Firefox or Chrome.
+
 ## Usage
 - **Create**: right click on the desired location in the graph and select the type of node to create
 - **Copy**: select a node to copy and press the `ctrl` key while clicking on the position to paste the selected node to
