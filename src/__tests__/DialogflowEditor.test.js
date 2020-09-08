@@ -21,11 +21,13 @@ describe('Dialogflow Editor Component', () => {
 describe('Context Menu Modal Component', () => {
 
   const openContextMenu = true;
+  const mousePosition = [0, 0];
   const closeContextMenu = jest.fn();
   const spawnNode = jest.fn();
   const output = render(
     <ContextMenuModal
       openContextMenu={openContextMenu}
+      mousePosition={mousePosition}
       closeContextMenu={closeContextMenu}
       spawnNode={spawnNode}
     />
@@ -35,6 +37,7 @@ describe('Context Menu Modal Component', () => {
     shallow(
       <ContextMenuModal
         openContextMenu={openContextMenu}
+        mousePosition={mousePosition}
         closeContextMenu={closeContextMenu}
         spawnNode={spawnNode}
       />
@@ -45,6 +48,7 @@ describe('Context Menu Modal Component', () => {
     mount(
       <ContextMenuModal
         openContextMenu={openContextMenu}
+        mousePosition={mousePosition}
         closeContextMenu={closeContextMenu}
         spawnNode={spawnNode}
       />

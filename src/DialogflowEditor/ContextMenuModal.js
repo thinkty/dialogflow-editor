@@ -41,15 +41,20 @@ export default class ContextMenuModal extends Component {
   }
 
   render() {
-    const { openContextMenu, closeContextMenu } = this.props;
+    const { openContextMenu, closeContextMenu, mousePosition } = this.props;
+    const top = mousePosition[1];
+    const left = mousePosition[0] - window.innerWidth / 2;
 
     return (
       <Modal
-        title="Spawn Node"
+        title={null}
         visible={openContextMenu}
+        closable={false}
         okText="Spawn"
         onOk={this.spawnNodeOnMouse}
         onCancel={closeContextMenu}
+        mask={false}
+        style={{ top, left }}
       >
         <p>Select the type of node to spawn at the mouse point</p>
         <Radio.Group onChange={this.onChange}>
@@ -68,6 +73,7 @@ export default class ContextMenuModal extends Component {
 
 ContextMenuModal.propTypes = {
   openContextMenu: PropTypes.bool.isRequired,
+  mousePosition: PropTypes.array.isRequired,
   closeContextMenu: PropTypes.func.isRequired,
   spawnNode: PropTypes.func.isRequired,
 };

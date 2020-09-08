@@ -34,6 +34,7 @@ export default class DialogflowEditor extends Component {
       type: nodeTypes[0],
       layoutEngineType: 'VerticalTree',
       openContextMenu: false,
+      mousePosition: [0, 0],
     };
   }
 
@@ -391,7 +392,12 @@ export default class DialogflowEditor extends Component {
    */
   onContextMenu = (x, y, event) => {
     event.preventDefault();
-    this.setState({ openContextMenu: true, x, y });
+    this.setState({
+      openContextMenu: true,
+      mousePosition: [event.pageX, event.pageY],
+      x,
+      y,
+    });
   }
 
   /**
@@ -593,8 +599,9 @@ export default class DialogflowEditor extends Component {
     const {
       graph,
       selected,
-      layoutEngineType,
+      mousePosition,
       openContextMenu,
+      layoutEngineType,
     } = this.state;
     const { nodes, edges } = graph;
     const { NodeTypes, NodeSubTypes, EdgeTypes } = GraphConfig;
@@ -673,6 +680,7 @@ export default class DialogflowEditor extends Component {
           />
           <ContextMenuModal
             openContextMenu={openContextMenu}
+            mousePosition={mousePosition}
             closeContextMenu={this.closeContextMenu}
             spawnNode={this.spawnNode}
           />
