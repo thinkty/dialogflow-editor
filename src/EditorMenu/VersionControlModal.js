@@ -28,6 +28,15 @@ export default class VersionControlModal extends Component {
   }
 
   /**
+   * Reset the states before closing
+   */
+  closeModal = () => {
+    this.setState({ isUrlValid: false });
+    const { onCancel } = this.props;
+    onCancel();
+  }
+
+  /**
    * Retrieve the graphs from the given url
    */
   getGraphs = () => {
@@ -80,16 +89,15 @@ export default class VersionControlModal extends Component {
   }
 
   render() {
-    const { visible, onCancel } = this.props;
+    const { visible } = this.props;
     const { url, sendingRequest, isUrlValid } = this.state;
     return (
       <Modal
         title="Version Control"
         visible={visible}
-        onOk={isUrlValid ? onCancel : this.checkUrlAndGetGraphs}
+        onOk={isUrlValid ? this.closeModal : this.checkUrlAndGetGraphs}
         okText={isUrlValid ? 'Done' : 'Next'}
-        cancelText={null}
-        onCancel={onCancel}
+        onCancel={this.closeModal}
         confirmLoading={sendingRequest}
       >
         {
