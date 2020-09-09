@@ -13,7 +13,7 @@
 export async function getGraphs(url) {
   // TODO:
   return [
-    { date: 1599613771574, graph: { nodes: [], edges: [] } }
+    { date: 1599613771574, graph: { nodes: [], edges: [] } },
   ];
 }
 

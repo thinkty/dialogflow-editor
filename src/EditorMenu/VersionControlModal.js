@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
-import { Modal, Space, Typography, Input, message, Button } from 'antd';
+import {
+  Modal, Space, Typography, Input, message, Button,
+} from 'antd';
 import PropTypes from 'prop-types';
 import { getGraphs, saveGraph } from './vc';
 
@@ -20,16 +22,12 @@ export default class VersionControlModal extends Component {
     };
   }
 
-  /**
-   * Handle url change 
-   */
+  // Handle url change
   onUrlChange = (event) => {
     this.setState({ url: event.target.value });
   }
 
-  /**
-   * Reset the states before closing
-   */
+  // Reset the states before closing
   closeModal = () => {
     this.setState({ isUrlValid: false });
     const { onCancel } = this.props;
@@ -90,7 +88,9 @@ export default class VersionControlModal extends Component {
 
   render() {
     const { visible } = this.props;
-    const { url, sendingRequest, isUrlValid } = this.state;
+    const {
+      url, sendingRequest, isUrlValid, graphs,
+    } = this.state;
     return (
       <Modal
         title="Version Control"
@@ -101,24 +101,33 @@ export default class VersionControlModal extends Component {
         confirmLoading={sendingRequest}
       >
         {
-          isUrlValid ?
-          <Space direction="vertical">
-            <p>List to show the graph by time. Click on the item to import it. Click on refresh to get the list again</p>
-            <Button>
-              Save current graph
-            </Button>
-          </Space> :
-          <Space direction="vertical">
-            <Typography>
-              Provide a url to the server to get the graphs from (using GET)
-            </Typography>
-            <Input
-              id="vcUrl"
-              value={url}
-              onChange={this.onUrlChange}
-            />
-          </Space>
-        }
+          isUrlValid
+            ? (
+              <Space direction="vertical">
+                <p>
+                  List to show the graph by time. Click to import it. Click refresh to get again
+                </p>
+                {
+                graphs
+              }
+                <Button>
+                  Save current graph
+                </Button>
+              </Space>
+            )
+            : (
+              <Space direction="vertical">
+                <Typography>
+                  Provide a url to the server to get the graphs from (using GET)
+                </Typography>
+                <Input
+                  id="vcUrl"
+                  value={url}
+                  onChange={this.onUrlChange}
+                />
+              </Space>
+            )
+}
       </Modal>
     );
   }
@@ -126,9 +135,9 @@ export default class VersionControlModal extends Component {
 
 VersionControlModal.propTypes = {
   visible: PropTypes.bool.isRequired,
-  importGraph: PropTypes.func.isRequired,
+  // importGraph: PropTypes.func.isRequired,
   onCancel: PropTypes.func.isRequired,
-  graph:  PropTypes.shape({
+  graph: PropTypes.shape({
     nodes: PropTypes.array,
     edges: PropTypes.array,
   }).isRequired,
