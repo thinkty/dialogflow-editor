@@ -6,6 +6,7 @@ import { DownOutlined } from '@ant-design/icons';
 import PropTypes from 'prop-types';
 import ExportModal from './ExportModal';
 import ImportModal from './ImportModal';
+import VersionControlModal from './VersionControlModal';
 
 const overlayKeys = {
   import: {
@@ -39,6 +40,7 @@ export default class EditorMenu extends Component {
       agent,
       exportModalVisible: false,
       importModalVisible: false,
+      vcModalVisible: false,
     };
   }
 
@@ -50,6 +52,16 @@ export default class EditorMenu extends Component {
   // Helper to close the import modal
   closeImportModal = () => {
     this.setState({ importModalVisible: false });
+  }
+
+  // Helper to close the VC modal
+  closeVCModal = () => {
+    this.setState({ vcModalVisible: false });
+  }
+
+  // Helper to open the VC modal
+  openVCModal = () => {
+    this.setState({ vcModalVisible: true });
   }
 
   /**
@@ -102,6 +114,7 @@ export default class EditorMenu extends Component {
       agent,
       exportModalVisible,
       importModalVisible,
+      vcModalVisible,
     } = this.state;
     const exportImportMenu = (
       <Menu onClick={this.handleExportImportOnClick}>
@@ -137,6 +150,9 @@ export default class EditorMenu extends Component {
             <DownOutlined />
           </Button>
         </Dropdown>
+        <Button onClick={this.openVCModal}>
+          VC
+        </Button>
         <ExportModal
           visible={exportModalVisible}
           agent={agent}
@@ -147,6 +163,12 @@ export default class EditorMenu extends Component {
           visible={importModalVisible}
           importGraph={importGraph}
           onCancel={this.closeImportModal}
+        />
+        <VersionControlModal
+          visible={vcModalVisible}
+          importGraph={importGraph}
+          onCancel={this.closeVCModal}
+          graph={graph}
         />
       </Space>
     );
