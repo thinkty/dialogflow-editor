@@ -1,5 +1,5 @@
 /**
- * Format the date in YYYY-MM-DD format and return it
+ * Format the date in YYYY-MM-DD.HH:MM format and return it
  *
  * @param {Date} dateObj
  */
@@ -10,6 +10,7 @@ export function formatDate(dateObj) {
   result += month < 10 ? '0' : '';
   result += `${month}-`;
   result += date < 10 ? '0' : '';
-  result += `${date}`;
+  result += `${date}.`;
+  result += `${dateObj.getHours()}:${dateObj.getMinutes()}`
   return result;
 }
