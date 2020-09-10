@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import {
-  Modal, Space, Typography, Input, message, Button,
+  Modal, Space, Typography, Input, message, Button, List
 } from 'antd';
 import PropTypes from 'prop-types';
 import { getGraphs, saveGraph } from './vc';
+import { formatDate } from './util';
 
 /**
  * A component to display the modal to version control the graph
@@ -15,8 +16,8 @@ export default class VersionControlModal extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      url: 'https://example.com',
-      graphs: [],
+      url: 'http://localhost:8080/graphs',
+      docs: [],
       sendingRequest: false,
       isUrlValid: false,
     };
@@ -27,11 +28,9 @@ export default class VersionControlModal extends Component {
     this.setState({ url: event.target.value });
   }
 
-  // Reset the states before closing
-  closeModal = () => {
+  // Set the url again
+  resetUrl = () => {
     this.setState({ isUrlValid: false });
-    const { onCancel } = this.props;
-    onCancel();
   }
 
   /**
@@ -40,9 +39,9 @@ export default class VersionControlModal extends Component {
   getGraphs = () => {
     const { url } = this.state;
     getGraphs(url)
-      .then((graphs) => {
+      .then((docs) => {
         this.setState({
-          graphs,
+          docs,
           isUrlValid: true,
           sendingRequest: false,
         });
@@ -86,33 +85,63 @@ export default class VersionControlModal extends Component {
       });
   }
 
+  /**
+   * Function to render list items to show the retrieved graph
+   *
+   * @param {object} item Object containing graph and its creation time
+   */
+  renderItem = (item) => {
+    const { importGraph } = this.props;
+    const { time, graph } = item;
+    const date = new Date(time);
+
+    return (
+      <List.Item
+        key={date.getTime()}
+        actions={[<Button onClick={() => { importGraph(graph) }}>Import</Button>]}
+      >
+        {
+          formatDate(date)
+        }
+      </List.Item>
+    )
+  }
+
   render() {
-    const { visible } = this.props;
+    const { visible, onCancel } = this.props;
     const {
-      url, sendingRequest, isUrlValid, graphs,
+      url, sendingRequest, isUrlValid, docs,
     } = this.state;
     return (
       <Modal
         title="Version Control"
         visible={visible}
-        onOk={isUrlValid ? this.closeModal : this.checkUrlAndGetGraphs}
+        onOk={isUrlValid ? onCancel : this.checkUrlAndGetGraphs}
         okText={isUrlValid ? 'Done' : 'Next'}
-        onCancel={this.closeModal}
+        onCancel={isUrlValid ? this.resetUrl : onCancel}
+        cancelText={isUrlValid ? 'Back' : 'Cancel'}
         confirmLoading={sendingRequest}
       >
         {
           isUrlValid
             ? (
               <Space direction="vertical">
-                <p>
-                  List to show the graph by time. Click to import it. Click refresh to get again
-                </p>
-                {
-                graphs
-              }
-                <Button>
-                  Save current graph
-                </Button>
+                <List
+                  size="small"
+                  bordered
+                  dataSource={docs}
+                  locale={{ emptyText: 'No Graphs' }}
+                  renderItem={this.renderItem}
+                  style={{ width: '100%' }}
+                />
+                <Space>
+                  <Button onClick={this.saveGraph}>
+                    Save current graph
+                  </Button>
+                  <Button onClick={this.getGraphs}>
+                    Refresh
+                  </Button>
+                </Space>
               </Space>
             )
             : (
@@ -127,7 +156,7 @@ export default class VersionControlModal extends Component {
                 />
               </Space>
             )
-}
+        }
       </Modal>
     );
   }
@@ -135,7 +164,7 @@ export default class VersionControlModal extends Component {
 
 VersionControlModal.propTypes = {
   visible: PropTypes.bool.isRequired,
-  // importGraph: PropTypes.func.isRequired,
+  importGraph: PropTypes.func.isRequired,
   onCancel: PropTypes.func.isRequired,
   graph: PropTypes.shape({
     nodes: PropTypes.array,
