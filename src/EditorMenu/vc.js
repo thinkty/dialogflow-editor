@@ -17,6 +17,7 @@ export function getGraphs(url) {
     signal: controller.signal,
   };
 
+  setTimeout(() => { controller.abort() }, 10000);
   return fetch(url, options)
     .then((response) => (response.json()));
 }
