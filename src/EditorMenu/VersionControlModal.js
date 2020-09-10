@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import {
-  Modal, Space, Typography, Input, message, Button, List
+  Modal, Space, Typography, Input, message, Button, List,
 } from 'antd';
 import PropTypes from 'prop-types';
 import { getGraphs, saveGraph } from './vc';
@@ -98,13 +98,13 @@ export default class VersionControlModal extends Component {
     return (
       <List.Item
         key={date.getTime()}
-        actions={[<Button onClick={() => { importGraph(graph) }}>Import</Button>]}
+        actions={[<Button onClick={() => { importGraph(graph); }}>Import</Button>]}
       >
         {
           formatDate(date)
         }
       </List.Item>
-    )
+    );
   }
 
   render() {
@@ -132,7 +132,6 @@ export default class VersionControlModal extends Component {
                   dataSource={docs}
                   locale={{ emptyText: 'No Graphs' }}
                   renderItem={this.renderItem}
-                  style={{ width: '100%' }}
                 />
                 <Space>
                   <Button onClick={this.saveGraph}>
