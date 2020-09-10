@@ -11,6 +11,6 @@ export function formatDate(dateObj) {
   result += `${month}-`;
   result += date < 10 ? '0' : '';
   result += `${date}.`;
-  result += `${dateObj.getHours()}:${dateObj.getMinutes()}`
+  result += `${dateObj.getHours()}:${dateObj.getMinutes()}`;
   return result;
 }

@@ -128,7 +128,6 @@ export default class VersionControlModal extends Component {
               <Space direction="vertical">
                 <List
                   size="small"
-                  bordered
                   dataSource={docs}
                   locale={{ emptyText: 'No Graphs' }}
                   renderItem={this.renderItem}
