@@ -76,9 +76,13 @@ export default class VersionControlModal extends Component {
     const { url } = this.state;
 
     saveGraph(url, graph)
-      .then(() => {
-        message.success('Graph saved');
-        getGraphs(); // Get the new list from the server
+      .then((value) => {
+        if (value.status === 200) {
+          message.success('Graph saved');
+          this.getGraphs(); // Get the new list from the server
+        } else {
+          message.error(`${value.status} : Failed to save graph`);
+        }
       })
       .catch(() => {
         message.error('Failed to save graph');
@@ -126,12 +130,6 @@ export default class VersionControlModal extends Component {
           isUrlValid
             ? (
               <Space direction="vertical">
-                <List
-                  size="small"
-                  dataSource={docs}
-                  locale={{ emptyText: 'No Graphs' }}
-                  renderItem={this.renderItem}
-                />
                 <Space>
                   <Button onClick={this.saveGraph}>
                     Save current graph
@@ -140,6 +138,12 @@ export default class VersionControlModal extends Component {
                     Refresh
                   </Button>
                 </Space>
+                <List
+                  size="small"
+                  dataSource={docs}
+                  locale={{ emptyText: 'No Graphs' }}
+                  renderItem={this.renderItem}
+                />
               </Space>
             )
             : (
