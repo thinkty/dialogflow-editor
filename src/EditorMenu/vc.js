@@ -10,11 +10,15 @@
  * @param {string} url Url to send a request to get the graphs
  * @returns An array of objects containing the date and graph
  */
-export async function getGraphs(url) {
-  // TODO:
-  return [
-    { date: 1599613771574, graph: { nodes: [], edges: [] } },
-  ];
+export function getGraphs(url) {
+  const controller = new AbortController();
+  const options = {
+    method: 'GET',
+    signal: controller.signal,
+  };
+
+  return fetch(url, options)
+    .then((response) => (response.json()));
 }
 
 /**
