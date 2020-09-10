@@ -29,7 +29,17 @@ export function getGraphs(url) {
  * @param {string} url Url to send a request to save the graph
  * @param {object} graph Graph to send
  */
-export async function saveGraph(url, graph) {
-  // TODO:
-  return true;
+export function saveGraph(url, graph) {
+  const controller = new AbortController();
+  const options = {
+    method: 'POST',
+    signal: controller.signal,
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(graph),
+  };
+
+  setTimeout(() => { controller.abort() }, 10000);
+  return fetch(url, options);
 }
