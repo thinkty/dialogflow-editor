@@ -222,24 +222,6 @@ describe('Version Control Modal Component', () => {
     nodes: ['item', 'item'],
     edges: ['item'],
   };
-  let output = render(
-    <ImportModal 
-      visible={visible}
-      importGraph={importGraph}
-      onCancel={onCancel}
-    />
-  );
-
-  beforeEach(() => {
-    output = render(
-      <VersionControlModal 
-        visible={visible}
-        importGraph={importGraph}
-        graph={graph}
-        onCancel={onCancel}
-      />
-    );
-  });
 
   it('renders without crashing', () => {
     mount(
@@ -250,12 +232,5 @@ describe('Version Control Modal Component', () => {
         onCancel={onCancel}
       />
     );
-  });
-
-  it('returns time in correct format', () => {
-    const currentTimeInMilli = 1599821886497;
-    const date = formatDate(new Date(currentTimeInMilli));
-
-    expect(date).toEqual('2020-09-11.19:58');
   });
 });
