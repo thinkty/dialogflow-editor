@@ -5,6 +5,7 @@ import { render, fireEvent, cleanup } from '@testing-library/react';
 import EditorMenu from '../EditorMenu';
 import ExportModal from '../EditorMenu/ExportModal';
 import ImportModal from '../EditorMenu/ImportModal';
+import VersionControlModal from '../EditorMenu/VersionControlModal';
 
 describe('Editor Menu Smoke Test', () => {
 
@@ -207,6 +208,47 @@ describe('Import Modal Component', () => {
 
     fireEvent.click(button);
     expect(readAsTextSpy).toBeCalledWith('');
+  });
+
+});
+
+describe('Version Control Modal Component', () => {
+
+  const visible = true;
+  const importGraph = jest.fn();
+  const onCancel = jest.fn();
+  const graph = {
+    nodes: ['item', 'item'],
+    edges: ['item'],
+  };
+  let output = render(
+    <ImportModal 
+      visible={visible}
+      importGraph={importGraph}
+      onCancel={onCancel}
+    />
+  );
+
+  beforeEach(() => {
+    output = render(
+      <VersionControlModal 
+        visible={visible}
+        importGraph={importGraph}
+        graph={graph}
+        onCancel={onCancel}
+      />
+    );
+  });
+
+  it('renders without crashing', () => {
+    mount(
+      <VersionControlModal 
+        visible={visible}
+        importGraph={importGraph}
+        graph={graph}
+        onCancel={onCancel}
+      />
+    );
   });
 
 });
