@@ -6,6 +6,7 @@ import EditorMenu from '../EditorMenu';
 import ExportModal from '../EditorMenu/ExportModal';
 import ImportModal from '../EditorMenu/ImportModal';
 import VersionControlModal from '../EditorMenu/VersionControlModal';
+import { formatDate } from '../EditorMenu/util';
 
 describe('Editor Menu Smoke Test', () => {
 
@@ -251,4 +252,10 @@ describe('Version Control Modal Component', () => {
     );
   });
 
+  it('returns time in correct format', () => {
+    const currentTimeInMilli = 1599821886497;
+    const date = formatDate(new Date(currentTimeInMilli));
+
+    expect(date).toEqual('2020-09-11.19:58');
+  });
 });
