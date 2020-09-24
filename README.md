@@ -24,6 +24,7 @@ This tool will not work well with Safari or IE. Use Firefox or Chrome.
 - **Import**: click on the `Import from .json` button to import a graph into the editor. The graph must have a valid format
 - **Download**: click on the `Export to .json` button to download the graph in a JSON file
 - **Export to url**: click on the `Import / Export` button at the top, and click on `Export to url`. Enter the destination url to send the graph in JSON, the name of the agent, and the name of the flowchart. Click `send` to finish
+- **Version Control**: click on the `VC` button at the top to save / import the graph from the server that contains various versions of the graph. The server must have support for `GET` and `POST` methods for retreiving the list of graphs and saving the current graph.
 
 Based on the sample graph, although the flowchart is extremely simple, it shows the basic rules on how to use this tool. One can specify the training phrases, responses, action, events, fallback, fulfillment, and etc just as they can with the Dialogflow Console. I recommend starting the graph with a context node instead of an intent node to have more control over the flow and block any unexpected jumps between conversations.
 
