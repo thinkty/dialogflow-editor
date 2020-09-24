@@ -16,7 +16,7 @@ export default class VersionControlModal extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      url: 'http://localhost:8080/graphs',
+      url: 'http://example.com/graphs',
       docs: [],
       sendingRequest: false,
       isUrlValid: false,
