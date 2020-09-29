@@ -141,8 +141,12 @@ export default class DialogflowEditor extends Component {
     const newNode = {
       ...node,
       id: uuidv4(),
-      x: mousePosition[0],
-      y: mousePosition[1],
+      contexts: {
+        in: [],
+        out: [],
+      },
+      x: mousePosition ? mousePosition[0] : 0,
+      y: mousePosition ? mousePosition[1] : 0,
     };
 
     graph.nodes = [...graph.nodes, newNode];
