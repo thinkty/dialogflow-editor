@@ -18,17 +18,18 @@ export default class ComplexArrayInput extends Component {
     const index = event.target.id;
     const updatedPool = event.target.value;
     const { onChange, id, pools } = this.props;
+    const tempPool = [...pools]; // Deep copy of the pools
 
     // Remove the pool if empty
     if (updatedPool.length === 0) {
-      pools.splice(index, 1);
-      onChange({ target: { id, value: pools } });
+      tempPool.splice(index, 1);
+      onChange({ target: { id, value: tempPool } });
       return;
     }
 
     // Update the pool with the given index and update all the pools
-    pools[index] = updatedPool;
-    onChange({ target: { id, value: pools } });
+    tempPool[index] = updatedPool;
+    onChange({ target: { id, value: tempPool } });
   }
 
   /**
@@ -36,8 +37,7 @@ export default class ComplexArrayInput extends Component {
    */
   addNewPool = () => {
     const { onChange, id, pools } = this.props;
-    pools.push([]);
-    onChange({ target: { id, value: pools } });
+    onChange({ target: { id, value: [...pools, []] } });
   }
 
   render() {

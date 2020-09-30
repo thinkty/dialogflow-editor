@@ -26,8 +26,9 @@ export default class SimpleArrayInput extends Component {
     const index = items.indexOf(item);
 
     if (index > -1) {
-      items.splice(index, 1);
-      onChange({ target: { id, value: items } });
+      const temp = [...items];
+      temp.splice(index, 1);
+      onChange({ target: { id, value: temp } });
     }
   }
 
@@ -36,7 +37,7 @@ export default class SimpleArrayInput extends Component {
    * the input is not empty and add it to the items and report the change to the
    * parent component
    */
-  onSubmit = () => {
+  onFinish = () => {
     const { id, onChange, items } = this.props;
     const { temp } = this.state;
 
@@ -44,8 +45,7 @@ export default class SimpleArrayInput extends Component {
       return;
     }
 
-    items.push(temp);
-    onChange({ target: { id, value: items } });
+    onChange({ target: { id, value: [...items, temp] } });
     this.setState({ temp: '' });
   }
 
@@ -54,7 +54,7 @@ export default class SimpleArrayInput extends Component {
    *
    * @param {*} event
    */
-  onChange = (event) => {
+  onTempChange = (event) => {
     this.setState({ temp: event.target.value });
   }
 
@@ -77,12 +77,12 @@ export default class SimpleArrayInput extends Component {
             </List.Item>
           )}
         />
-        <Form onFinish={this.onSubmit}>
+        <Form onFinish={this.onFinish}>
           <Form.Item>
             <Input
               id="temp"
               value={temp}
-              onChange={this.onChange}
+              onChange={this.onTempChange}
               placeholder="Press enter to add new entry"
             />
           </Form.Item>
