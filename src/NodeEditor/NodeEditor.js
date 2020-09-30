@@ -23,9 +23,6 @@ export default class NodeEditor extends Component {
     const { id, value } = event.target;
     const { updateSelected } = this.props;
 
-    console.log('id: ' + id);
-    console.log(value);
-
     updateSelected(id, value);
   }
 
