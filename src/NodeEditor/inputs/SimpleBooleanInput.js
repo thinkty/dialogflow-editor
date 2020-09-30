@@ -1,41 +1,23 @@
 import React, { Component } from 'react';
 import { Switch, Space, Typography } from 'antd';
+import PropTypes from 'prop-types';
 
 /**
  * A component for editting boolean through a switch
  */
 export default class SimpleBooleanInput extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      ...props,
-    };
-  }
-
-  /**
-   * Update on prop change
-   *
-   * @param {*} props Next props
-   * @param {*} state Previous state
-   */
-  static getDerivedStateFromProps(props, state) {
-    return {
-      ...props,
-    };
-  }
-
   /**
    * Event handler for input switch value change
    *
    * @param {Boolean} checked Current value of the check box
    */
   onChange = (checked) => {
-    const { id, onChange } = this.state;
+    const { id, onChange } = this.props;
     onChange({ target: { id, value: checked } });
   }
 
   render() {
-    const { value, label } = this.state;
+    const { value, label } = this.props;
 
     return (
       <Space direction="horizontal" size="middle">
@@ -50,3 +32,10 @@ export default class SimpleBooleanInput extends Component {
     );
   }
 }
+
+SimpleBooleanInput.propTypes = {
+  id: PropTypes.string.isRequired,
+  onChange: PropTypes.func.isRequired,
+  value: PropTypes.bool.isRequired,
+  label: PropTypes.string.isRequired,
+};
