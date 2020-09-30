@@ -21,12 +21,12 @@ export default class NodeEditor extends Component {
    */
   onChange = (event) => {
     const { id, value } = event.target;
-    const { update, updateSelected } = this.props;
+    const { updateSelected } = this.props;
+
+    console.log('id: ' + id);
+    console.log(value);
 
     updateSelected(id, value);
-
-    // Notify the parent component to rerender the graph to show changes
-    update();
   }
 
   render() {
@@ -249,7 +249,6 @@ export default class NodeEditor extends Component {
 }
 
 NodeEditor.propTypes = {
-  update: PropTypes.func.isRequired,
   updateSelected: PropTypes.func.isRequired,
   selected: PropTypes.any,
 };

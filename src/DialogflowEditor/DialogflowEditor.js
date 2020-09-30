@@ -470,6 +470,7 @@ export default class DialogflowEditor extends Component {
 
     selected[id] = value;
     this.setState({ selected });
+    this.updateGraph();
   }
 
   /**
@@ -648,7 +649,6 @@ export default class DialogflowEditor extends Component {
         >
           <NodeEditor
             selected={selected}
-            update={this.updateGraph}
             updateSelected={this.updateSelected}
           />
         </Sider>

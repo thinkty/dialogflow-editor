@@ -26,7 +26,6 @@ describe('Node Editor Smoke Test', () => {
     responses: [["default response"]],
     fulfillment: false
   };
-  const updateSpy = jest.fn();
   const updateSelectedSpy = jest.fn();
 
   // https://jestjs.io/docs/en/manual-mocks#mocking-methods-which-are-not-implemented-in-jsdom
@@ -48,7 +47,6 @@ describe('Node Editor Smoke Test', () => {
     shallow(
       <NodeEditor
         selected={selected}
-        update={updateSpy}
         updateSelected={updateSelectedSpy}
       />
     );
@@ -58,7 +56,6 @@ describe('Node Editor Smoke Test', () => {
     mount(
       <NodeEditor
         selected={selected}
-        update={updateSpy}
         updateSelected={updateSelectedSpy}
       />
     );
@@ -81,7 +78,6 @@ describe('Node Editor Component w/ Intent Node', () => {
     responses: [["default response"]],
     fulfillment: false
   };
-  const updateSpy = jest.fn();
   const updateSelectedSpy = jest.fn();
   let output;
 
@@ -105,7 +101,6 @@ describe('Node Editor Component w/ Intent Node', () => {
     output = render(
       <NodeEditor
         selected={selected}
-        update={updateSpy}
         updateSelected={updateSelectedSpy}
       />
     );
@@ -144,7 +139,6 @@ describe('Node Editor Component w/ Context Node', () => {
     title: "cnode1",
     type: "contextNode"
   };
-  const updateSpy = jest.fn();
   const updateSelectedSpy = jest.fn();
   let output;
 
@@ -168,7 +162,6 @@ describe('Node Editor Component w/ Context Node', () => {
     output = render(
       <NodeEditor
         selected={selected}
-        update={updateSpy}
         updateSelected={updateSelectedSpy}
       />);
   });
@@ -189,7 +182,6 @@ describe('Node Editor Component w/ Context Node', () => {
 
     fireEvent.change(input, { target: { value: 'new name' } });
 
-    expect(updateSpy).toHaveBeenCalledTimes(1);
     expect(updateSelectedSpy).toHaveBeenCalledTimes(1);
   });
 
@@ -308,7 +300,14 @@ describe('Simple Boolean Input Component', () => {
   });
 
   it('renders without crashing', () => {
-    mount(<SimpleBooleanInput />);
+    mount(
+      <SimpleBooleanInput
+        value={value}
+        label={label}
+        id={id}
+        onChange={onChange}
+      />
+    );
   });
 
   it('renders w/ given props', () => {
@@ -320,7 +319,7 @@ describe('Simple Boolean Input Component', () => {
   });
 
   it('updates on click', () => {
-    const { getByRole, getByText } = output;
+    const { getByRole } = output;
     const checkbox = getByRole('switch');
     
     fireEvent.click(checkbox);
@@ -359,7 +358,7 @@ describe('Simple Text Input Component', () => {
   });
 
   it('udpates on change', () => {
-    const { getByDisplayValue, getByRole } = output;
+    const { getByRole } = output;
     const input = getByRole('textbox');
     const newValue = 'new value';
 

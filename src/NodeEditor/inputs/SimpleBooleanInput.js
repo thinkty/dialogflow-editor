@@ -36,6 +36,10 @@ export default class SimpleBooleanInput extends Component {
 SimpleBooleanInput.propTypes = {
   id: PropTypes.string.isRequired,
   onChange: PropTypes.func.isRequired,
-  value: PropTypes.bool.isRequired,
+  value: PropTypes.bool,
   label: PropTypes.string.isRequired,
+};
+
+SimpleBooleanInput.defaultProps = {
+  value: false,
 };
